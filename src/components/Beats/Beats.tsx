@@ -1,6 +1,25 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState, type FC } from "react";
 
-const MiniPlayer = ({ currentBeat, isPlaying, onToggle, onClose }) => {
+// 1. Definimos la interfaz para la estructura de un Beat
+interface Beat {
+  id: number;
+  title: string;
+  bpm: number;
+  key: string;
+  price: number;
+  image: string;
+  audioUrl: string;
+}
+
+// 2. Definimos las props para el MiniPlayer
+interface MiniPlayerProps {
+  currentBeat: Beat | null;
+  isPlaying: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+}
+
+const MiniPlayer: FC<MiniPlayerProps> = ({ currentBeat, isPlaying, onToggle, onClose }) => {
   if (!currentBeat) return null;
 
   return (
@@ -46,12 +65,12 @@ const MiniPlayer = ({ currentBeat, isPlaying, onToggle, onClose }) => {
   );
 };
 
-
-const beats = [
+// Tipamos el array de beats
+const beats: Beat[] = [
   {
     id: 1,
     title: "Midnight Coffee",
-    bpm:78,
+    bpm: 78,
     key: "E",
     price: 14.99,
     image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -95,14 +114,16 @@ const beats = [
   },
 ];
 
+const BeatsSection: FC = () => {
+  // 3. Tipamos los Refs: HTMLDivElement para el scroll y HTMLAudioElement para el audio
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null); 
+  
+  // 4. Tipamos el estado: puede ser un Beat o null
+  const [currentBeat, setCurrentBeat] = useState<Beat | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-const BeatsSection = () => {
-  const scrollRef = useRef(null);
-  const audioRef = useRef(null); 
-  const [currentBeat, setCurrentBeat] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const scroll = (direction) => {
+  const scroll = (direction: "left" | "right") => {
     const { current } = scrollRef;
     if (current) {
       const scrollAmount = direction === "left" ? -320 : 320;
@@ -110,20 +131,20 @@ const BeatsSection = () => {
     }
   };
 
-
-  const togglePlayPause = (beat) => {
+  const togglePlayPause = (beat: Beat | null) => {
+    if (!beat) return;
     const audio = audioRef.current;
+    if (!audio) return;
 
     if (currentBeat?.id === beat.id) {
       if (isPlaying) {
         audio.pause();
         setIsPlaying(false);
+      } else {
+        audio.play();
+        setIsPlaying(true);
       }
-      setCurrentBeat(null);
     } else {
-      if (currentBeat) {
-        audio.pause();
-      }
       audio.src = beat.audioUrl;
       audio.play().then(() => {
         setIsPlaying(true);
@@ -136,8 +157,10 @@ const BeatsSection = () => {
 
   const stopAudio = () => {
     const audio = audioRef.current;
-    audio.pause();
-    audio.currentTime = 0;
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
     setIsPlaying(false);
     setCurrentBeat(null);
   };
@@ -180,7 +203,7 @@ const BeatsSection = () => {
           <div
             ref={scrollRef}
             className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-2"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            style={{ scrollbarWidth: "none" }}
           >
             {beats.map((beat) => (
               <div
@@ -241,10 +264,8 @@ const BeatsSection = () => {
         </div>
       </section>
 
-      {/* AUDIO OCULTO */}
       <audio ref={audioRef} />
 
-      {/* MINI REPRODUCTOR */}
       <MiniPlayer
         currentBeat={currentBeat}
         isPlaying={isPlaying}

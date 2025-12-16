@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 
 const Header = () => {
   // Estado para manejar si el menú de hamburguesa está abierto o cerrado

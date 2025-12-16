@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 // Datos de prueba (Social Proof)
 const reviews = [

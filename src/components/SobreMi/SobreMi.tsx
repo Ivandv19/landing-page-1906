@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const stats = [
   { label: 'Años produciendo', value: '3+' },

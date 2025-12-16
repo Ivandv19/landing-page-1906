@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 // Datos de las licencias
 const licenses = [
@@ -66,7 +66,7 @@ const Licencias = () => {
 
         {/* GRID DE TARJETAS */}
         <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8">
-          {licenses.map((tier, tierIdx) => (
+          {licenses.map((tier) => (
             <div
               key={tier.name}
               className={`relative flex flex-col justify-between rounded-lg p-8 ring-1 transition-all ${
