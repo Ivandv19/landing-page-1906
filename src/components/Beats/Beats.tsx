@@ -65,16 +65,16 @@ const MiniPlayer: FC<MiniPlayerProps> = ({ currentBeat, isPlaying, onToggle, onC
   );
 };
 
-// Tipamos el array de beats
 const beats: Beat[] = [
   {
     id: 1,
-    title: "Midnight Coffee",
+    title: "winter",
     bpm: 78,
     key: "E",
     price: 14.99,
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    audioUrl: "https://audiosflux.blob.core.windows.net/public-audio/musc1.wav"
+    // Una ventana con lluvia y luces cálidas (vibe muy lofi)
+    image: "https://assets.mgdc.site/winter.png",
+    audioUrl: "https://assets.mgdc.site/winter.mp3"
   },
   {
     id: 2,
@@ -82,8 +82,9 @@ const beats: Beat[] = [
     bpm: 90,
     key: "C#m",
     price: 14.99,
-    image: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    audioUrl: "https://audiosflux.blob.core.windows.net/public-audio/LilSeraph.mp3"
+    // Un cielo nostálgico con nubes tipo anime
+    image: "https://assets.mgdc.site/Seraph.png",
+    audioUrl: "https://assets.mgdc.site/LilSeraph.mp3"
   },
   {
     id: 3,
@@ -91,8 +92,8 @@ const beats: Beat[] = [
     bpm: 89,
     key: "G#m",
     price: 14.99,
-    image: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    audioUrl: "https://audiosflux.blob.core.windows.net/public-audio/Moon.mp3"
+    image: "https://assets.mgdc.site/Moon.png",
+    audioUrl: "https://assets.mgdc.site/Moon.mp3"
   },
   {
     id: 4,
@@ -100,8 +101,8 @@ const beats: Beat[] = [
     bpm: 85,
     key: "C#m",
     price: 14.99,
-    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    audioUrl: "https://audiosflux.blob.core.windows.net/public-audio/7Nights.mp3"
+    image: "https://assets.mgdc.site/7Nights.png",
+    audioUrl: "https://assets.mgdc.site/7Nights.mp3"
   },
   {
     id: 5,
@@ -109,8 +110,8 @@ const beats: Beat[] = [
     bpm: 95,
     key: "Bbm",
     price: 14.99,
-    image: "https://images.unsplash.com/photo-1516280440614-6697288d5d38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    audioUrl: "https://audiosflux.blob.core.windows.net/public-audio/ShibuyaNights.mp3"
+    image: "https://assets.mgdc.site/Shibuya.png",
+    audioUrl: "https://assets.mgdc.site/ShibuyaNights.mp3"
   },
 ];
 
