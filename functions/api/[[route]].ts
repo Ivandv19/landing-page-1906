@@ -15,6 +15,15 @@ type Env = {
 	CONTACT_EMAIL: string;
 };
 
+type PagesFunction<Env = unknown> = (context: {
+	request: Request;
+	env: Env;
+	params: Record<string, string>;
+	waitUntil: (promise: Promise<unknown>) => void;
+	next: () => Promise<Response>;
+	data: Record<string, unknown>;
+}) => Response | Promise<Response>;
+
 const app = new Hono<{ Bindings: Env }>();
 
 // CORS para permitir requests desde tu dominio
@@ -154,4 +163,6 @@ app.get("/api/health", (c) => {
 });
 
 // Export para Cloudflare Pages Functions
-export const onRequest = app.fetch;
+export const onRequest: PagesFunction<Env> = async (context) => {
+	return app.fetch(context.request, context.env, context);
+};
