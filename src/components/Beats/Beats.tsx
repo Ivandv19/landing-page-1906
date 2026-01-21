@@ -136,6 +136,7 @@ const beats: Beat[] = [
 ];
 
 const BeatsSection: FC = () => {
+	const { t } = useLanguage();
 	// 3. Tipamos los Refs: HTMLDivElement para el scroll y HTMLAudioElement para el audio
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const audioRef = useRef<HTMLAudioElement>(null);
@@ -199,10 +200,10 @@ const BeatsSection: FC = () => {
 					<div className="flex items-center justify-between mb-12">
 						<div>
 							<h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-								Catálogo Reciente
+								{t.beats.title}
 							</h2>
 							<p className="mt-2 text-lg leading-8 text-slate-600 dark:text-slate-400">
-								Explora nuestros últimos lanzamientos.
+								{t.beats.subtitle}
 							</p>
 						</div>
 						<div className="flex gap-4">
