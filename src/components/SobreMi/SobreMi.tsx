@@ -1,4 +1,5 @@
 import { useLanguage } from "../../context/LanguageContext";
+import { ResponsiveImage } from "../ResponsiveImage";
 
 const SobreMi = () => {
 	const { t } = useLanguage();
@@ -61,10 +62,11 @@ const SobreMi = () => {
 						<div className="absolute top-4 left-4 -right-4 -bottom-4 rounded-xl bg-blue-100/60 blur-sm -z-10 hidden sm:block dark:bg-blue-900/30" />
 
 						{/* Imagen Principal */}
-						<img
-							src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+						<ResponsiveImage
+							src="about-me-studio.jpg"
 							alt="Prod Flux Studio Setup"
 							className="w-full h-auto rounded-xl bg-slate-900 shadow-xl ring-1 ring-slate-400/10 object-cover"
+							sizes={{ mobile: 600, tablet: 900, desktop: 1200 }}
 							width={1000}
 							height={1000}
 						/>

@@ -15,7 +15,7 @@ export const beats: Beat[] = [
 		bpm: 78,
 		key: "E",
 		price: 14.99,
-		image: "https://assets.mgdc.site/winter.png",
+		image: "https://assets.mgdc.site/cdn-cgi/image/width=400,height=400,fit=cover,format=auto/winter.png",
 		audioUrl: "https://assets.mgdc.site/winter.mp3",
 	},
 	{
@@ -24,7 +24,7 @@ export const beats: Beat[] = [
 		bpm: 90,
 		key: "C#m",
 		price: 14.99,
-		image: "https://assets.mgdc.site/Seraph.png",
+		image: "https://assets.mgdc.site/cdn-cgi/image/width=400,height=400,fit=cover,format=auto/Seraph.png",
 		audioUrl: "https://assets.mgdc.site/LilSeraph.mp3",
 	},
 	{
@@ -33,7 +33,7 @@ export const beats: Beat[] = [
 		bpm: 89,
 		key: "G#m",
 		price: 14.99,
-		image: "https://assets.mgdc.site/Moon.png",
+		image: "https://assets.mgdc.site/cdn-cgi/image/width=400,height=400,fit=cover,format=auto/Moon.png",
 		audioUrl: "https://assets.mgdc.site/Moon.mp3",
 	},
 	{
@@ -42,7 +42,7 @@ export const beats: Beat[] = [
 		bpm: 85,
 		key: "C#m",
 		price: 14.99,
-		image: "https://assets.mgdc.site/7Nights.png",
+		image: "https://assets.mgdc.site/cdn-cgi/image/width=400,height=400,fit=cover,format=auto/7Nights.png",
 		audioUrl: "https://assets.mgdc.site/7Nights.mp3",
 	},
 	{
@@ -51,7 +51,7 @@ export const beats: Beat[] = [
 		bpm: 95,
 		key: "Bbm",
 		price: 14.99,
-		image: "https://assets.mgdc.site/Shibuya.png",
+		image: "https://assets.mgdc.site/cdn-cgi/image/width=400,height=400,fit=cover,format=auto/Shibuya.png",
 		audioUrl: "https://assets.mgdc.site/ShibuyaNights.mp3",
 	},
 ];

@@ -1,8 +1,9 @@
-import { type FC, useRef, useState, useEffect, useMemo } from "react";
+import { type FC, useRef, useEffect, useMemo } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 import { useAudioPlayer } from "../../hooks/useAudioPlayer";
 import { beats, type Beat } from "../../data/beats";
+import { ResponsiveImage } from "../ResponsiveImage";
 
 // Definimos las props para el MiniPlayer
 interface MiniPlayerProps {
@@ -187,7 +188,6 @@ const BeatsSection: FC = () => {
 		handleVolumeChange,
 		handleSeek,
 	} = useAudioPlayer();
-	const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
 
 	const scroll = (direction: "left" | "right") => {
 		const { current } = scrollRef;
@@ -195,10 +195,6 @@ const BeatsSection: FC = () => {
 			const scrollAmount = direction === "left" ? -320 : 320;
 			current.scrollBy({ left: scrollAmount, behavior: "smooth" });
 		}
-	};
-
-	const handleImageError = (beatId: number) => {
-		setImageErrors((prev) => new Set(prev).add(beatId));
 	};
 
 	// Keyboard navigation
@@ -229,11 +225,11 @@ const BeatsSection: FC = () => {
 					className="min-w-[280px] md:min-w-[320px] snap-center group relative flex flex-col overflow-hidden rounded-lg bg-white shadow-sm transition-all hover:shadow border border-slate-200 dark:bg-slate-800 dark:border-slate-700"
 				>
 					<div className="relative aspect-square overflow-hidden bg-slate-200 dark:bg-slate-700">
-						<img
-							src={beat.image}
+						<ResponsiveImage
+							src={beat.image.split('/').pop() || ''}
 							alt={beat.title}
-							onError={() => handleImageError(beat.id)}
 							className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+							sizes={{ mobile: 280, tablet: 320, desktop: 400 }}
 						/>
 						<div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
 						<button

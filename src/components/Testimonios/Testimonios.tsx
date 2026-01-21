@@ -7,8 +7,7 @@ const reviews = [
 		author: "Carlos 'Flow' Ruiz",
 		role: "Artista Urbano",
 		rating: 5,
-		avatar:
-			"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+		avatar: "https://assets.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/carlos.jpg",
 	},
 	{
 		id: 2,
@@ -17,8 +16,7 @@ const reviews = [
 		author: "Sofía Streamz",
 		role: "Content Creator",
 		rating: 4,
-		avatar:
-			"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+		avatar: "https://assets.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/sofia.jpg",
 	},
 	{
 		id: 3,
@@ -27,12 +25,12 @@ const reviews = [
 		author: "Prod. Javi",
 		role: "Ingeniero de Mezcla",
 		rating: 4,
-		avatar:
-			"https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+		avatar: "https://assets.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/javi.jpg",
 	},
 ];
 
 import { useLanguage } from "../../context/LanguageContext";
+import { Avatar } from "../ResponsiveImage";
 
 const Testimonios = () => {
 	const { t } = useLanguage();
