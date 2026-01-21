@@ -80,7 +80,7 @@ app.post("/api/contact", async (c) => {
 		// Enviar email
 		const { data, error } = await resend.emails.send({
 			from: "Contacto FluxBeats <onboarding@resend.dev>",
-			to: c.env.CONTACT_EMAIL || "ivan.dvlpr@gmail.com",
+			to: "ivangtx19@gmail.com", // Sandbox mode: solo puede enviar a tu email
 			replyTo: email,
 			subject: `Nuevo mensaje de ${name}`,
 			html: `
