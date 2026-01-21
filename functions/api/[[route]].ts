@@ -29,11 +29,17 @@ app.use(
 // Endpoint de contacto
 app.post("/api/contact", async (c) => {
 	try {
+		console.log("Contact endpoint hit");
+		console.log("Headers:", c.req.header());
+		
 		// Parsear y validar datos
 		const body = await c.req.json();
+		console.log("Body received:", body);
+		
 		const result = contactSchema.safeParse(body);
 
 		if (!result.success) {
+			console.log("Validation failed:", result.error);
 			return c.json(
 				{
 					success: false,
@@ -46,8 +52,21 @@ app.post("/api/contact", async (c) => {
 
 		const { name, email, message } = result.data;
 
+		// Verificar que las env vars existan
+		if (!c.env.RESEND_API_KEY) {
+			console.error("RESEND_API_KEY not found");
+			return c.json(
+				{
+					success: false,
+					error: "Configuración del servidor incompleta",
+				},
+				500
+			);
+		}
+
 		// Inicializar Resend
 		const resend = new Resend(c.env.RESEND_API_KEY);
+		console.log("Resend initialized");
 
 		// Enviar email
 		const { data, error } = await resend.emails.send({
@@ -104,11 +123,13 @@ app.post("/api/contact", async (c) => {
 				{
 					success: false,
 					error: "Error al enviar el mensaje",
+					details: error,
 				},
 				500
 			);
 		}
 
+		console.log("Email sent successfully:", data);
 		return c.json({
 			success: true,
 			message: "Mensaje enviado correctamente",
@@ -120,6 +141,7 @@ app.post("/api/contact", async (c) => {
 			{
 				success: false,
 				error: "Error interno del servidor",
+				details: error instanceof Error ? error.message : "Unknown error",
 			},
 			500
 		);
