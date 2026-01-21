@@ -1,7 +1,9 @@
 import { useLanguage } from "../../context/LanguageContext";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
 const Hero = () => {
 	const { t } = useLanguage();
+	const { ref, isVisible } = useScrollAnimation();
 	return (
 		<div id="inicio" className="relative isolate bg-white px-6 pt-14 lg:px-8 overflow-hidden dark:bg-slate-900 transition-colors duration-300">
 			{/* --- Fondo Atmosférico Superior (Efecto Blur) --- */}
@@ -16,7 +18,7 @@ const Hero = () => {
 			</div>
 
 			{/* --- Contenido Principal (Centrado) --- */}
-			<div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+			<div ref={ref as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 animate-on-scroll ${isVisible ? 'visible' : ''}`}>
 				<div className="text-center">
 					<h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl dark:text-white">
 						{t.hero.title}

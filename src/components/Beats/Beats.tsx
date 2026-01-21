@@ -1,5 +1,6 @@
 import { type FC, useRef, useState } from "react";
 import { useLanguage } from "../../context/LanguageContext";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
 // 1. Definimos la interfaz para la estructura de un Beat
 interface Beat {
@@ -137,6 +138,7 @@ const beats: Beat[] = [
 
 const BeatsSection: FC = () => {
 	const { t } = useLanguage();
+	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 	// 3. Tipamos los Refs: HTMLDivElement para el scroll y HTMLAudioElement para el audio
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const audioRef = useRef<HTMLAudioElement>(null);
@@ -197,7 +199,7 @@ const BeatsSection: FC = () => {
 				className="bg-white py-24 sm:py-32 dark:bg-slate-900 transition-colors duration-300"
 			>
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-					<div className="flex items-center justify-between mb-12">
+					<div ref={headerRef as React.RefObject<HTMLDivElement>} className={`flex items-center justify-between mb-12 animate-on-scroll ${headerVisible ? 'visible' : ''}`}>
 						<div>
 							<h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
 								{t.beats.title}
