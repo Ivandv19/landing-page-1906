@@ -1,5 +1,5 @@
 import { useLanguage } from "../../context/LanguageContext";
-import { ResponsiveImage } from "../ResponsiveImage";
+import { ResponsiveImage } from "../common/ResponsiveImage";
 
 const SobreMi = () => {
 	const { t } = useLanguage();

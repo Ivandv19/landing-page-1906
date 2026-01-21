@@ -30,7 +30,7 @@ const reviews = [
 ];
 
 import { useLanguage } from "../../context/LanguageContext";
-import { Avatar } from "../ResponsiveImage";
+import { Avatar } from "../common/ResponsiveImage";
 
 const Testimonios = () => {
 	const { t } = useLanguage();

@@ -1,4 +1,4 @@
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 
 const ThemeSelector = () => {
 	const { theme, toggleTheme } = useTheme();
@@ -8,7 +8,7 @@ const ThemeSelector = () => {
 			onClick={toggleTheme}
 			className="rounded-full p-2 text-slate-600 transition-colors hover:bg-slate-100 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-blue-400"
 			aria-label="Toggle theme"
-		>
+		>	
 			{theme === "light" ? (
 				// Moon icon for light mode (switch to dark)
 				<svg

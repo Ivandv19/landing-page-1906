@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { useLanguage } from "../../context/LanguageContext";
-import { ResponsiveImage } from "../ResponsiveImage";
+import { ResponsiveImage } from "../common/ResponsiveImage";
 import type { Beat } from "../../data/beats";
 
 interface BeatCardProps {

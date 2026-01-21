@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ThemeSelector from "../ThemeSelector";
-import LanguageSelector from "../LanguageSelector";
+import ThemeSelector from "../common/ThemeSelector";
+import LanguageSelector from "../common/LanguageSelector";
 import { useLanguage } from "../../context/LanguageContext";
 
 const Header = () => {
