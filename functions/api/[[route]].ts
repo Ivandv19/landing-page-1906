@@ -21,7 +21,7 @@ const app = new Hono<{ Bindings: Env }>();
 app.use(
 	"/api/*",
 	cors({
-		origin: ["http://localhost:5173", "https://landing-page.mgdc.site"],
+		origin: ["http://localhost:5173", "https://landing-page.mgdc.site", "https://mgdc.site"],
 		credentials: true,
 	})
 );
