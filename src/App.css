@@ -4,6 +4,26 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+/* ===========================================
+   🎨 DESIGN TOKENS - Color Palette
+   Cambia estos valores para cambiar toda la marca
+   =========================================== */
+@theme {
+    /* Primary Brand Colors (Azul) */
+    --color-primary: oklch(0.55 0.22 264);
+    /* blue-600 */
+    --color-primary-hover: oklch(0.60 0.22 264);
+    /* blue-500 */
+    --color-primary-light: oklch(0.90 0.08 264);
+    /* blue-200 */
+    --color-primary-dark: oklch(0.50 0.20 264);
+    /* blue-700 for dark mode */
+
+    /* Accent (Cyan - para gradientes) */
+    --color-accent: oklch(0.75 0.15 195);
+    /* cyan-400 */
+}
+
 /* Scroll Animations */
 @keyframes fadeInUp {
     from {

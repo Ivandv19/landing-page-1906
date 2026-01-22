@@ -37,7 +37,7 @@ const Header = () => {
 					{/* LOGO */}
 					<div className="flex-shrink-0 cursor-pointer">
 						<h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-							<span className="text-blue-600 dark:text-blue-500">Flux</span>
+							<span className="text-primary dark:text-primary">Flux</span>
 							beats
 						</h1>
 					</div>
@@ -58,7 +58,7 @@ const Header = () => {
 												element.getBoundingClientRect();
 											}
 										}}
-										className="text-sm font-medium text-slate-600 transition-colors hover:text-blue-600 hover:underline hover:decoration-2 hover:underline-offset-4 dark:text-slate-300 dark:hover:text-blue-400"
+										className="text-sm font-medium text-slate-600 transition-colors hover:text-primary hover:underline hover:decoration-2 hover:underline-offset-4 dark:text-slate-300 dark:hover:text-primary"
 									>
 										{item.label}
 									</a>
@@ -76,7 +76,7 @@ const Header = () => {
 						{/* BOTÓN DE HAMBURGUESA */}
 						<button
 							onClick={toggleMenu}
-							className="text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 md:hidden"
+							className="text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary md:hidden"
 							aria-label="Abrir menú"
 							aria-expanded={isMenuOpen}
 						>
@@ -136,7 +136,7 @@ const Header = () => {
 								<a
 									href={item.href}
 									onClick={closeMenu}
-									className="block p-2 text-base font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-blue-600 rounded-md dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-blue-400"
+									className="block p-2 text-base font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-primary rounded-md dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-primary"
 								>
 									{item.label}
 								</a>

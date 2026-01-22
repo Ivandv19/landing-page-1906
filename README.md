@@ -20,6 +20,7 @@ Landing page para venta de beats Lofi y Chillhop para creadores de contenido.
 - 📱 Diseño responsive
 - 🎨 Animaciones smooth al scroll
 - 📧 Formulario de contacto serverless
+- 🎨 Paleta de colores centralizada con tokens semánticos
 
 ## Development
 
