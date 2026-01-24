@@ -13,6 +13,7 @@ const contactSchema = z.object({
 type Env = {
 	RESEND_API_KEY: string;
 	CONTACT_EMAIL: string;
+	TURNSTILE_SECRET_KEY: string;
 };
 
 type PagesFunction<Env = unknown> = (context: {
@@ -39,13 +40,13 @@ app.use(
 app.post("/api/contact", async (c) => {
 	try {
 		console.log("Contact endpoint hit");
-		console.log("Headers:", c.req.header());
 		
 		// Parsear y validar datos
 		const body = await c.req.json();
-		console.log("Body received:", body);
 		
-		const result = contactSchema.safeParse(body);
+		const result = contactSchema.extend({
+			turnstileToken: z.string().min(1, "Verificación de humano requerida"),
+		}).safeParse(body);
 
 		if (!result.success) {
 			console.log("Validation failed:", result.error);
@@ -53,13 +54,38 @@ app.post("/api/contact", async (c) => {
 				{
 					success: false,
 					error: "Datos inválidos",
-					details: result.error.errors,
+					details: result.error.issues,
 				},
 				400
 			);
 		}
 
-		const { name, email, message } = result.data;
+		const { name, email, message, turnstileToken } = result.data;
+
+		// Verificar Turnstile
+		const secretKey = c.env.TURNSTILE_SECRET_KEY;
+		const verifyUrl = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+		
+		const verifyResponse = await fetch(verifyUrl, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+			body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(turnstileToken)}`,
+		});
+
+		const verifyData: any = await verifyResponse.json();
+		
+		if (!verifyData.success) {
+			console.error("Turnstile verification failed:", verifyData);
+			return c.json(
+				{
+					success: false,
+					error: "La verificación de seguridad falló. Por favor, inténtalo de nuevo.",
+				},
+				400
+			);
+		}
 
 		// Verificar que las env vars existan
 		if (!c.env.RESEND_API_KEY) {
@@ -75,12 +101,11 @@ app.post("/api/contact", async (c) => {
 
 		// Inicializar Resend
 		const resend = new Resend(c.env.RESEND_API_KEY);
-		console.log("Resend initialized");
 
 		// Enviar email
 		const { data, error } = await resend.emails.send({
 			from: "Contacto FluxBeats <onboarding@resend.dev>",
-			to: "ivangtx19@gmail.com", // Sandbox mode: solo puede enviar a tu email
+			to: "ivangtx19@gmail.com",
 			replyTo: email,
 			subject: `Nuevo mensaje de ${name}`,
 			html: `
@@ -117,7 +142,7 @@ app.post("/api/contact", async (c) => {
 									<div class="value">${message.replace(/\n/g, "<br>")}</div>
 								</div>
 								<div class="footer">
-									<p>Enviado desde FluxBeats Landing Page</p>
+									<p>Enviado desde FluxBeats Landing Page (Verificado por Cloudflare Turnstile)</p>
 								</div>
 							</div>
 						</div>
@@ -138,7 +163,6 @@ app.post("/api/contact", async (c) => {
 			);
 		}
 
-		console.log("Email sent successfully:", data);
 		return c.json({
 			success: true,
 			message: "Mensaje enviado correctamente",
@@ -164,5 +188,5 @@ app.get("/api/health", (c) => {
 
 // Export para Cloudflare Pages Functions
 export const onRequest: PagesFunction<Env> = async (context) => {
-	return app.fetch(context.request, context.env, context);
+	return app.fetch(context.request, context.env, context as any);
 };

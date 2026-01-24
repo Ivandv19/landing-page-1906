@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useLanguage } from "../../context/LanguageContext";
 import type { ContactFormData, ContactResponse } from "./types";
 
@@ -8,6 +9,7 @@ const Contacto = () => {
 		name: "",
 		email: "",
 		message: "",
+		turnstileToken: "",
 	});
 	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 	const [errorMessage, setErrorMessage] = useState("");
@@ -33,7 +35,7 @@ const Contacto = () => {
 			}
 
 			setStatus("success");
-			setFormData({ name: "", email: "", message: "" });
+			setFormData({ name: "", email: "", message: "", turnstileToken: "" });
 
 			// Reset success message after 5 seconds
 			setTimeout(() => setStatus("idle"), 5000);
@@ -301,11 +303,24 @@ const Contacto = () => {
 							</div>
 						</div>
 
+						{/* Cloudflare Turnstile */}
+						<div className="mt-6 flex justify-center sm:justify-start">
+							<Turnstile
+								siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+								onSuccess={(token) => {
+									setFormData((prev) => ({ ...prev, turnstileToken: token }));
+								}}
+								onExpire={() => {
+									setFormData((prev) => ({ ...prev, turnstileToken: "" }));
+								}}
+							/>
+						</div>
+
 						<div className="mt-8 flex justify-end">
 							<button
 								type="submit"
-								disabled={status === "loading"}
-								className="rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed dark:bg-blue-600 dark:hover:bg-blue-500"
+								disabled={status === "loading" || !formData.turnstileToken}
+								className="rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed dark:bg-blue-600 dark:hover:bg-blue-500"
 							>
 								{status === "loading" ? (
 									<span className="flex items-center justify-center gap-2">
