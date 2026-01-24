@@ -18,8 +18,8 @@
   # Fuerza HTTPS por 1 año
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   
-  # Content Security Policy - Configurado para Google Analytics
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://assets.mgdc.site; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://analytics.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests;
+  # Content Security Policy - Configurado para Google Analytics y Media
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://assets.mgdc.site; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://analytics.google.com; media-src 'self' https://assets.mgdc.site; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests;
 
 # Cache Headers para Assets Estáticos (JS, CSS)
 # Browser: 1 año | CDN: 30 días (immutable porque tienen hash en el nombre)
