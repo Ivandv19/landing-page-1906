@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext";
 
 // 1. Definimos la interfaz para las props de SocialIcon
@@ -81,12 +82,12 @@ const Footer: FC = () => {
 								{ label: t.header.about, href: "#" },
 							].map((item) => (
 								<li key={item.label}>
-									<a
-										href={item.href}
+									<Link
+										to={item.href}
 										className="text-sm text-slate-500 hover:text-blue-600 hover:underline transition-colors dark:text-slate-400 dark:hover:text-blue-400"
 									>
 										{item.label}
-									</a>
+									</Link>
 								</li>
 							))}
 						</ul>
@@ -100,17 +101,16 @@ const Footer: FC = () => {
 						<ul className="space-y-3">
 
 							{[
-								{ label: t.footer.legal.licenses, href: "#" },
-								{ label: t.footer.legal.terms, href: "#" },
-								{ label: t.footer.legal.privacy, href: "#" },
+								{ label: t.footer.legal.terms, href: "/terms" },
+								{ label: t.footer.legal.privacy, href: "/privacy" },
 							].map((item) => (
 								<li key={item.label}>
-									<a
-										href={item.href}
+									<Link
+										to={item.href}
 										className="text-sm text-slate-500 hover:text-blue-600 hover:underline transition-colors dark:text-slate-400 dark:hover:text-blue-400"
 									>
 										{item.label}
-									</a>
+									</Link>
 								</li>
 							))}
 						</ul>
@@ -138,7 +138,22 @@ const Footer: FC = () => {
 				</div>
 
 				{/* BARRA INFERIOR */}
-				<div className="mt-12 border-t border-slate-100 pt-8 dark:border-slate-800">
+				<div className="mt-12 border-t border-slate-100 pt-8 dark:border-slate-800 flex flex-col items-center gap-6">
+					<div className="flex flex-col items-center gap-4">
+						<p className="text-sm font-medium text-slate-600 dark:text-slate-300">
+							{t.footer.developedBy} <span className="font-bold text-slate-900 dark:text-white">Sinx</span>
+						</p>
+						<div className="flex flex-wrap justify-center gap-2">
+							{["React", "Vite", "Tailwind", "Hono", "Cloudflare"].map((tech) => (
+								<span
+									key={tech}
+									className="px-3 py-1 text-xs font-medium rounded-full border border-slate-200 bg-slate-50 text-slate-600 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400"
+								>
+									{tech}
+								</span>
+							))}
+						</div>
+					</div>
 					<p className="text-center text-xs text-slate-400 dark:text-slate-500">
 						&copy; {currentYear} Fluxbeats. {t.footer.rights}
 					</p>

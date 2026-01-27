@@ -83,6 +83,8 @@ export const es = {
 	footer: {
 		about: "Beats de alta calidad para creadores de contenido, streamers y artistas. Estilo Lofi, Chillhop y Boom Bap.",
 		rights: "Todos los derechos reservados.",
+		developedBy: "Desarrollado por",
+		backToHome: "Volver al inicio",
 		legal: {
 			terms: "Términos y Condiciones",
 			privacy: "Política de Privacidad",
@@ -92,6 +94,46 @@ export const es = {
 			title: "Suscríbete para ofertas",
 			placeholder: "Tu email",
 			button: "Suscribirse",
+		},
+	},
+	legalPages: {
+		terms: {
+			title: "Términos y Condiciones",
+			s1: {
+				title: "1. Aceptación de los Términos",
+				content: "Al acceder y utilizar este sitio web, usted acepta estar sujeto a los siguientes términos y condiciones de uso. Si no está de acuerdo con alguno de estos términos, le rogamos que no utilice el sitio.",
+			},
+			s2: {
+				title: "2. Uso de la Plataforma",
+				content: "Fluxbeats proporciona una plataforma para la visualización y adquisición de beats musicales. El uso indebido de los servicios o el intento de vulnerar la seguridad de la plataforma resultará en la terminación inmediata del acceso.",
+			},
+			s3: {
+				title: "3. Propiedad Intelectual",
+				content: "Todo el contenido presente en este sitio, incluyendo pero no limitado a textos, gráficos, logos y audios, es propiedad de Fluxbeats o de sus respectivos creadores y está protegido por las leyes de propiedad intelectual.",
+			},
+			s4: {
+				title: "4. Limitación de Responsabilidad",
+				content: "Fluxbeats no se hace responsable de los daños directos, indirectos o accidentales que puedan derivarse del uso o la imposibilidad de uso de nuestros servicios.",
+			},
+		},
+		privacy: {
+			title: "Política de Privacidad",
+			s1: {
+				title: "1. Información que Recopilamos",
+				content: "Recopilamos información personal básica como su nombre y dirección de correo electrónico únicamente cuando usted decide suscribirse a nuestro newsletter o contactarnos.",
+			},
+			s2: {
+				title: "2. Uso de la Información",
+				content: "Utilizamos sus datos exclusivamente para enviarle actualizaciones sobre nuevos beats, promociones y noticias relevantes de Fluxbeats. Nunca venderemos ni compartiremos su información con terceros.",
+			},
+			s3: {
+				title: "3. Cookies",
+				content: "Este sitio utiliza cookies para mejorar la experiencia del usuario y analizar el tráfico de la web. Puede desactivar las cookies en la configuración de su navegador en cualquier momento.",
+			},
+			s4: {
+				title: "4. Sus Derechos",
+				content: "Usted tiene derecho a acceder, rectificar o eliminar sus datos personales de nuestra base de datos en cualquier momento enviándonos un correo electrónico.",
+			},
 		},
 	},
 };

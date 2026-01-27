@@ -17,6 +17,7 @@
 		"hono": "^4.11.4",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
+		"react-router-dom": "^7.13.0",
 		"react-use-audio-player": "^4.0.2",
 		"resend": "^6.8.0",
 		"tailwindcss": "^4.1.17",
