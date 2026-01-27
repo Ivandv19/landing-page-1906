@@ -30,9 +30,13 @@ const reviews = [
 ];
 
 import { useLanguage } from "../../context/LanguageContext";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
 const Testimonios = () => {
 	const { t } = useLanguage();
+	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+	const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation(0.05);
+
 	return (
 		<section
 			id="testimonios"
@@ -40,7 +44,7 @@ const Testimonios = () => {
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				{/* ENCABEZADO DE LA SECCIÓN */}
-				<div className="mx-auto max-w-2xl text-center">
+				<div ref={headerRef as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-2xl text-center animate-on-scroll ${headerVisible ? 'visible' : ''}`}>
 					<h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
 						{t.reviews.header}
 					</h2>
@@ -50,7 +54,7 @@ const Testimonios = () => {
 				</div>
 
 				{/* GRID DE TARJETAS DE TESTIMONIOS */}
-				<div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+				<div ref={gridRef as React.RefObject<HTMLDivElement>} className={`mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 animate-on-scroll ${gridVisible ? 'visible' : ''}`}>
 					{reviews.map((review) => (
 						<div
 							key={review.id}

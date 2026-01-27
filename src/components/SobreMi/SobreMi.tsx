@@ -1,8 +1,10 @@
 import { useLanguage } from "../../context/LanguageContext";
 import { ResponsiveImage } from "../common/ResponsiveImage";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
 const SobreMi = () => {
 	const { t } = useLanguage();
+	const { ref, isVisible } = useScrollAnimation();
 
 	const stats = [
 		{ label: t.about.stats.years, value: "3+" },
@@ -17,7 +19,7 @@ const SobreMi = () => {
 			className="overflow-hidden bg-slate-50 py-24 sm:py-32 dark:bg-slate-900 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center">
+				<div ref={ref as React.RefObject<HTMLDivElement>} className={`mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center animate-on-scroll ${isVisible ? 'visible' : ''}`}>
 					{/* COLUMNA IZQUIERDA: Texto y Estadísticas */}
 					<div className="lg:pr-8">
 						<div className="lg:max-w-lg">

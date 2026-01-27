@@ -1,10 +1,12 @@
 import { useState, type FormEvent } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { useLanguage } from "../../context/LanguageContext";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 import type { ContactFormData, ContactResponse } from "./types";
 
 const Contacto = () => {
 	const { t } = useLanguage();
+	const { ref, isVisible } = useScrollAnimation();
 	const [formData, setFormData] = useState<ContactFormData>({
 		name: "",
 		email: "",
@@ -62,7 +64,7 @@ const Contacto = () => {
 			className="bg-white py-24 sm:py-32 border-t border-slate-100 dark:bg-slate-900 dark:border-slate-800 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div className="grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2">
+				<div ref={ref as React.RefObject<HTMLDivElement>} className={`grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2 animate-on-scroll ${isVisible ? 'visible' : ''}`}>
 					{/* COLUMNA IZQUIERDA: Información de Contacto */}
 					<div className="flex flex-col justify-center">
 						<h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
