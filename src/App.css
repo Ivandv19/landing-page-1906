@@ -27,6 +27,66 @@
     /* Accent (Cyan - para gradientes) */
     --color-accent: oklch(0.75 0.15 195);
     /* cyan-400 */
+
+    /* Custom Animations for Aurora */
+    --animate-drift-slow: drift-slow 20s infinite linear;
+    --animate-drift-reverse: drift-reverse 25s infinite linear;
+    --animate-drift-mid: drift-mid 15s infinite ease-in-out;
+    --animate-pulse-slow: pulse-slow 8s infinite ease-in-out;
+
+    @keyframes drift-slow {
+
+        0%,
+        100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+
+        33% {
+            transform: translate(10%, 5%) rotate(5deg);
+        }
+
+        66% {
+            transform: translate(-5%, 15%) rotate(-5deg);
+        }
+    }
+
+    @keyframes drift-reverse {
+
+        0%,
+        100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+
+        50% {
+            transform: translate(-15%, -10%) rotate(-10deg);
+        }
+    }
+
+    @keyframes drift-mid {
+
+        0%,
+        100% {
+            transform: translate(0, 0);
+        }
+
+        50% {
+            transform: translate(5%, -5%);
+        }
+    }
+
+    @keyframes pulse-slow {
+
+        0%,
+        100% {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 0.6;
+            transform: scale(1.1);
+        }
+    }
 }
 
 /* ===========================================

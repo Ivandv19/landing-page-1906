@@ -16,7 +16,7 @@ const SobreMi = () => {
 	return (
 		<section
 			id="sobre-mi"
-			className="overflow-hidden bg-slate-50 py-24 sm:py-32 dark:bg-slate-900 transition-colors duration-300"
+			className="overflow-hidden bg-slate-50 py-24 sm:py-32 dark:bg-slate-950 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				<div ref={ref as React.RefObject<HTMLDivElement>} className={`mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center animate-on-scroll ${isVisible ? 'visible' : ''}`}>
@@ -44,7 +44,7 @@ const SobreMi = () => {
 								{stats.map((stat) => (
 									<div
 										key={stat.label}
-										className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:bg-slate-800 dark:border-slate-700"
+										className="rounded-lg border border-slate-200 bg-white p-4 shadow-md dark:bg-slate-800 dark:border-slate-700"
 									>
 										<dt className="text-sm font-medium leading-6 text-slate-500 dark:text-slate-400">
 											{stat.label}
@@ -58,11 +58,8 @@ const SobreMi = () => {
 						</div>
 					</div>
 
-					{/* COLUMNA DERECHA: Imagen y Decoración */}
+					{/* COLUMNA DERECHA: Imagen */}
 					<div className="relative lg:mt-0">
-						{/* Decoración/Sombra detrás de la imagen (Blur) */}
-						<div className="absolute top-4 left-4 -right-4 -bottom-4 rounded-xl bg-blue-100/60 blur-sm -z-10 hidden sm:block dark:bg-blue-900/30" />
-
 						{/* Imagen Principal */}
 						<ResponsiveImage
 							src="about-me-studio.jpg"

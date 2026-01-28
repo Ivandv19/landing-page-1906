@@ -4,16 +4,17 @@ import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 const Hero = () => {
 	const { t } = useLanguage();
 	const { ref, isVisible } = useScrollAnimation();
+
 	return (
 		<div id="inicio" className="relative isolate bg-white px-6 pt-14 lg:px-8 overflow-hidden dark:bg-slate-900 transition-colors duration-300">
 			{/* --- Fondo Atmosférico Superior (Efecto Blur) --- */}
 			<div
-				className="absolute -top-40 left-[calc(50%-10rem)] -z-10 h-[40rem] w-[40rem] transform-gpu blur-3xl sm:left-[calc(50%-20rem)]"
+				className="absolute -top-40 left-[calc(50%-10rem)] -z-10 h-160 w-160 transform-gpu blur-3xl sm:left-[calc(50%-20rem)]"
 				aria-hidden="true"
 			>
 				<div
-					className="h-full w-full bg-gradient-to-tr from-primary-light to-accent opacity-30 rounded-full animate-pulse-slow"
-					style={{ animationDuration: "8s" }} // Animación de pulso lenta
+					className="h-full w-full bg-linear-to-tr from-primary-light to-accent opacity-30 rounded-full animate-pulse-slow"
+					style={{ animationDuration: "10s" }} // Animación de pulso lenta
 				/>
 			</div>
 
@@ -49,10 +50,10 @@ const Hero = () => {
 
 			{/* --- Fondo Atmosférico Inferior (Efecto Blur) --- */}
 			<div
-				className="absolute top-[calc(100%-20rem)] left-[calc(50%+3rem)] -z-10 h-[40rem] w-[40rem] transform-gpu blur-3xl sm:left-[calc(50%+10rem)]"
+				className="absolute top-[calc(100%-20rem)] left-[calc(50%+3rem)] -z-10 h-160 w-160 transform-gpu blur-3xl sm:left-[calc(50%+10rem)]"
 				aria-hidden="true"
 			>
-				<div className="h-full w-full bg-gradient-to-tr from-primary-light to-accent opacity-30 rounded-full" />
+				<div className="h-full w-full bg-linear-to-tr from-primary-light to-accent opacity-30 rounded-full" />
 			</div>
 		</div>
 	);

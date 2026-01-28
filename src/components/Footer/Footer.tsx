@@ -37,7 +37,7 @@ const Footer: FC = () => {
 	const currentYear = new Date().getFullYear();
 
 	return (
-		<footer className="bg-white border-t border-slate-200 pt-16 pb-8 dark:bg-slate-900 dark:border-slate-800 transition-colors duration-300">
+		<footer className="bg-slate-50 border-t border-slate-200 pt-16 pb-8 dark:bg-slate-950 dark:border-slate-800 transition-colors duration-300">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
 					{/* COLUMNA 1: Marca y Redes Sociales */}

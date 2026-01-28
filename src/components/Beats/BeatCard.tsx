@@ -19,7 +19,7 @@ export const BeatCard: FC<BeatCardProps> = ({
 	const { t } = useLanguage();
 
 	return (
-		<div className="min-w-[280px] md:min-w-[320px] snap-center group relative flex flex-col overflow-hidden rounded-lg bg-white shadow-sm transition-all hover:shadow border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+		<div className="min-w-[280px] md:min-w-[320px] snap-center group relative flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-xl border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
 			<div className="relative aspect-square overflow-hidden bg-slate-200 dark:bg-slate-700">
 				<ResponsiveImage
 					src={beat.image.split("/").pop() || ""}

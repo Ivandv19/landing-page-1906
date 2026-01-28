@@ -1,89 +1,83 @@
 import { useState, useRef, useEffect } from "react";
-import { useLanguage } from "../../context/LanguageContext";	
+import { useLanguage } from "../../context/LanguageContext";
 
 const LanguageSelector = () => {
-	const { language, setLanguage } = useLanguage();
-	const [isOpen, setIsOpen] = useState(false);
-	const dropdownRef = useRef<HTMLDivElement>(null);
+    const { language, setLanguage } = useLanguage();
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
-	// Cerrar dropdown al hacer clic fuera
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-				setIsOpen(false);
-			}
-		};
+    const toggleMenu = () => setIsOpen(!isOpen);
 
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, []);
+    // Close when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
 
-	const languages = [
-		{ code: "es", label: "Español", flag: "🇪🇸" },
-		{ code: "en", label: "English", flag: "🇺🇸" },
-	];
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
 
-	const currentLang = languages.find((lang) => lang.code === language) || languages[0];
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
 
-	return (
-		<div className="relative" ref={dropdownRef}>
-			<button
-				onClick={() => setIsOpen(!isOpen)}
-				className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors dark:text-slate-300 dark:hover:bg-slate-800"
-				aria-label="Cambiar idioma"
-			>
-				<span className="text-lg">{currentLang.flag}</span>
-				<span>{currentLang.code.toUpperCase()}</span>
-				<svg
-					className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-				</svg>
-			</button>
+    return (
+        <div className="relative" ref={dropdownRef}>
+            <button
+                onClick={toggleMenu}
+                className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white group"
+                aria-label="Change language"
+                aria-expanded={isOpen}
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-primary transition-colors">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span className="text-sm font-bold uppercase">{language}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`opacity-50 group-hover:opacity-100 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+                    <path d="m6 9 6 6 6-6" />
+                </svg>
+            </button>
 
-			{/* Dropdown Menu */}
-			{isOpen && (
-				<div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-800 dark:ring-slate-700 z-50">
-					<div className="py-1" role="menu">
-						{languages.map((lang) => (
-							<button
-								key={lang.code}
-								onClick={() => {
-									setLanguage(lang.code as "es" | "en");
-									setIsOpen(false);
-								}}
-								className={`w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors ${
-									language === lang.code
-										? "bg-blue-50 text-blue-700 font-semibold dark:bg-blue-900/30 dark:text-blue-300"
-										: "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700"
-								}`}
-								role="menuitem"
-							>
-								<span className="text-xl">{lang.flag}</span>
-								<span>{lang.label}</span>
-								{language === lang.code && (
-									<svg
-										className="ml-auto w-4 h-4 text-blue-600 dark:text-blue-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
-										<path
-											fillRule="evenodd"
-											d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-											clipRule="evenodd"
-										/>
-									</svg>
-								)}
-							</button>
-						))}
-					</div>
-				</div>
-			)}
-		</div>
-	);
+            <div
+                className={`absolute right-0 top-full mt-2 w-32 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1 transition-all duration-200 z-50 transform origin-top-right ${
+                    isOpen 
+                        ? "opacity-100 visible translate-y-2" 
+                        : "opacity-0 invisible translate-y-0"
+                }`}
+            >
+                <button
+                    onClick={() => { setLanguage("es"); setIsOpen(false); }}
+                    className={`
+                        w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all
+                        ${language === "es" 
+                            ? "bg-primary/10 text-primary" 
+                            : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}
+                    `}
+                >
+                    <span className={`w-1.5 h-1.5 rounded-full bg-primary transition-opacity ${language === "es" ? "opacity-100" : "opacity-0"}`}></span>
+                    Español
+                </button>
+                <button
+                    onClick={() => { setLanguage("en"); setIsOpen(false); }}
+                    className={`
+                        w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all
+                        ${language === "en" 
+                            ? "bg-primary/10 text-primary" 
+                            : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}
+                    `}
+                >
+                    <span className={`w-1.5 h-1.5 rounded-full bg-primary transition-opacity ${language === "en" ? "opacity-100" : "opacity-0"}`}></span>
+                    English
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default LanguageSelector;

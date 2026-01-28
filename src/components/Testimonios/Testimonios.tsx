@@ -58,7 +58,7 @@ const Testimonios = () => {
 					{reviews.map((review) => (
 						<div
 							key={review.id}
-							className="flex flex-col justify-between rounded-lg border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-md hover:border-blue-200 dark:bg-slate-800 dark:border-slate-700 dark:hover:border-blue-500"
+							className="flex flex-col justify-between rounded-lg border border-slate-200 bg-white p-8 shadow-md transition-all hover:shadow-lg hover:border-blue-200 dark:bg-slate-800 dark:border-slate-700 dark:hover:border-blue-500"
 						>
 							{/* ESTRELLAS Y TEXTO */}
 							<div>

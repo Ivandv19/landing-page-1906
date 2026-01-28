@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ThemeSelector from "../common/ThemeSelector";
 import LanguageSelector from "../common/LanguageSelector";
 import { useLanguage } from "../../context/LanguageContext";
@@ -6,8 +6,18 @@ import { useLanguage } from "../../context/LanguageContext";
 const Header = () => {
 	// Estado para manejar si el menú de hamburguesa está abierto o cerrado
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isScrolled, setIsScrolled] = useState(false);
 
 	const { t } = useLanguage();
+
+	// Detectar scroll para cambiar estilo del header
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsScrolled(window.scrollY > 10);
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	// Array de elementos de navegación con traducciones y IDs fijos
 	const navItems = [
@@ -32,7 +42,13 @@ const Header = () => {
 	return (
 		<>
 			{/* HEADER PRINCIPAL */}
-			<header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80">
+			<header 
+				className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+					isScrolled 
+						? "border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80 shadow-sm" 
+						: "border-b border-transparent bg-white dark:bg-slate-900 shadow-none"
+				}`}
+			>
 				<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 					{/* LOGO */}
 					<div className="flex-shrink-0 cursor-pointer">

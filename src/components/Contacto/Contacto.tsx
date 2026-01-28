@@ -185,7 +185,7 @@ const Contacto = () => {
 					{/* COLUMNA DERECHA: Formulario de Contacto */}
 					<form
 						onSubmit={handleSubmit}
-						className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:bg-slate-800 dark:border-slate-700"
+						className="rounded-xl border border-slate-200 bg-white p-6 shadow-xl sm:p-8 dark:bg-slate-800 dark:border-slate-700"
 					>
 						{/* Success Message */}
 						{status === "success" && (
@@ -224,7 +224,7 @@ const Contacto = () => {
 											clipRule="evenodd"
 										/>
 									</svg>
-									<p className="ml-3 text-sm font-medium text-red-800 dark:text-red-300">
+									<p className="ml-3 text-sm font-medium text-red-800 dark:text-green-300">
 										{errorMessage}
 									</p>
 								</div>

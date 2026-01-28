@@ -80,8 +80,8 @@ const Licencias = () => {
 							key={tier.name}
 							className={`relative flex flex-col justify-between rounded-lg p-8 ring-1 transition-all ${
 								tier.popular
-									? "bg-white shadow-md ring-2 ring-primary scale-100 lg:scale-105 z-10 dark:bg-slate-800 dark:ring-primary" // Estilos para la tarjeta destacada
-									: "bg-white ring-slate-200 shadow-sm hover:ring-slate-300 dark:bg-slate-800 dark:ring-slate-700 dark:hover:ring-slate-600" // Estilos para las tarjetas estándar
+									? "bg-white shadow-xl ring-2 ring-primary scale-100 lg:scale-105 z-10 dark:bg-slate-800 dark:ring-primary shadow-primary/10" 
+									: "bg-white ring-slate-200 shadow-md hover:ring-slate-300 hover:shadow-lg dark:bg-slate-800 dark:ring-slate-700 dark:hover:ring-slate-600" 
 							}`}
 						>
 							{/* ETIQUETA "MÁS VENDIDO" */}
