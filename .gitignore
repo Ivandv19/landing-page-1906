@@ -31,4 +31,3 @@ dist-ssr
 
 # Wrangler
 .wrangler/
-wrangler.toml
