@@ -10,7 +10,7 @@ import Privacy from "./pages/legal/Privacy";
 function App() {
 	return (
 		<BrowserRouter>
-			<div className="relative min-h-screen w-full font-sans text-slate-900 dark:text-white transition-colors duration-300">
+			<div className="relative min-h-screen w-full font-sans bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
 				{/* Fondo Global (Desactivado por ahora para volver al original) */}
 				{/* <AuraBackground /> */}
 				

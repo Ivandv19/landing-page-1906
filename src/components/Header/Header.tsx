@@ -43,13 +43,13 @@ const Header = () => {
 		<>
 			{/* HEADER PRINCIPAL */}
 			<header 
-				className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+				className={`fixed top-0 z-50 w-full transition-all duration-300 bg-white/80 backdrop-blur-md dark:bg-slate-900/80 ${
 					isScrolled 
-						? "border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80 shadow-sm" 
-						: "border-b border-transparent bg-white dark:bg-slate-900 shadow-none"
+						? "border-b border-slate-200 dark:border-slate-800 shadow-sm" 
+						: "border-b border-transparent shadow-none"
 				}`}
 			>
-				<nav className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+				<nav className="flex h-16 w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
 					{/* LOGO */}
 					<div className="shrink-0 cursor-pointer">
 						<h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -111,13 +111,13 @@ const Header = () => {
 
 			{/* MENÚ DESPLEGABLE PARA MÓVILES */}
 			<div
-				className={`fixed top-16 left-0 z-40 w-full transform transition-all duration-300 ease-in-out md:hidden ${
+				className={`fixed top-16 left-0 z-40 w-full h-[calc(100vh-4rem)] bg-white dark:bg-slate-900 transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${
 					isMenuOpen
 						? "translate-y-0 opacity-100"
 						: "-translate-y-full opacity-0 pointer-events-none"
 				}`}
 			>
-				<div className="shadow-lg bg-white p-4 border-b border-slate-200 dark:bg-slate-900 dark:border-slate-800">
+				<div className="p-4 border-b border-slate-200 dark:border-slate-800">
 					<ul className="flex flex-col space-y-2">
 						{navItems.map((item) => (
 							<li key={item.href}>

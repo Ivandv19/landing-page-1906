@@ -6,7 +6,7 @@ const Hero = () => {
 	const { ref, isVisible } = useScrollAnimation();
 
 	return (
-		<div id="inicio" className="relative isolate bg-white px-6 pt-14 lg:px-8 overflow-hidden dark:bg-slate-900 transition-colors duration-300">
+		<div id="inicio" className="relative isolate bg-white px-6 pt-14 lg:px-8 overflow-hidden dark:bg-slate-900 transition-colors duration-300 min-h-screen flex items-center justify-center">
 			{/* --- Fondo Atmosférico Superior (Efecto Blur) --- */}
 			<div
 				className="absolute -top-40 left-[calc(50%-10rem)] -z-10 h-160 w-160 transform-gpu blur-3xl sm:left-[calc(50%-20rem)]"
@@ -33,7 +33,7 @@ const Hero = () => {
 						{/* CTA 1: Explorar Beats */}
 						<a
 							href="#beats"
-							className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all"
+							className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all"
 						>
 							{t.hero.cta1}
 						</a>
