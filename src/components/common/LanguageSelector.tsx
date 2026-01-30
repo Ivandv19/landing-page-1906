@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 
-const LanguageSelector = () => {
+interface LanguageSelectorProps {
+    align?: "left" | "right";
+}
+
+const LanguageSelector = ({ align = "right" }: LanguageSelectorProps) => {
     const { language, setLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -26,26 +30,28 @@ const LanguageSelector = () => {
     }, [isOpen]);
 
     return (
-        <div className="relative" ref={dropdownRef}>
+        <div className="relative inline-block" ref={dropdownRef}>
             <button
                 onClick={toggleMenu}
-                className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white group"
+                className="flex items-center gap-1 px-2 py-2 hover:text-primary transition-colors text-slate-600 dark:text-slate-400 dark:hover:text-primary group"
                 aria-label="Change language"
                 aria-expanded={isOpen}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-primary transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-primary transition-colors">
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="2" y1="12" x2="22" y2="12"></line>
                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                 </svg>
-                <span className="text-sm font-bold uppercase">{language}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`opacity-50 group-hover:opacity-100 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+                <span className="text-sm font-medium uppercase">{language}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`opacity-50 group-hover:opacity-100 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
                     <path d="m6 9 6 6 6-6" />
                 </svg>
             </button>
 
             <div
-                className={`absolute right-0 top-full mt-2 w-32 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1 transition-all duration-200 z-50 transform origin-top-right ${
+                className={`absolute top-full mt-2 w-32 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1 transition-all duration-200 z-50 transform ${
+                    align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left"
+                } ${
                     isOpen 
                         ? "opacity-100 visible translate-y-2" 
                         : "opacity-0 invisible translate-y-0"

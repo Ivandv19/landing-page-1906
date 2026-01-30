@@ -49,84 +49,56 @@ const Header = () => {
 						: "border-b border-transparent bg-white dark:bg-slate-900 shadow-none"
 				}`}
 			>
-				<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+				<nav className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
 					{/* LOGO */}
-					<div className="flex-shrink-0 cursor-pointer">
+					<div className="shrink-0 cursor-pointer">
 						<h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
 							<span className="text-primary dark:text-primary">Flux</span>
 							beats
 						</h1>
 					</div>
 
-					{/* NAVEGACIÓN DE ESCRITORIO */}
-					<nav className="hidden md:block">
-						<ul className="flex space-x-8">
+					{/* ESPACIADOR FLEXIBLE / NAV CENTRADA */}
+					<div className="hidden md:flex flex-1 justify-center">
+						<div className="flex items-center gap-8">
 							{navItems.map((item) => (
-								<li key={item.href}>
-									<a
-										href={item.href}
-										onMouseEnter={() => {
-											// Prefetch: scroll to section on hover to prepare
-											const targetId = item.href.replace('#', '');
-											const element = document.getElementById(targetId);
-											if (element) {
-												// Pre-calculate scroll position
-												element.getBoundingClientRect();
-											}
-										}}
-										className="text-sm font-medium text-slate-600 transition-colors hover:text-primary hover:underline hover:decoration-2 hover:underline-offset-4 dark:text-slate-300 dark:hover:text-primary"
-									>
-										{item.label}
-									</a>
-								</li>
+								<a
+									key={item.href}
+									href={item.href}
+									className="text-sm font-medium text-slate-600 transition-colors hover:text-primary hover:underline hover:decoration-2 hover:underline-offset-4 dark:text-slate-300 dark:hover:text-primary"
+								>
+									{item.label}
+								</a>
 							))}
-						</ul>
-					</nav>
+						</div>
+					</div>
 
-					{/* CONTENEDOR DERECHO */}
-					<div className="flex items-center space-x-4">
-						<LanguageSelector />
-						<ThemeSelector />
+					{/* ESPACIADOR PARA MÓVIL (para empujar el grupo derecho) */}
+					<div className="flex-1 md:hidden"></div>
+
+					{/* GRUPO DERECHO: SELECTORES + HAMBURGUESA */}
+					<div className="flex items-center gap-2 shrink-0">
+						{/* SELECTORES DE ESCRITORIO */}
+						<div className="hidden md:flex items-center gap-0">
+							<LanguageSelector />
+							<ThemeSelector />
+						</div>
 
 
-						{/* BOTÓN DE HAMBURGUESA */}
+						{/* BOTÓN DE HAMBURGUESA (SOLO MÓVIL) */}
 						<button
 							onClick={toggleMenu}
-							className="text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary md:hidden"
+							className="text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary md:hidden p-2"
 							aria-label="Abrir menú"
 							aria-expanded={isMenuOpen}
 						>
 							{isMenuOpen ? (
-								// Icono X
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									className="h-6 w-6"
-								>
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
 									<path d="M18 6L6 18" />
 									<path d="M6 6l12 12" />
 								</svg>
 							) : (
-								// Icono Hamburguesa
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									className="h-6 w-6"
-								>
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
 									<line x1="4" y1="12" x2="20" y2="12" />
 									<line x1="4" y1="6" x2="20" y2="6" />
 									<line x1="4" y1="18" x2="20" y2="18" />
@@ -134,11 +106,11 @@ const Header = () => {
 							)}
 						</button>
 					</div>
-				</div>
+				</nav>
 			</header>
 
 			{/* MENÚ DESPLEGABLE PARA MÓVILES */}
-			<nav
+			<div
 				className={`fixed top-16 left-0 z-40 w-full transform transition-all duration-300 ease-in-out md:hidden ${
 					isMenuOpen
 						? "translate-y-0 opacity-100"
@@ -158,9 +130,18 @@ const Header = () => {
 								</a>
 							</li>
 						))}
+						
+						{/* SEPARADOR MÓVIL */}
+						<li className="border-t border-slate-200 dark:border-slate-800 my-2"></li>
+
+						{/* SELECTORES EN MÓVIL */}
+						<li className="flex items-center justify-between px-2 pt-2">
+							<LanguageSelector align="left" />
+							<ThemeSelector />
+						</li>
 					</ul>
 				</div>
-			</nav>
+			</div>
 
 			{/*  OVERLAY/FONDO CON BLUR MODIFICADO  */}
 			{/*  OVERLAY/FONDO CON BLUR DE FONDO  */}
