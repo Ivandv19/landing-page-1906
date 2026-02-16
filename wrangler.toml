@@ -6,17 +6,4 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 VITE_TURNSTILE_SITE_KEY = "0x4AAAAAACO-aPz4XYUFxls5"
 
-[[secrets_store_secrets]]
-binding = "RESEND_API_KEY"
-store_id = "6f7b52d34088497f8b08f42c1e938a22"
-secret_name = "RESEND_API_KEY"
 
-[[secrets_store_secrets]]
-binding = "CONTACT_EMAIL"
-store_id = "6f7b52d34088497f8b08f42c1e938a22"
-secret_name = "CONTACT_EMAIL"
-
-[[secrets_store_secrets]]
-binding = "TURNSTILE_SECRET_KEY"
-store_id = "6f7b52d34088497f8b08f42c1e938a22"
-secret_name = "TURNSTILE_SECRET_KEY"
