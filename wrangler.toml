@@ -1,10 +1,22 @@
 name = "landing-page-1906"
 pages_build_output_dir = "dist"
-compatibility_date = "2026-01-28"
+compatibility_date = "2026-02-16"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
-# Add your environment variables here or in the Dashboard
-# RESEND_API_KEY = "re_..."
-# CONTACT_EMAIL = "..."
-# TURNSTILE_SECRET_KEY = "..."
+VITE_TURNSTILE_SITE_KEY = "0x4AAAAAACO-aPz4XYUFxls5"
+
+[[secret_store]]
+binding = "RESEND_API_KEY"
+store_id = "6f7b52d34088497f8b08f42c1e938a22"
+key = "RESEND_API_KEY"
+
+[[secret_store]]
+binding = "CONTACT_EMAIL"
+store_id = "6f7b52d34088497f8b08f42c1e938a22"
+key = "CONTACT_EMAIL"
+
+[[secret_store]]
+binding = "TURNSTILE_SECRET_KEY"
+store_id = "6f7b52d34088497f8b08f42c1e938a22"
+key = "TURNSTILE_SECRET_KEY"
