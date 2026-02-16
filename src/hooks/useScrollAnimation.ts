@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
+/**
+ * Hook Personalizado: Activa animaciones cuando los elementos entran en el viewport.
+ * Usa IntersectionObserver y se reinicia al cambiar el idioma.
+ */
 export const useScrollAnimation = (threshold = 0.1) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isVisible, setIsVisible] = useState(false);
@@ -9,7 +13,7 @@ export const useScrollAnimation = (threshold = 0.1) => {
 	useEffect(() => {
 		// Reset animation when language changes
 		setIsVisible(false);
-		
+
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {

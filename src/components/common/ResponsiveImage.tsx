@@ -19,6 +19,14 @@ const DEFAULT_SIZES = {
 	desktop: 600,
 };
 
+/**
+ * ResponsiveImage Component
+ *
+ * Componente de imagen optimizado que utiliza Cloudflare Image Resizing.
+ * - Genera atributos `srcSet` y `sizes` automáticamente.
+ * - Permite definir anchos específicos para mobile/tablet/desktop.
+ * - Carga perezosa (lazy loading) por defecto.
+ */
 export const ResponsiveImage: FC<ResponsiveImageProps> = ({
 	src,
 	alt,

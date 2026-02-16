@@ -32,6 +32,14 @@ const reviews = [
 import { useLanguage } from "../../context/LanguageContext";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
+/**
+ * Testimonios Component
+ *
+ * Sección de prueba social (Social Proof).
+ * - Grid de tarjetas con reseñas de clientes.
+ * - Incluye valoración (estrellas), texto, autor y rol.
+ * - Datos estáticos (mock) por ahora.
+ */
 const Testimonios = () => {
 	const { t } = useLanguage();
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();

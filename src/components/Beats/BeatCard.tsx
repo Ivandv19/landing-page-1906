@@ -10,6 +10,14 @@ interface BeatCardProps {
 	onPlay: (beat: Beat) => void;
 }
 
+/**
+ * BeatCard Component
+ *
+ * Tarjeta individual para mostrar la información de un beat.
+ * - Muestra portada, título, BPM, Key y precio.
+ * - Botón de Play/Pause con estado de carga (spinner).
+ * - Efectos de hover para revelar controles.
+ */
 export const BeatCard: FC<BeatCardProps> = ({
 	beat,
 	isPlaying,
@@ -31,11 +39,10 @@ export const BeatCard: FC<BeatCardProps> = ({
 				<button
 					onClick={() => onPlay(beat)}
 					disabled={isLoading}
-					className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-500 disabled:opacity-50 ${
-						isPlaying
+					className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-500 disabled:opacity-50 ${isPlaying
 							? "opacity-100 scale-100"
 							: "opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100"
-					}`}
+						}`}
 				>
 					{isLoading ? (
 						<svg className="h-6 w-6 animate-spin" fill="none" viewBox="0 0 24 24">

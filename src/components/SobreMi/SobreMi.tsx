@@ -2,6 +2,14 @@ import { useLanguage } from "../../context/LanguageContext";
 import { ResponsiveImage } from "../common/ResponsiveImage";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
+/**
+ * SobreMi Component
+ *
+ * Sección "Acerca de" con layout dividido.
+ * - Izquierda: Historia, misión y estadísticas clave (Grid).
+ * - Derecha: Imagen de perfil/estudio con frase destacada (Quote).
+ * - Uso de `ResponsiveImage` para optimización.
+ */
 const SobreMi = () => {
 	const { t } = useLanguage();
 	const { ref, isVisible } = useScrollAnimation();

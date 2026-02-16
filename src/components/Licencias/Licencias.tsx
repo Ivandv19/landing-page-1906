@@ -1,6 +1,15 @@
 import { useLanguage } from "../../context/LanguageContext";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
+/**
+ * Licencias Component
+ *
+ * Sección de precios y planes (Pricing Table).
+ * - Muestra 3 niveles de licencias (Básica, Premium, Ilimitada).
+ * - Destaca la opción "Más popular".
+ * - Lista de características por plan con iconos de check.
+ * - Animación de entrada.
+ */
 const Licencias = () => {
 	const { t } = useLanguage();
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
@@ -78,11 +87,10 @@ const Licencias = () => {
 					{licenses.map((tier) => (
 						<div
 							key={tier.name}
-							className={`relative flex flex-col justify-between rounded-lg p-8 ring-1 transition-all ${
-								tier.popular
-									? "bg-white shadow-xl ring-2 ring-primary scale-100 lg:scale-105 z-10 dark:bg-slate-800 dark:ring-primary shadow-primary/10" 
-									: "bg-white ring-slate-200 shadow-md hover:ring-slate-300 hover:shadow-lg dark:bg-slate-800 dark:ring-slate-700 dark:hover:ring-slate-600" 
-							}`}
+							className={`relative flex flex-col justify-between rounded-lg p-8 ring-1 transition-all ${tier.popular
+									? "bg-white shadow-xl ring-2 ring-primary scale-100 lg:scale-105 z-10 dark:bg-slate-800 dark:ring-primary shadow-primary/10"
+									: "bg-white ring-slate-200 shadow-md hover:ring-slate-300 hover:shadow-lg dark:bg-slate-800 dark:ring-slate-700 dark:hover:ring-slate-600"
+								}`}
 						>
 							{/* ETIQUETA "MÁS VENDIDO" */}
 							{tier.popular && (
@@ -141,11 +149,10 @@ const Licencias = () => {
 							{/* BOTÓN DE ACCIÓN */}
 							<a
 								href="#"
-								className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${
-									tier.popular
+								className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${tier.popular
 										? "bg-primary text-white shadow-sm hover:bg-primary-hover focus-visible:outline-primary dark:bg-primary dark:hover:bg-primary-hover" // Botón primario
 										: "text-primary ring-1 ring-inset ring-primary-light hover:ring-primary bg-primary-light/30 dark:text-primary dark:ring-primary/30 dark:bg-primary/10 dark:hover:ring-primary" // Botón secundario
-								}`}
+									}`}
 							>
 								{tier.cta}
 							</a>

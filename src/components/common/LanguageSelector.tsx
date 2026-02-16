@@ -5,6 +5,14 @@ interface LanguageSelectorProps {
     align?: "left" | "right";
 }
 
+/**
+ * LanguageSelector Component
+ *
+ * Dropdown para cambiar el idioma de la aplicación.
+ * - Consume `LanguageContext`.
+ * - Soporta alineación izquierda/derecha para adaptarse al header móvil/desktop.
+ * - Cierra el menú al hacer clic fuera.
+ */
 const LanguageSelector = ({ align = "right" }: LanguageSelectorProps) => {
     const { language, setLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
@@ -49,20 +57,18 @@ const LanguageSelector = ({ align = "right" }: LanguageSelectorProps) => {
             </button>
 
             <div
-                className={`absolute top-full mt-2 w-32 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1 transition-all duration-200 z-50 transform ${
-                    align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left"
-                } ${
-                    isOpen 
-                        ? "opacity-100 visible translate-y-2" 
+                className={`absolute top-full mt-2 w-32 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg p-1 transition-all duration-200 z-50 transform ${align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left"
+                    } ${isOpen
+                        ? "opacity-100 visible translate-y-2"
                         : "opacity-0 invisible translate-y-0"
-                }`}
+                    }`}
             >
                 <button
                     onClick={() => { setLanguage("es"); setIsOpen(false); }}
                     className={`
                         w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all
-                        ${language === "es" 
-                            ? "bg-primary/10 text-primary" 
+                        ${language === "es"
+                            ? "bg-primary/10 text-primary"
                             : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}
                     `}
                 >
@@ -73,8 +79,8 @@ const LanguageSelector = ({ align = "right" }: LanguageSelectorProps) => {
                     onClick={() => { setLanguage("en"); setIsOpen(false); }}
                     className={`
                         w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all
-                        ${language === "en" 
-                            ? "bg-primary/10 text-primary" 
+                        ${language === "en"
+                            ? "bg-primary/10 text-primary"
                             : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}
                     `}
                 >

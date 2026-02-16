@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Beat } from "../data/beats";
 
+/**
+ * Hook Personalizado: Gestiona el estado global de reproducción de audio.
+ * Maneja: Play/Pause, cambio de pista, volumen y actualizaciones de progreso.
+ */
 export const useAudioPlayer = () => {
 	const audioRef = useRef<HTMLAudioElement>(null);
 	const [currentBeat, setCurrentBeat] = useState<Beat | null>(null);

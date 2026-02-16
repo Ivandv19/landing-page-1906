@@ -1,5 +1,12 @@
 import { useTheme } from "../../context/ThemeContext";
 
+/**
+ * ThemeSelector Component
+ *
+ * Botón para alternar entre modo claro y oscuro.
+ * - Consume `ThemeContext`.
+ * - Cambia el icono (Sol/Luna) según el estado actual.
+ */
 const ThemeSelector = () => {
 	const { theme, toggleTheme } = useTheme();
 
@@ -8,7 +15,7 @@ const ThemeSelector = () => {
 			onClick={toggleTheme}
 			className="rounded-full p-2 text-slate-600 transition-colors hover:text-primary dark:text-slate-300 dark:hover:text-primary"
 			aria-label="Toggle theme"
-		>	
+		>
 			{theme === "light" ? (
 				// Moon icon for light mode (switch to dark)
 				<svg

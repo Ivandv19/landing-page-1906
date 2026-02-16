@@ -3,9 +3,21 @@ import ThemeSelector from "../common/ThemeSelector";
 import LanguageSelector from "../common/LanguageSelector";
 import { useLanguage } from "../../context/LanguageContext";
 
+/**
+ * Header Component
+ *
+ * Muestra la barra de navegación principal, responsive y fija en la parte superior.
+ * Incluye:
+ * - Logo con link al inicio.
+ * - Menú de navegación (oculto en móvil).
+ * - Selectores de Idioma y Tema.
+ * - Menú de hamburguesa para dispositivos móviles.
+ * - Efecto de cambio de fondo al hacer scroll (backdrop-blur).
+ */
 const Header = () => {
-	// Estado para manejar si el menú de hamburguesa está abierto o cerrado
+	// Estado para visualizar el menú de hamburguesa en móvil
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	// Estado para detectar si el usuario ha hecho scroll y cambiar estilo
 	const [isScrolled, setIsScrolled] = useState(false);
 
 	const { t } = useLanguage();
@@ -42,12 +54,11 @@ const Header = () => {
 	return (
 		<>
 			{/* HEADER PRINCIPAL */}
-			<header 
-				className={`fixed top-0 z-50 w-full transition-all duration-300 bg-white/80 backdrop-blur-md dark:bg-slate-900/80 ${
-					isScrolled 
-						? "border-b border-slate-200 dark:border-slate-800 shadow-sm" 
-						: "border-b border-transparent shadow-none"
-				}`}
+			<header
+				className={`fixed top-0 z-50 w-full transition-all duration-300 bg-white/80 backdrop-blur-md dark:bg-slate-900/80 ${isScrolled
+					? "border-b border-slate-200 dark:border-slate-800 shadow-sm"
+					: "border-b border-transparent shadow-none"
+					}`}
 			>
 				<nav className="flex h-16 w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
 					{/* LOGO */}
@@ -111,11 +122,10 @@ const Header = () => {
 
 			{/* MENÚ DESPLEGABLE PARA MÓVILES */}
 			<div
-				className={`fixed top-16 left-0 z-40 w-full h-[calc(100vh-4rem)] bg-white dark:bg-slate-900 transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${
-					isMenuOpen
-						? "translate-y-0 opacity-100"
-						: "-translate-y-full opacity-0 pointer-events-none"
-				}`}
+				className={`fixed top-16 left-0 z-40 w-full h-[calc(100vh-4rem)] bg-white dark:bg-slate-900 transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${isMenuOpen
+					? "translate-y-0 opacity-100"
+					: "-translate-y-full opacity-0 pointer-events-none"
+					}`}
 			>
 				<div className="p-4 border-b border-slate-200 dark:border-slate-800">
 					<ul className="flex flex-col space-y-2">
@@ -130,7 +140,7 @@ const Header = () => {
 								</a>
 							</li>
 						))}
-						
+
 						{/* SEPARADOR MÓVIL */}
 						<li className="border-t border-slate-200 dark:border-slate-800 my-2"></li>
 

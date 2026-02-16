@@ -6,6 +6,16 @@ import { beats } from "../../data/beats";
 import { MiniPlayer } from "./MiniPlayer";
 import { BeatCard } from "./BeatCard";
 
+/**
+ * BeatsSection Component
+ *
+ * Muestra el catálogo de beats disponibles en un carrusel desplazable.
+ * Funcionalidades:
+ * - Listado horizontal de beats (scroll con botones y teclado).
+ * - Integración con `useAudioPlayer` para manejar la reproducción global.
+ * - Renderiza `MiniPlayer` persistente cuando hay un beat activo.
+ * - Animación de entrada al hacer scroll.
+ */
 const BeatsSection: FC = () => {
 	const { t } = useLanguage();
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();

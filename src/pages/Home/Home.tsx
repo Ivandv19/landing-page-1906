@@ -5,6 +5,10 @@ import Licencias from "../../components/Licencias/Licencias";
 import SobreMi from "../../components/SobreMi/SobreMi";
 import Testimonios from "../../components/Testimonios/Testimonios";
 
+/**
+ * Página: Landing Page (Inicio)
+ * Compone todas las secciones principales: Hero, Beats, Licencias, Testimonios, Sobre Mí, Contacto.
+ */
 const Home = () => {
 	return (
 		<>

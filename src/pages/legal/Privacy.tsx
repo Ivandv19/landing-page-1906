@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 import { useLanguage } from "../../context/LanguageContext";
 
+/**
+ * Página: Política de Privacidad
+ * Contenido estático que muestra los términos de privacidad. Usa i18n para los textos.
+ */
 const Privacy: FC = () => {
 	const { t } = useLanguage();
 

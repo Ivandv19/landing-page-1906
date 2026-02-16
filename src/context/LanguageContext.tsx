@@ -17,7 +17,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 	undefined,
 );
 
-// 3. Provider
+// 3. Provider: Gestiona el estado del idioma (persistencia + detección del navegador)
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
 	// Estado inicial lazy: busca en localStorage o usa "es" por defecto
 	const [language, setLanguageState] = useState<Language>(() => {

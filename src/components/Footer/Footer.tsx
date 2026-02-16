@@ -32,6 +32,15 @@ const SocialIcon: FC<SocialIconProps> = ({ href, label, children }) => (
 	</a>
 );
 
+/**
+ * Footer Component
+ *
+ * Pie de página global.
+ * - Enlaces rápidos a secciones.
+ * - Iconos de redes sociales.
+ * - Formulario de suscripción a newsletter.
+ * - Información legal y copyright.
+ */
 const Footer: FC = () => {
 	const { t } = useLanguage();
 	const currentYear = new Date().getFullYear();

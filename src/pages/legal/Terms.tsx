@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 import { useLanguage } from "../../context/LanguageContext";
 
+/**
+ * Página: Términos de Servicio
+ * Contenido estático que muestra los términos de servicio. Usa i18n para los textos.
+ */
 const Terms: FC = () => {
 	const { t } = useLanguage();
 

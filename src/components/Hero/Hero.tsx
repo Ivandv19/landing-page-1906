@@ -1,6 +1,16 @@
 import { useLanguage } from "../../context/LanguageContext";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
+/**
+ * Hero Component
+ *
+ * Sección principal de aterrizaje (Above the fold).
+ * Características:
+ * - Fondo con efectos atmosféricos (blur) y gradientes animados.
+ * - Título y subtítulo traducibles.
+ * - Call to Actions (CTAs) principales para explorar beats o licencias.
+ * - Animación de entrada al hacer scroll.
+ */
 const Hero = () => {
 	const { t } = useLanguage();
 	const { ref, isVisible } = useScrollAnimation();

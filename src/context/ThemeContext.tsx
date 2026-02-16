@@ -9,6 +9,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+// Provider: Maneja el cambio de tema (claro/oscuro) y sincroniza con localStorage/sistema
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 	const [theme, setTheme] = useState<Theme>(() => {
 		// 1. Check local storage
@@ -24,6 +25,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 	});
 
 	useEffect(() => {
+		console.log("ThemeContext: Effect ran, theme is:", theme);
 		const root = document.documentElement;
 		if (theme === "dark") {
 			root.classList.add("dark");
@@ -34,6 +36,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 	}, [theme]);
 
 	const toggleTheme = () => {
+		console.log("ThemeContext: Toggling theme. Current:", theme);
 		setTheme((prev) => (prev === "light" ? "dark" : "light"));
 	};
 

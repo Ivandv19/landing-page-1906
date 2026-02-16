@@ -4,6 +4,17 @@ import { useLanguage } from "../../context/LanguageContext";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 import type { ContactFormData, ContactResponse } from "./types";
 
+/**
+ * Contacto Component
+ *
+ * Formulario de contacto y sección de información social.
+ * Características:
+ * - Formulario validado (HTML5 + estado React).
+ * - Protección anti-spam con Cloudflare Turnstile.
+ * - Envío de datos a API backend (simulado o real).
+ * - Mensajes de éxito/error temporales.
+ * - Información de contacto estática (Email, Redes).
+ */
 const Contacto = () => {
 	const { t } = useLanguage();
 	const { ref, isVisible } = useScrollAnimation();

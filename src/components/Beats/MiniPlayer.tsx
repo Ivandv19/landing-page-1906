@@ -1,5 +1,6 @@
 import { type FC } from "react";
 import type { Beat } from "../../data/beats";
+import { formatTime } from "../../utils/time";
 
 interface MiniPlayerProps {
 	currentBeat: Beat | null;
@@ -15,14 +16,15 @@ interface MiniPlayerProps {
 	onSeek: (progress: number) => void;
 }
 
-// Helper para formatear tiempo
-const formatTime = (seconds: number) => {
-	if (!seconds || isNaN(seconds)) return "0:00";
-	const mins = Math.floor(seconds / 60);
-	const secs = Math.floor(seconds % 60);
-	return `${mins}:${secs.toString().padStart(2, "0")}`;
-};
-
+/**
+ * MiniPlayer Component
+ *
+ * Reproductor flotante fijo en la parte inferior de la pantalla.
+ * - Aparece solo cuando hay un beat seleccionado.
+ * - Controles: Play/Pause, Barra de progreso (seekable), Volumen, Cerrar.
+ * - Muestra tiempo actual y duración total formateados.
+ * - Adaptable a modo oscuro/claro.
+ */
 export const MiniPlayer: FC<MiniPlayerProps> = ({
 	currentBeat,
 	isPlaying,
