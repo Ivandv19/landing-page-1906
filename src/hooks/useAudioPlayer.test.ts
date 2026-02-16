@@ -5,25 +5,24 @@ import type { Beat } from "../data/beats";
 
 // Mock beat data
 const mockBeat: Beat = {
-    id: "1",
+    id: 1,
     title: "Test Beat",
     bpm: 120,
     key: "C Minor",
     price: 29.99,
     audioUrl: "test-audio.mp3",
-    coverUrl: "test-cover.jpg",
-    tags: ["trap", "dark"]
+    image: "test-cover.jpg",
+    // tags is not in Beat interface
 };
 
 const mockBeat2: Beat = {
-    id: "2",
+    id: 2,
     title: "Test Beat 2",
     bpm: 140,
     key: "D Major",
     price: 39.99,
     audioUrl: "test-audio-2.mp3",
-    coverUrl: "",
-    tags: []
+    image: "",
 };
 
 describe("useAudioPlayer Hook", () => {
@@ -112,13 +111,13 @@ describe("useAudioPlayer Hook", () => {
         await act(async () => {
             result.current.togglePlayPause(mockBeat);
         });
-        expect(result.current.currentBeat?.id).toBe("1");
+        expect(result.current.currentBeat?.id).toBe(1);
 
         // Play second beat
         await act(async () => {
             result.current.togglePlayPause(mockBeat2);
         });
-        expect(result.current.currentBeat?.id).toBe("2");
+        expect(result.current.currentBeat?.id).toBe(2);
         expect(result.current.isPlaying).toBe(true);
         expect(result.current.audioRef.current?.src).toContain("test-audio-2.mp3");
     });

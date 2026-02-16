@@ -8,14 +8,14 @@ import type { Beat } from "../../data/beats";
 // Pero la lógica de MiniPlayer depende de los props que le pasamos.
 
 const mockBeat: Beat = {
-    id: "1",
+    id: 1,
     title: "Awesome Beat",
     bpm: 140,
     key: "C Minor",
     price: 30,
     audioUrl: "url",
-    coverUrl: "",
-    tags: []
+    image: "",
+    // tags: [] // tags is not in Beat interface
 };
 
 describe("MiniPlayer Component", () => {
