@@ -60,7 +60,7 @@ const Header = () => {
 					: "border-b border-transparent shadow-none"
 					}`}
 			>
-				<nav className="flex h-16 w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
+				<nav className="mx-auto max-w-7xl flex h-16 w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
 					{/* LOGO */}
 					<div className="shrink-0 cursor-pointer">
 						<h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
