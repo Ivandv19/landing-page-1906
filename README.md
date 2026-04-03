@@ -1,58 +1,75 @@
-# Fluxbeats 🎵
+# Fluxbeats (Landing Page 1906)
 
-Landing page para venta de beats Lofi y Chillhop para creadores de contenido.
+## Descripción
 
-🔗 **Live:** [landing-page.mgdc.site](https://landing-page.mgdc.site/)
+Esta es la página pública diseñada para exhibir y vender instrumentales musicales (Beats). Funciona como un portafolio profesional y un punto de contacto directo, proporcionando a los clientes una forma rápida de escuchar de música y comunicarse para adquirir las licencias.
 
-## Tech Stack
+## Características
 
-- **Frontend:** React 19 + TypeScript + Vite 7
-- **Styling:** TailwindCSS 4
-- **Backend:** Cloudflare Workers (Hono + Resend)
-- **Linting:** Biome
-- **Deploy:** Cloudflare Pages
+- **Diseño Inmersivo**: Interfaz moderna y atractiva estructurada para presentar pistas musicales de forma profesional.
+- **Reproductor de Audio**: Lista de instrumentales integrada con un funcionamiento sencillo e interactivo (Play/Pause) directo en la página.
+- **Contacto Directo**: Formulario web integrado y protegido contra spam para que los clientes soliciten compras o comisiones.
+- **Soporte Multilingüe**: Permite cambiar el idioma y la información visual de la plataforma entre español e inglés.
 
-## Features
+## Secciones
 
-- 🎧 Reproductor de audio integrado con MiniPlayer
-- 🌙 Dark/Light mode
-- 🌐 Internacionalización (ES/EN)
-- 📱 Diseño responsive
-- 🎨 Animaciones smooth al scroll
-- 📧 Formulario de contacto serverless
-- 🎨 Paleta de colores centralizada con tokens semánticos
+1. **Inicio**: Presentación e introducción principal que invita a descubrir el catálogo.
+2. **Catálogo de Beats**: Sección central que lista las pistas musicales y permite reproducirlas libremente.
+3. **Licencias y Precios**: Resumen claro que explica los diferentes formatos y tipos de uso disponibles.
+4. **Contacto**: Formulario de comunicación directa para solicitar archivos de audio o negociaciones.
 
-## Development
+## Uso
+
+- **Visualizar Contenido**: El proyecto ya se encuentra en funcionamiento. Puedes explorarlo aquí: [Fluxbeats Landing Page](https://landing-page.mgdc.site/).
+- **Escuchar Pistas**: Desliza hasta el apartado del catálogo de instrumentales y haz clic en reproducir.
+- **Enviar Mensaje**: Rellena el formulario con tus datos en la parte de abajo; el sistema se encarga de enviarlo directamente.
+
+## Tecnologías Utilizadas
+
+- HTML / CSS / TypeScript
+- React
+- Vite
+- Tailwind CSS
+- pnpm
+
+## Instalación
+
+1. **Clonar el Repositorio**: Descarga el código de este proyecto en tu máquina usando Git.
 
 ```bash
-# Instalar dependencias
+git clone https://github.com/Ivandv19/landing-page-1906.git
+```
+
+2. **Instalar Dependencias**: Abre una terminal en la raíz del proyecto y ejecuta:
+
+```bash
 pnpm install
+```
 
-# Desarrollo local
+3. **Variables de Entorno**: Crea un archivo `.env` o `.dev.vars` en la carpeta base. Necesitarás agregar tus claves secretas de Resend (para enviar los correos) y Turnstile (para evitar el spam del formulario).
+
+4. **Iniciar el Proyecto**: Ejecuta el servidor localmente con el siguiente comando:
+
+```bash
 pnpm run dev
-
-# Build producción
-pnpm run build
-
-# Lint y format
-pnpm run check
 ```
 
-## Project Structure
+## Créditos
 
-```
-├── src/
-│   ├── components/     # Componentes React
-│   ├── context/        # Context providers
-│   ├── data/           # Datos estáticos (beats)
-│   ├── hooks/          # Custom hooks
-│   ├── i18n/           # Traducciones
-│   └── pages/          # Páginas
-├── functions/          # Cloudflare Workers
-│   └── api/            # API endpoints
-└── public/             # Assets estáticos
-```
+Este es un proyecto dedicado a la exhibición y venta dentro del comercio de la producción musical.
 
-## License
+- Desarrollado por Ivan Cruz.
 
-MIT
+## Despliegue
+
+La plataforma está gestionada completamente de forma remota a través de servicios como Cloudflare Pages. En esta ubicación se aloja tanto la información visual como la función ligera que manda el propio correo de contacto. 
+
+Puedes visitarlo permanentemente desde aquí: [landing-page.mgdc.site](https://landing-page.mgdc.site/).
+
+## Licencia
+
+Licencia de Uso Personal:
+
+Este software es propiedad de **Ivan Cruz**. Se permite el uso de este software solo para fines personales y no comerciales. No se permite la distribución, modificación ni uso comercial de este software sin el consentimiento expreso de **Ivan Cruz**.
+
+Cualquier uso no autorizado puede resultar en acciones legales.
