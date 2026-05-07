@@ -9,5 +9,5 @@ export interface ContactResponse {
 	success: boolean;
 	message?: string;
 	error?: string;
-	details?: any;
+	details?: unknown;
 }

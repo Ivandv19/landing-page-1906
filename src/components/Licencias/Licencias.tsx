@@ -122,7 +122,6 @@ const Licencias = () => {
 
 								{/* LISTA DE CARACTERÍSTICAS */}
 								<ul
-									role="list"
 									className="mt-8 space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
 								>
 									{tier.features.map((feature) => (
@@ -147,15 +146,15 @@ const Licencias = () => {
 							</div>
 
 							{/* BOTÓN DE ACCIÓN */}
-							<a
-								href="#"
+							<button
+								type="button"
 								className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${tier.popular
 										? "bg-primary text-white shadow-sm hover:bg-primary-hover focus-visible:outline-primary dark:bg-primary dark:hover:bg-primary-hover" // Botón primario
 										: "text-primary ring-1 ring-inset ring-primary-light hover:ring-primary bg-primary-light/30 dark:text-primary dark:ring-primary/30 dark:bg-primary/10 dark:hover:ring-primary" // Botón secundario
 									}`}
 							>
 								{tier.cta}
-							</a>
+							</button>
 						</div>
 					))}
 				</div>

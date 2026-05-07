@@ -89,19 +89,20 @@ const Contacto = () => {
 							{/* Email de Contacto */}
 							<div className="flex items-center gap-x-4">
 								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:ring-blue-900/50">
-									<svg
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										strokeWidth="1.5"
-										stroke="currentColor"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-										/>
-									</svg>
+								<svg
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									aria-hidden="true"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+									/>
+								</svg>
 								</div>
 								<div className="text-base text-slate-600">
 									<span className="block font-semibold text-slate-900 dark:text-white">
@@ -116,19 +117,20 @@ const Contacto = () => {
 							{/* Tiempo de Respuesta */}
 							<div className="flex items-center gap-x-4">
 								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:ring-blue-900/50">
-									<svg
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										strokeWidth="1.5"
-										stroke="currentColor"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-										/>
-									</svg>
+								<svg
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									aria-hidden="true"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
 								</div>
 								<div className="text-base text-slate-600 dark:text-slate-400">
 									<span className="block font-semibold text-slate-900 dark:text-white">
@@ -141,52 +143,53 @@ const Contacto = () => {
 							{/* Redes Sociales */}
 							<div className="flex items-center gap-x-4">
 								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:ring-blue-900/50">
-									<svg
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										strokeWidth="1.5"
-										stroke="currentColor"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-										/>
-									</svg>
+								<svg
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									aria-hidden="true"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+									/>
+								</svg>
 								</div>
 								<div>
 									<span className="block font-semibold text-slate-900 text-base dark:text-white">
 										{t.contact.follow}
 									</span>
 									<div className="flex gap-4 mt-1">
-										<a
-											href="#"
+										<button
+											type="button"
 											className="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-1 dark:text-slate-400 dark:hover:text-blue-400"
 										>
 											Instagram
-										</a>
+										</button>
 										<span className="text-slate-300 dark:text-slate-600">|</span>
-										<a
-											href="#"
+										<button
+											type="button"
 											className="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-1 dark:text-slate-400 dark:hover:text-blue-400"
 										>
 											YouTube
-										</a>
+										</button>
 										<span className="text-slate-300 dark:text-slate-600">|</span>
-										<a
-											href="#"
+										<button
+											type="button"
 											className="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-1 dark:text-slate-400 dark:hover:text-blue-400"
 										>
 											Airbit
-										</a>
+										</button>
 										<span className="text-slate-300 dark:text-slate-600">|</span>
-										<a
-											href="#"
+										<button
+											type="button"
 											className="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-1 dark:text-slate-400 dark:hover:text-blue-400"
 										>
 											BeatStars
-										</a>
+										</button>
 									</div>
 								</div>
 							</div>
@@ -202,11 +205,12 @@ const Contacto = () => {
 						{status === "success" && (
 							<div className="mb-6 rounded-lg bg-green-50 p-4 border border-green-200 dark:bg-green-900/20 dark:border-green-900/50">
 								<div className="flex">
-									<svg
-										className="h-5 w-5 text-green-600 dark:text-green-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
+								<svg
+									className="h-5 w-5 text-green-600 dark:text-green-400"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+									aria-hidden="true"
+								>
 										<path
 											fillRule="evenodd"
 											d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -224,11 +228,12 @@ const Contacto = () => {
 						{status === "error" && (
 							<div className="mb-6 rounded-lg bg-red-50 p-4 border border-red-200 dark:bg-red-900/20 dark:border-red-900/50">
 								<div className="flex">
-									<svg
-										className="h-5 w-5 text-red-600 dark:text-red-400"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
+								<svg
+									className="h-5 w-5 text-red-600 dark:text-red-400"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+									aria-hidden="true"
+								>
 										<path
 											fillRule="evenodd"
 											d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -341,6 +346,7 @@ const Contacto = () => {
 											className="animate-spin h-4 w-4"
 											fill="none"
 											viewBox="0 0 24 24"
+											aria-hidden="true"
 										>
 											<circle
 												className="opacity-25"

@@ -74,7 +74,7 @@ app.post("/api/contact", async (c) => {
 			body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(turnstileToken)}`,
 		});
 
-		const verifyData: any = await verifyResponse.json();
+		const verifyData = await verifyResponse.json() as { success: boolean; [key: string]: unknown };
 		
 		if (!verifyData.success) {
 			console.error("Turnstile verification failed:", verifyData);
@@ -188,5 +188,5 @@ app.get("/api/health", (c) => {
 
 // Export para Cloudflare Pages Functions
 export const onRequest: PagesFunction<Env> = async (context) => {
-	return app.fetch(context.request, context.env, context as any);
+		return app.fetch(context.request, context.env, context as never);
 };

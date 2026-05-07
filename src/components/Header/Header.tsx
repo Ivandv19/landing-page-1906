@@ -98,18 +98,19 @@ const Header = () => {
 
 						{/* BOTÓN DE HAMBURGUESA (SOLO MÓVIL) */}
 						<button
+							type="button"
 							onClick={toggleMenu}
 							className="text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary md:hidden p-2"
 							aria-label="Abrir menú"
 							aria-expanded={isMenuOpen}
 						>
 							{isMenuOpen ? (
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6" aria-hidden="true">
 									<path d="M18 6L6 18" />
 									<path d="M6 6l12 12" />
 								</svg>
 							) : (
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6" aria-hidden="true">
 									<line x1="4" y1="12" x2="20" y2="12" />
 									<line x1="4" y1="6" x2="20" y2="6" />
 									<line x1="4" y1="18" x2="20" y2="18" />

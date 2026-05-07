@@ -61,7 +61,7 @@ describe("useAudioPlayer Hook", () => {
         const { result } = renderHook(() => useAudioPlayer());
 
         // Simular que el ref se adjunta al elemento
-        // @ts-ignore - forzamos la asignación para el test
+        // @ts-expect-error - forzamos la asignación para el test
         result.current.audioRef.current = audioMock;
 
         // Play a new beat
@@ -78,7 +78,7 @@ describe("useAudioPlayer Hook", () => {
 
     it("toggles play/pause for the same beat", async () => {
         const { result } = renderHook(() => useAudioPlayer());
-        // @ts-ignore
+        // @ts-expect-error
         result.current.audioRef.current = audioMock;
 
         // Play first
@@ -104,7 +104,7 @@ describe("useAudioPlayer Hook", () => {
 
     it("switches to a different beat", async () => {
         const { result } = renderHook(() => useAudioPlayer());
-        // @ts-ignore
+        // @ts-expect-error
         result.current.audioRef.current = audioMock;
 
         // Play first beat
@@ -124,7 +124,7 @@ describe("useAudioPlayer Hook", () => {
 
     it("stops playback correctly", async () => {
         const { result } = renderHook(() => useAudioPlayer());
-        // @ts-ignore
+        // @ts-expect-error
         result.current.audioRef.current = audioMock;
 
         // Play
@@ -147,7 +147,7 @@ describe("useAudioPlayer Hook", () => {
 
     it("updates volume", () => {
         const { result } = renderHook(() => useAudioPlayer());
-        // @ts-ignore
+        // @ts-expect-error
         result.current.audioRef.current = audioMock;
 
         act(() => {

@@ -2,8 +2,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@variant dark (&:where(.dark, .dark *));
-
 /* ===========================================
    🎨 DESIGN TOKENS - Color Palette & Typography
    Cambia estos valores para cambiar toda la marca

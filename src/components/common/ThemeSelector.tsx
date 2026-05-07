@@ -12,12 +12,12 @@ const ThemeSelector = () => {
 
 	return (
 		<button
+			type="button"
 			onClick={toggleTheme}
 			className="rounded-full p-2 text-slate-600 transition-colors hover:text-primary dark:text-slate-300 dark:hover:text-primary"
 			aria-label="Toggle theme"
 		>
 			{theme === "light" ? (
-				// Moon icon for light mode (switch to dark)
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="20"
@@ -28,11 +28,11 @@ const ThemeSelector = () => {
 					strokeWidth="2"
 					strokeLinecap="round"
 					strokeLinejoin="round"
+					aria-hidden="true"
 				>
 					<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
 				</svg>
 			) : (
-				// Sun icon for dark mode (switch to light)
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="20"
@@ -43,6 +43,7 @@ const ThemeSelector = () => {
 					strokeWidth="2"
 					strokeLinecap="round"
 					strokeLinejoin="round"
+					aria-hidden="true"
 				>
 					<circle cx="12" cy="12" r="4" />
 					<path d="M12 2v2" />

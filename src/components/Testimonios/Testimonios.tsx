@@ -72,7 +72,7 @@ const Testimonios = () => {
 							<div>
 								{/* Visualización de Estrellas (5 estáticas) */}
 								<div className="flex gap-x-1 text-yellow-500 mb-4">
-									{[...Array(5)].map((_, i) => (
+									{[0, 1, 2, 3, 4].map((i) => (
 										<svg
 											key={i}
 											className="h-5 w-5 flex-none"

@@ -13,6 +13,7 @@ export const useScrollAnimation = (threshold = 0.1) => {
 	useEffect(() => {
 		// Reset animation when language changes
 		setIsVisible(false);
+		void language;
 
 		const observer = new IntersectionObserver(
 			([entry]) => {
@@ -28,7 +29,7 @@ export const useScrollAnimation = (threshold = 0.1) => {
 		}
 
 		return () => observer.disconnect();
-	}, [threshold, language]); // Re-run when language changes
+	}, [threshold, language]);
 
 	return { ref, isVisible };
 };

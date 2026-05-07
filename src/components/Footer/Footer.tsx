@@ -26,9 +26,11 @@ const SocialIcon: FC<SocialIconProps> = ({ href, label, children }) => (
 			strokeWidth="2"
 			strokeLinecap="round"
 			strokeLinejoin="round"
+			aria-hidden="true"
 		>
 			{children}
 		</svg>
+		<span className="sr-only">{label}</span>
 	</a>
 );
 

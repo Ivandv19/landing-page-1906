@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 
 interface ResponsiveImageProps {
 	src: string; // Nombre del archivo en assets.mgdc.site (ej: "winter.png")

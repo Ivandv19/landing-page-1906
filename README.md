@@ -27,10 +27,12 @@ Esta es la página pública diseñada para exhibir y vender instrumentales music
 ## Tecnologías Utilizadas
 
 - HTML / CSS / TypeScript
-- React
-- Vite
-- Tailwind CSS
-- pnpm
+- React 19
+- Vite 7
+- Tailwind CSS 4
+- Hono (API)
+- Cloudflare Pages (hosting)
+- Bun
 
 ## Instalación
 
@@ -43,15 +45,15 @@ git clone https://github.com/Ivandv19/landing-page-1906.git
 2. **Instalar Dependencias**: Abre una terminal en la raíz del proyecto y ejecuta:
 
 ```bash
-pnpm install
+bun install
 ```
 
-3. **Variables de Entorno**: Crea un archivo `.env` o `.dev.vars` en la carpeta base. Necesitarás agregar tus claves secretas de Resend (para enviar los correos) y Turnstile (para evitar el spam del formulario).
+3. **Variables de Entorno**: Crea un archivo `.env` o `.dev.vars` en la carpeta base. Necesitarás agregar tus claves secretas de Resend (para enviar los correos), Turnstile (para evitar el spam del formulario) y el email de destino.
 
 4. **Iniciar el Proyecto**: Ejecuta el servidor localmente con el siguiente comando:
 
 ```bash
-pnpm run dev
+bun run dev
 ```
 
 ## Créditos

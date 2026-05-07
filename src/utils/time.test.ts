@@ -21,8 +21,8 @@ describe("formatTime", () => {
     });
 
     it("handles explicit null, undefined or NaN gracefully", () => {
-        expect(formatTime(null as any)).toBe("0:00");
-        expect(formatTime(undefined as any)).toBe("0:00");
+        expect(formatTime(null as never)).toBe("0:00");
+        expect(formatTime(undefined as never)).toBe("0:00");
         expect(formatTime(NaN)).toBe("0:00");
     });
 });

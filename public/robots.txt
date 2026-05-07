@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-
-# Sitemap
-Sitemap: https://tudominio.com/sitemap.xml
+Sitemap: https://landing-page.mgdc.site/sitemap.xml

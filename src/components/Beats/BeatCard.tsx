@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 import { ResponsiveImage } from "../common/ResponsiveImage";
 import type { Beat } from "../../data/beats";
@@ -37,15 +37,17 @@ export const BeatCard: FC<BeatCardProps> = ({
 				/>
 				<div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
 				<button
+					type="button"
 					onClick={() => onPlay(beat)}
 					disabled={isLoading}
+					aria-label={isPlaying ? "Pause" : "Play"}
 					className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-500 disabled:opacity-50 ${isPlaying
 							? "opacity-100 scale-100"
 							: "opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100"
 						}`}
 				>
 					{isLoading ? (
-						<svg className="h-6 w-6 animate-spin" fill="none" viewBox="0 0 24 24">
+						<svg className="h-6 w-6 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
 							<circle
 								className="opacity-25"
 								cx="12"
@@ -61,7 +63,7 @@ export const BeatCard: FC<BeatCardProps> = ({
 							/>
 						</svg>
 					) : isPlaying ? (
-						<svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+						<svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 							<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
 						</svg>
 					) : (
@@ -69,6 +71,7 @@ export const BeatCard: FC<BeatCardProps> = ({
 							className="h-6 w-6 ml-1"
 							fill="currentColor"
 							viewBox="0 0 24 24"
+							aria-hidden="true"
 						>
 							<path d="M8 5v14l11-7z" />
 						</svg>
@@ -88,6 +91,7 @@ export const BeatCard: FC<BeatCardProps> = ({
 								fill="none"
 								stroke="currentColor"
 								strokeWidth="2"
+								aria-hidden="true"
 							>
 								<circle cx="12" cy="12" r="10" />
 								<polyline points="12 6 12 12 16 14" />
@@ -102,7 +106,7 @@ export const BeatCard: FC<BeatCardProps> = ({
 					<span className="text-lg font-bold text-blue-600 dark:text-blue-400">
 						${beat.price}
 					</span>
-					<button className="rounded-md border border-slate-200 px-4 py-1.5 text-sm font-semibold text-slate-900 transition-colors hover:border-blue-600 hover:bg-blue-50 hover:text-blue-600 dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:text-blue-400">
+					<button type="button" className="rounded-md border border-slate-200 px-4 py-1.5 text-sm font-semibold text-slate-900 transition-colors hover:border-blue-600 hover:bg-blue-50 hover:text-blue-600 dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:text-blue-400">
 						{t.beats.buy}
 					</button>
 				</div>

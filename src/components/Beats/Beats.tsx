@@ -1,4 +1,4 @@
-import { type FC, useRef, useEffect } from "react";
+import { type FC, useRef, useEffect, useCallback } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 import { useAudioPlayer } from "../../hooks/useAudioPlayer";
@@ -35,13 +35,13 @@ const BeatsSection: FC = () => {
 		handleSeek,
 	} = useAudioPlayer();
 
-	const scroll = (direction: "left" | "right") => {
+	const scroll = useCallback((direction: "left" | "right") => {
 		const { current } = scrollRef;
 		if (current) {
 			const scrollAmount = direction === "left" ? -320 : 320;
 			current.scrollBy({ left: scrollAmount, behavior: "smooth" });
 		}
-	};
+	}, []);
 
 	// Keyboard navigation
 	useEffect(() => {
@@ -63,7 +63,7 @@ const BeatsSection: FC = () => {
 
 		window.addEventListener("keydown", handleKeyPress);
 		return () => window.removeEventListener("keydown", handleKeyPress);
-	}, [currentBeat, togglePlayPause]);
+	}, [currentBeat, togglePlayPause, scroll]);
 
 	return (
 		<>
@@ -86,6 +86,7 @@ const BeatsSection: FC = () => {
 						</div>
 						<div className="flex gap-4">
 							<button
+								type="button"
 								onClick={() => scroll("left")}
 								className="group flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white transition-all hover:border-blue-600 hover:text-blue-600 active:scale-95 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:text-blue-400"
 								aria-label="Anterior"
@@ -96,6 +97,7 @@ const BeatsSection: FC = () => {
 									viewBox="0 0 24 24"
 									stroke="currentColor"
 									strokeWidth="2"
+									aria-hidden="true"
 								>
 									<path
 										strokeLinecap="round"
@@ -105,6 +107,7 @@ const BeatsSection: FC = () => {
 								</svg>
 							</button>
 							<button
+								type="button"
 								onClick={() => scroll("right")}
 								className="group flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white transition-all hover:border-blue-600 hover:text-blue-600 active:scale-95 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:text-blue-400"
 								aria-label="Siguiente"
@@ -115,6 +118,7 @@ const BeatsSection: FC = () => {
 									viewBox="0 0 24 24"
 									stroke="currentColor"
 									strokeWidth="2"
+									aria-hidden="true"
 								>
 									<path
 										strokeLinecap="round"
@@ -144,6 +148,7 @@ const BeatsSection: FC = () => {
 				</div>
 			</section>
 
+			{/* biome-ignore lint/a11y/useMediaCaption: hidden audio player for music beats */}
 			<audio ref={audioRef} />
 
 			<MiniPlayer

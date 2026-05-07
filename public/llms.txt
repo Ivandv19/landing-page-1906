@@ -1,0 +1,29 @@
+# Fluxbeats
+Beats Lofi y Chillhop de alta calidad para creadores de contenido.
+
+## Características
+- Catálogo de beats con reproducción integrada (play/pause, volumen, seek)
+- Licencias flexibles para streamers, youtubers y artistas
+- Soporte multilingüe (español / inglés)
+- Formulario de contacto con protección anti-spam (Turnstile)
+- Modo oscuro / claro
+
+## Enlaces
+- Sitio web: https://landing-page.mgdc.site/
+- Email: contacto@fluxbeats.com
+
+---
+
+# Fluxbeats (English)
+High-quality Lofi & Chillhop beats for content creators.
+
+## Features
+- Beat catalog with built-in audio player (play/pause, volume, seek)
+- Flexible licenses for streamers, youtubers and artists
+- Multilingual support (Spanish / English)
+- Contact form with spam protection (Turnstile)
+- Dark / Light mode
+
+## Links
+- Website: https://landing-page.mgdc.site/
+- Email: contacto@fluxbeats.com

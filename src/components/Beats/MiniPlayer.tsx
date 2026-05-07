@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 import type { Beat } from "../../data/beats";
 import { formatTime } from "../../utils/time";
 
@@ -67,13 +67,14 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 					{/* Left: Play button + Info */}
 					<div className="flex items-center gap-4 min-w-0 flex-1">
 						<button
+							type="button"
 							onClick={onToggle}
 							disabled={isLoading}
 							className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white shadow-md transition-transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
 							aria-label={isPlaying ? "Pausar" : "Reproducir"}
 						>
 							{isLoading ? (
-								<svg className="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24">
+								<svg className="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
 									<circle
 										className="opacity-25"
 										cx="12"
@@ -89,7 +90,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 									/>
 								</svg>
 							) : isPlaying ? (
-								<svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+								<svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 									<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
 								</svg>
 							) : (
@@ -97,6 +98,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 									className="h-5 w-5 ml-0.5"
 									fill="currentColor"
 									viewBox="0 0 24 24"
+									aria-hidden="true"
 								>
 									<path d="M8 5v14l11-7z" />
 								</svg>
@@ -120,6 +122,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 								className="h-5 w-5 text-slate-500 dark:text-slate-400"
 								fill="currentColor"
 								viewBox="0 0 24 24"
+								aria-hidden="true"
 							>
 								{volume === 0 ? (
 									<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
@@ -142,6 +145,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 
 						{/* Close Button */}
 						<button
+							type="button"
 							onClick={onClose}
 							className="text-slate-500 hover:text-slate-700 p-2 rounded-full transition-colors dark:text-slate-400 dark:hover:text-slate-200"
 							aria-label="Cerrar reproductor"
@@ -152,6 +156,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 								viewBox="0 0 24 24"
 								stroke="currentColor"
 								strokeWidth="2"
+								aria-hidden="true"
 							>
 								<path
 									strokeLinecap="round"
