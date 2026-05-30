@@ -20,7 +20,7 @@ Esta es la página pública diseñada para exhibir y vender instrumentales music
 
 ## Uso
 
-- **Visualizar Contenido**: El proyecto ya se encuentra en funcionamiento. Puedes explorarlo aquí: [Fluxbeats Landing Page](https://landing-page.mgdc.site/).
+- **Visualizar Contenido**: El proyecto ya se encuentra en funcionamiento. Puedes explorarlo aquí: [Fluxbeats Landing Page](https://fluxbeats.mgdc.site/).
 - **Escuchar Pistas**: Desliza hasta el apartado del catálogo de instrumentales y haz clic en reproducir.
 - **Enviar Mensaje**: Rellena el formulario con tus datos en la parte de abajo; el sistema se encarga de enviarlo directamente.
 
@@ -39,7 +39,7 @@ Esta es la página pública diseñada para exhibir y vender instrumentales music
 1. **Clonar el Repositorio**: Descarga el código de este proyecto en tu máquina usando Git.
 
 ```bash
-git clone https://github.com/Ivandv19/landing-page-1906.git
+git clone https://github.com/Ivandv19/fluxbeats.git
 ```
 
 2. **Instalar Dependencias**: Abre una terminal en la raíz del proyecto y ejecuta:
@@ -66,7 +66,7 @@ Este es un proyecto dedicado a la exhibición y venta dentro del comercio de la 
 
 La plataforma está gestionada completamente de forma remota a través de servicios como Cloudflare Pages. En esta ubicación se aloja tanto la información visual como la función ligera que manda el propio correo de contacto. 
 
-Puedes visitarlo permanentemente desde aquí: [landing-page.mgdc.site](https://landing-page.mgdc.site/).
+Puedes visitarlo permanentemente desde aquí: [landing-page.mgdc.site](https://fluxbeats.mgdc.site/).
 
 ## Licencia
 
