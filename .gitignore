@@ -32,5 +32,8 @@ dist-ssr
 # Wrangler
 .wrangler/
 
+# CodeGraph
+.codegraph/
+
 # Documentation
 docs/
