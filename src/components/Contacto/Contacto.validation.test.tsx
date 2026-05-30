@@ -2,8 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import Contacto from "./Contacto";
-import { LanguageProvider } from "../../context/LanguageContext";
-import { ThemeProvider } from "../../context/ThemeContext";
 
 // Override Turnstile mock locally to allow interaction
 vi.mock("@marsidev/react-turnstile", () => ({
@@ -23,13 +21,7 @@ const fetchMock = vi.fn();
 globalThis.fetch = fetchMock;
 
 const renderComponent = () => {
-    return render(
-        <LanguageProvider>
-            <ThemeProvider>
-                <Contacto />
-            </ThemeProvider>
-        </LanguageProvider>
-    );
+	return render(<Contacto />);
 };
 
 describe("Contacto Form Validation", () => {

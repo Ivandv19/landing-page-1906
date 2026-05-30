@@ -1,42 +1,38 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { useLanguage } from "../../context/LanguageContext";
+import { useT } from "@/store/appStore";
 
-/**
- * Página: Política de Privacidad
- * Contenido estático que muestra los términos de privacidad. Usa i18n para los textos.
- */
 const Privacy: FC = () => {
-	const { t } = useLanguage();
+	const t = useT();
 
 	return (
-		<div className="min-h-screen bg-white dark:bg-slate-900 pt-32 pb-16 transition-colors duration-300">
+		<div className="min-h-screen bg-page-bg pt-32 pb-16 transition-colors duration-300">
 			<div className="mx-auto max-w-3xl px-6 lg:px-8">
 				<Link
 					to="/"
-					className="text-sm font-medium text-blue-600 hover:text-blue-500 mb-8 inline-block dark:text-blue-400"
+					className="text-sm font-medium text-accent hover:text-accent-hover mb-8 inline-block"
 				>
 					&larr; {t.footer.backToHome}
 				</Link>
-				<h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-8">
+				<h1 className="text-4xl font-bold tracking-tight text-text-main mb-8">
 					{t.legalPages.privacy.title}
 				</h1>
-				<div className="prose prose-slate dark:prose-invert max-w-none text-slate-600 dark:text-slate-400 space-y-6">
+				<div className="prose prose-slate dark:prose-invert max-w-none text-text-muted space-y-6">
 					<section>
-						<h2 className="text-2xl font-semibold text-slate-900 dark:text-white">{t.legalPages.privacy.s1.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s1.title}</h2>
 						<p>{t.legalPages.privacy.s1.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-slate-900 dark:text-white">{t.legalPages.privacy.s2.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s2.title}</h2>
 						<p>{t.legalPages.privacy.s2.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-slate-900 dark:text-white">{t.legalPages.privacy.s3.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s3.title}</h2>
 						<p>{t.legalPages.privacy.s3.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-slate-900 dark:text-white">{t.legalPages.privacy.s4.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s4.title}</h2>
 						<p>{t.legalPages.privacy.s4.content}</p>
 					</section>
 				</div>

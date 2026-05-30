@@ -1,4 +1,7 @@
-// Datos de prueba (Social Proof)
+import { Star } from "lucide-react";
+import { useT } from "@/store/appStore";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 const reviews = [
 	{
 		id: 1,
@@ -29,84 +32,55 @@ const reviews = [
 	},
 ];
 
-import { useLanguage } from "../../context/LanguageContext";
-import { useScrollAnimation } from "../../hooks/useScrollAnimation";
-
-/**
- * Testimonios Component
- *
- * Sección de prueba social (Social Proof).
- * - Grid de tarjetas con reseñas de clientes.
- * - Incluye valoración (estrellas), texto, autor y rol.
- * - Datos estáticos (mock) por ahora.
- */
 const Testimonios = () => {
-	const { t } = useLanguage();
+	const t = useT();
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 	const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation(0.05);
 
 	return (
 		<section
 			id="testimonios"
-			className="bg-white py-24 sm:py-32 border-t border-slate-100 dark:bg-slate-900 dark:border-slate-800 transition-colors duration-300"
+			className="bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				{/* ENCABEZADO DE LA SECCIÓN */}
-				<div ref={headerRef as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-2xl text-center animate-on-scroll ${headerVisible ? 'visible' : ''}`}>
-					<h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+				<div ref={headerRef as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-2xl text-center animate-on-scroll ${headerVisible ? "visible" : ""}`}>
+					<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
 						{t.reviews.header}
 					</h2>
-					<p className="mt-2 text-lg leading-8 text-slate-600 dark:text-slate-400">
+					<p className="mt-2 text-lg leading-8 text-text-muted">
 						{t.reviews.subtitle}
 					</p>
 				</div>
 
-				{/* GRID DE TARJETAS DE TESTIMONIOS */}
-				<div ref={gridRef as React.RefObject<HTMLDivElement>} className={`mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 animate-on-scroll ${gridVisible ? 'visible' : ''}`}>
+				<div ref={gridRef as React.RefObject<HTMLDivElement>} className={`mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 animate-on-scroll ${gridVisible ? "visible" : ""}`}>
 					{reviews.map((review) => (
 						<div
 							key={review.id}
-							className="flex flex-col justify-between rounded-lg border border-slate-200 bg-white p-8 shadow-md transition-all hover:shadow-lg hover:border-blue-200 dark:bg-slate-800 dark:border-slate-700 dark:hover:border-blue-500"
+							className="flex flex-col justify-between rounded-lg border border-border bg-surface-card p-8 shadow-md transition-all hover:shadow-lg hover:border-accent/50"
 						>
-							{/* ESTRELLAS Y TEXTO */}
 							<div>
-								{/* Visualización de Estrellas (5 estáticas) */}
 								<div className="flex gap-x-1 text-yellow-500 mb-4">
 									{[0, 1, 2, 3, 4].map((i) => (
-										<svg
-											key={i}
-											className="h-5 w-5 flex-none"
-											viewBox="0 0 20 20"
-											fill="currentColor"
-											aria-hidden="true"
-										>
-											<path
-												fillRule="evenodd"
-												d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-												clipRule="evenodd"
-											/>
-										</svg>
+										<Star key={i} size={20} fill="currentColor" />
 									))}
 								</div>
 
-								{/* La Cita del Testimonio */}
-								<p className="text-sm leading-6 text-slate-700 italic dark:text-slate-300">
+								<p className="text-sm leading-6 text-text-muted italic">
 									"{review.content}"
 								</p>
 							</div>
 
-							{/* INFORMACIÓN DEL AUTOR */}
-							<div className="mt-6 flex items-center gap-x-4 border-t border-slate-100 pt-4 dark:border-slate-700">
+							<div className="mt-6 flex items-center gap-x-4 border-t border-border pt-4">
 								<img
-									className="h-10 w-10 rounded-full bg-slate-50 object-cover ring-2 ring-white dark:bg-slate-700 dark:ring-slate-600"
+									className="h-10 w-10 rounded-full bg-surface-card object-cover ring-2 ring-page-bg"
 									src={review.avatar}
 									alt={`Avatar de ${review.author}`}
 								/>
 								<div>
-									<h3 className="text-sm font-semibold leading-6 text-slate-900 dark:text-white">
+									<h3 className="text-sm font-semibold leading-6 text-text-main">
 										{review.author}
 									</h3>
-									<p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
+									<p className="text-xs leading-5 text-text-muted">
 										{review.role}
 									</p>
 								</div>

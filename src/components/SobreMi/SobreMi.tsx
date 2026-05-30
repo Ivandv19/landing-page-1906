@@ -1,17 +1,9 @@
-import { useLanguage } from "../../context/LanguageContext";
-import { ResponsiveImage } from "../common/ResponsiveImage";
-import { useScrollAnimation } from "../../hooks/useScrollAnimation";
+import { useT } from "@/store/appStore";
+import { ResponsiveImage } from "@/components/common/ResponsiveImage";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-/**
- * SobreMi Component
- *
- * Sección "Acerca de" con layout dividido.
- * - Izquierda: Historia, misión y estadísticas clave (Grid).
- * - Derecha: Imagen de perfil/estudio con frase destacada (Quote).
- * - Uso de `ResponsiveImage` para optimización.
- */
 const SobreMi = () => {
-	const { t } = useLanguage();
+	const t = useT();
 	const { ref, isVisible } = useScrollAnimation();
 
 	const stats = [
@@ -24,40 +16,38 @@ const SobreMi = () => {
 	return (
 		<section
 			id="sobre-mi"
-			className="overflow-hidden bg-slate-50 py-24 sm:py-32 dark:bg-slate-950 transition-colors duration-300"
+			className="overflow-hidden bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div ref={ref as React.RefObject<HTMLDivElement>} className={`mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center animate-on-scroll ${isVisible ? 'visible' : ''}`}>
-					{/* COLUMNA IZQUIERDA: Texto y Estadísticas */}
+				<div ref={ref as React.RefObject<HTMLDivElement>} className={`mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center animate-on-scroll ${isVisible ? "visible" : ""}`}>
 					<div className="lg:pr-8">
 						<div className="lg:max-w-lg">
-							<h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400">
+							<h2 className="text-base font-semibold leading-7 text-accent">
 								{t.about.title}
 							</h2>
-							<p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+							<p className="mt-2 text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
 								{t.about.headline}
 							</p>
-							<p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-400">
+							<p className="mt-6 text-lg leading-8 text-text-muted">
 								{t.about.p1}
 							</p>
-							<p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+							<p className="mt-4 text-base leading-7 text-text-muted">
 								{t.about.p2}
 							</p>
-							<p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+							<p className="mt-4 text-base leading-7 text-text-muted">
 								{t.about.p3}
 							</p>
 
-							{/* STATS DE LA COMPAÑÍA (Grid) */}
-							<dl className="mt-10 grid grid-cols-2 gap-4 border-t border-slate-200 pt-10 sm:grid-cols-2 dark:border-slate-800">
+							<dl className="mt-10 grid grid-cols-2 gap-4 border-t border-border pt-10 sm:grid-cols-2">
 								{stats.map((stat) => (
 									<div
 										key={stat.label}
-										className="rounded-lg border border-slate-200 bg-white p-4 shadow-md dark:bg-slate-800 dark:border-slate-700"
+										className="rounded-lg border border-border bg-surface-card p-4 shadow-md"
 									>
-										<dt className="text-sm font-medium leading-6 text-slate-500 dark:text-slate-400">
+										<dt className="text-sm font-medium leading-6 text-text-muted">
 											{stat.label}
 										</dt>
-										<dd className="mt-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+										<dd className="mt-2 text-3xl font-bold tracking-tight text-text-main">
 											{stat.value}
 										</dd>
 									</div>
@@ -66,21 +56,18 @@ const SobreMi = () => {
 						</div>
 					</div>
 
-					{/* COLUMNA DERECHA: Imagen */}
 					<div className="relative lg:mt-0">
-						{/* Imagen Principal */}
 						<ResponsiveImage
 							src="about-me-studio.jpg"
 							alt="Prod Flux Studio Setup"
-							className="w-full h-auto rounded-xl bg-slate-900 shadow-xl ring-1 ring-slate-400/10 object-cover"
+							className="w-full h-auto rounded-xl bg-surface-card shadow-xl ring-1 ring-border/40 object-cover"
 							sizes={{ mobile: 600, tablet: 900, desktop: 1200 }}
 							width={1000}
 							height={1000}
 						/>
 
-						{/* Frase Flotante (Efecto Frosted Glass) */}
-						<div className="absolute bottom-6 left-6 right-6 rounded-lg bg-white/95 backdrop-blur-sm p-4 border border-slate-200 shadow-sm hidden md:block dark:bg-slate-800/95 dark:border-slate-700">
-							<p className="text-sm font-medium text-slate-800 italic text-center dark:text-slate-200">
+						<div className="absolute bottom-6 left-6 right-6 rounded-lg bg-surface-card/95 backdrop-blur-sm p-4 border border-border shadow-sm hidden md:block">
+							<p className="text-sm font-medium text-text-main italic text-center">
 								{t.about.quote}
 							</p>
 						</div>

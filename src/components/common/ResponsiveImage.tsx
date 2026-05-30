@@ -56,13 +56,3 @@ export const ResponsiveImage: FC<ResponsiveImageProps> = ({
 		/>
 	);
 };
-
-// Para avatares (siempre pequeños)
-export const Avatar: FC<Omit<ResponsiveImageProps, "sizes">> = (props) => {
-	return (
-		<ResponsiveImage
-			{...props}
-			sizes={{ mobile: 80, tablet: 100, desktop: 100 }}
-		/>
-	);
-};

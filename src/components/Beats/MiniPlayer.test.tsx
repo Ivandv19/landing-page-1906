@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { MiniPlayer } from "./MiniPlayer";
-import type { Beat } from "../../data/beats";
+import type { Beat } from "@/data/beats";
 
 // Mock del helper formatTime si se usa internamente o importar si es necesario
 // Como MiniPlayer importa formatTime de utils, vitest lo resolverá bien.
@@ -55,14 +55,14 @@ describe("MiniPlayer Component", () => {
         const toggleBtn = screen.getByRole("button", { name: /Reproducir/i });
         expect(toggleBtn).toBeInTheDocument();
         // SVG Icon check (optional, but good for confidence)
-        expect(toggleBtn.innerHTML).toContain("d=\"M8 5v14l11-7z\""); // Path del play icon
+        expect(toggleBtn.innerHTML).toContain("lucide-play");
     });
 
     it("shows pause button when playing", () => {
         render(<MiniPlayer {...defaultProps} isPlaying={true} />);
         const toggleBtn = screen.getByRole("button", { name: /Pausar/i });
         expect(toggleBtn).toBeInTheDocument();
-        expect(toggleBtn.innerHTML).toContain("d=\"M6 19h4V5H6v14zm8-14v14h4V5h-4z\""); // Path del pause icon
+        expect(toggleBtn.innerHTML).toContain("lucide-pause");
     });
 
     it("calls onToggle when play/pause button is clicked", () => {

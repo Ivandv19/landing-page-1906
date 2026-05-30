@@ -1,21 +1,12 @@
-import { useLanguage } from "../../context/LanguageContext";
-import { useScrollAnimation } from "../../hooks/useScrollAnimation";
+import { Check } from "lucide-react";
+import { useT } from "@/store/appStore";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-/**
- * Licencias Component
- *
- * Sección de precios y planes (Pricing Table).
- * - Muestra 3 niveles de licencias (Básica, Premium, Ilimitada).
- * - Destaca la opción "Más popular".
- * - Lista de características por plan con iconos de check.
- * - Animación de entrada.
- */
 const Licencias = () => {
-	const { t } = useLanguage();
+	const t = useT();
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 	const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation(0.05);
 
-	// Datos de las licencias traducidos
 	const licenses = [
 		{
 			name: t.licenses.options.basic.name,
@@ -66,91 +57,74 @@ const Licencias = () => {
 	return (
 		<section
 			id="licencias"
-			className="bg-slate-50 py-24 sm:py-32 dark:bg-slate-950 transition-colors duration-300"
+			className="bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				{/* ENCABEZADO DE LA SECCIÓN */}
-				<div ref={headerRef as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-4xl text-center animate-on-scroll ${headerVisible ? 'visible' : ''}`}>
-					<h2 className="text-base font-semibold leading-7 text-primary dark:text-primary">
+				<div ref={headerRef as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-4xl text-center animate-on-scroll ${headerVisible ? "visible" : ""}`}>
+					<h2 className="text-base font-semibold leading-7 text-accent">
 						{t.licenses.header}
 					</h2>
-					<p className="mt-2 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+					<p className="mt-2 text-4xl font-bold tracking-tight text-text-main sm:text-5xl">
 						{t.licenses.title}
 					</p>
 				</div>
-				<p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-slate-600 dark:text-slate-300">
+				<p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-text-muted">
 					{t.licenses.subtitle}
 				</p>
 
-				{/* GRID DE TARJETAS */}
-				<div ref={gridRef as React.RefObject<HTMLDivElement>} className={`isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 animate-on-scroll ${gridVisible ? 'visible' : ''}`}>
+				<div ref={gridRef as React.RefObject<HTMLDivElement>} className={`isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 animate-on-scroll ${gridVisible ? "visible" : ""}`}>
 					{licenses.map((tier) => (
 						<div
 							key={tier.name}
 							className={`relative flex flex-col justify-between rounded-lg p-8 ring-1 transition-all ${tier.popular
-									? "bg-white shadow-xl ring-2 ring-primary scale-100 lg:scale-105 z-10 dark:bg-slate-800 dark:ring-primary shadow-primary/10"
-									: "bg-white ring-slate-200 shadow-md hover:ring-slate-300 hover:shadow-lg dark:bg-slate-800 dark:ring-slate-700 dark:hover:ring-slate-600"
+									? "bg-surface-card shadow-xl ring-2 ring-accent scale-100 lg:scale-105 z-10 shadow-accent/10"
+									: "bg-surface-card ring-border shadow-md hover:ring-accent/50 hover:shadow-lg"
 								}`}
 						>
-							{/* ETIQUETA "MÁS VENDIDO" */}
 							{tier.popular && (
-								<div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-sm font-semibold text-white shadow-sm">
-									Más Vendido
+								<div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-sm font-semibold text-white shadow-sm">
+									Mas Vendido
 								</div>
 							)}
 
-							{/* CONTENIDO SUPERIOR: Título, Precio y Descripción */}
 							<div>
 								<div className="flex items-center justify-between gap-x-4">
 									<h3
-										className={`text-lg font-semibold leading-8 ${tier.popular ? "text-primary dark:text-primary" : "text-slate-900 dark:text-white"}`}
+										className={`text-lg font-semibold leading-8 ${tier.popular ? "text-accent" : "text-text-main"}`}
 									>
 										{tier.name}
 									</h3>
 								</div>
-								<p className="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+								<p className="mt-4 text-sm leading-6 text-text-muted">
 									{tier.description}
 								</p>
 								<p className="mt-6 flex items-baseline gap-x-1">
-									<span className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+									<span className="text-4xl font-bold tracking-tight text-text-main">
 										${tier.price}
 									</span>
-									<span className="text-sm font-semibold leading-6 text-slate-600 dark:text-slate-400">
+									<span className="text-sm font-semibold leading-6 text-text-muted">
 										/beat
 									</span>
 								</p>
 
-								{/* LISTA DE CARACTERÍSTICAS */}
-								<ul
-									className="mt-8 space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-								>
+								<ul className="mt-8 space-y-3 text-sm leading-6 text-text-muted">
 									{tier.features.map((feature) => (
 										<li key={feature} className="flex gap-x-3">
-											{/* Icono Check */}
-											<svg
-												className={`h-6 w-5 flex-none ${tier.popular ? "text-primary" : "text-slate-400"}`}
-												viewBox="0 0 20 20"
-												fill="currentColor"
-												aria-hidden="true"
-											>
-												<path
-													fillRule="evenodd"
-													d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-													clipRule="evenodd"
-												/>
-											</svg>
+											<Check
+												size={20}
+												className={`flex-none ${tier.popular ? "text-accent" : "opacity-40"}`}
+											/>
 											{feature}
 										</li>
 									))}
 								</ul>
 							</div>
 
-							{/* BOTÓN DE ACCIÓN */}
 							<button
 								type="button"
 								className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${tier.popular
-										? "bg-primary text-white shadow-sm hover:bg-primary-hover focus-visible:outline-primary dark:bg-primary dark:hover:bg-primary-hover" // Botón primario
-										: "text-primary ring-1 ring-inset ring-primary-light hover:ring-primary bg-primary-light/30 dark:text-primary dark:ring-primary/30 dark:bg-primary/10 dark:hover:ring-primary" // Botón secundario
+										? "bg-accent text-white shadow-sm hover:bg-accent-hover focus-visible:outline-accent"
+										: "text-accent ring-1 ring-inset ring-accent/30 hover:ring-accent bg-accent-muted/30 dark:ring-accent/30 dark:bg-accent/10 dark:hover:ring-accent"
 									}`}
 							>
 								{tier.cta}

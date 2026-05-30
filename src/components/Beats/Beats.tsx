@@ -1,39 +1,26 @@
 import { type FC, useRef, useEffect, useCallback } from "react";
-import { useLanguage } from "../../context/LanguageContext";
-import { useScrollAnimation } from "../../hooks/useScrollAnimation";
-import { useAudioPlayer } from "../../hooks/useAudioPlayer";
-import { beats } from "../../data/beats";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useT, useStore } from "@/store/appStore";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { beats } from "@/data/beats";
 import { MiniPlayer } from "./MiniPlayer";
 import { BeatCard } from "./BeatCard";
 
-/**
- * BeatsSection Component
- *
- * Muestra el catálogo de beats disponibles en un carrusel desplazable.
- * Funcionalidades:
- * - Listado horizontal de beats (scroll con botones y teclado).
- * - Integración con `useAudioPlayer` para manejar la reproducción global.
- * - Renderiza `MiniPlayer` persistente cuando hay un beat activo.
- * - Animación de entrada al hacer scroll.
- */
 const BeatsSection: FC = () => {
-	const { t } = useLanguage();
+	const t = useT();
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 	const scrollRef = useRef<HTMLDivElement>(null);
-	const {
-		audioRef,
-		currentBeat,
-		isPlaying,
-		isLoading,
-		volume,
-		progress,
-		currentTime,
-		duration,
-		togglePlayPause,
-		stop,
-		handleVolumeChange,
-		handleSeek,
-	} = useAudioPlayer();
+	const currentBeat = useStore((s) => s.currentBeat);
+	const isPlaying = useStore((s) => s.isPlaying);
+	const isLoading = useStore((s) => s.isLoading);
+	const volume = useStore((s) => s.volume);
+	const progress = useStore((s) => s.progress);
+	const currentTime = useStore((s) => s.currentTime);
+	const duration = useStore((s) => s.duration);
+	const play = useStore((s) => s.play);
+	const stop = useStore((s) => s.stop);
+	const setVolume = useStore((s) => s.setVolume);
+	const seek = useStore((s) => s.seek);
 
 	const scroll = useCallback((direction: "left" | "right") => {
 		const { current } = scrollRef;
@@ -43,33 +30,32 @@ const BeatsSection: FC = () => {
 		}
 	}, []);
 
-	// Keyboard navigation
 	useEffect(() => {
 		const handleKeyPress = (e: KeyboardEvent) => {
 			if (
 				e.target instanceof HTMLInputElement ||
 				e.target instanceof HTMLTextAreaElement
 			) {
-				return; // No interferir con inputs
+				return;
 			}
 
 			if (e.key === "ArrowLeft") scroll("left");
 			if (e.key === "ArrowRight") scroll("right");
 			if (e.key === " " && currentBeat) {
 				e.preventDefault();
-				togglePlayPause(currentBeat);
+				play(currentBeat);
 			}
 		};
 
 		window.addEventListener("keydown", handleKeyPress);
 		return () => window.removeEventListener("keydown", handleKeyPress);
-	}, [currentBeat, togglePlayPause, scroll]);
+	}, [currentBeat, play, scroll]);
 
 	return (
 		<>
 			<section
 				id="beats"
-				className="bg-white py-24 sm:py-32 dark:bg-slate-900 transition-colors duration-300"
+				className="bg-page-bg py-24 sm:py-32 border-t border-border/50"
 			>
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<div
@@ -77,10 +63,10 @@ const BeatsSection: FC = () => {
 						className={`flex items-center justify-between mb-12 animate-on-scroll ${headerVisible ? "visible" : ""}`}
 					>
 						<div>
-							<h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+							<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
 								{t.beats.title}
 							</h2>
-							<p className="mt-2 text-lg leading-8 text-slate-600 dark:text-slate-400">
+							<p className="mt-2 text-lg leading-8 text-text-muted">
 								{t.beats.subtitle}
 							</p>
 						</div>
@@ -88,44 +74,18 @@ const BeatsSection: FC = () => {
 							<button
 								type="button"
 								onClick={() => scroll("left")}
-								className="group flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white transition-all hover:border-blue-600 hover:text-blue-600 active:scale-95 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:text-blue-400"
+								className="group flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface-card transition-all hover:border-accent hover:text-accent active:scale-95"
 								aria-label="Anterior"
 							>
-								<svg
-									className="h-5 w-5"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									strokeWidth="2"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M15 19l-7-7 7-7"
-									/>
-								</svg>
+								<ChevronLeft size={20} />
 							</button>
 							<button
 								type="button"
 								onClick={() => scroll("right")}
-								className="group flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white transition-all hover:border-blue-600 hover:text-blue-600 active:scale-95 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:text-blue-400"
+								className="group flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface-card transition-all hover:border-accent hover:text-accent active:scale-95"
 								aria-label="Siguiente"
 							>
-								<svg
-									className="h-5 w-5"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-									strokeWidth="2"
-									aria-hidden="true"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M9 5l7 7-7 7"
-									/>
-								</svg>
+								<ChevronRight size={20} />
 							</button>
 						</div>
 					</div>
@@ -133,7 +93,6 @@ const BeatsSection: FC = () => {
 					<div
 						ref={scrollRef}
 						className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-2"
-						style={{ scrollbarWidth: "none" }}
 					>
 						{beats.map((beat) => (
 							<BeatCard
@@ -141,15 +100,12 @@ const BeatsSection: FC = () => {
 								beat={beat}
 								isPlaying={currentBeat?.id === beat.id && isPlaying}
 								isLoading={isLoading && currentBeat?.id === beat.id}
-								onPlay={togglePlayPause}
+								onPlay={play}
 							/>
 						))}
 					</div>
 				</div>
 			</section>
-
-			{/* biome-ignore lint/a11y/useMediaCaption: hidden audio player for music beats */}
-			<audio ref={audioRef} />
 
 			<MiniPlayer
 				currentBeat={currentBeat}
@@ -159,10 +115,10 @@ const BeatsSection: FC = () => {
 				progress={progress}
 				currentTime={currentTime}
 				duration={duration}
-				onToggle={() => togglePlayPause(currentBeat)}
+				onToggle={() => { if (currentBeat) play(currentBeat); }}
 				onClose={stop}
-				onVolumeChange={handleVolumeChange}
-				onSeek={handleSeek}
+				onVolumeChange={setVolume}
+				onSeek={seek}
 			/>
 		</>
 	);
