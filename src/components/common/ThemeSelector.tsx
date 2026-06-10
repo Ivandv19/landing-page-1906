@@ -1,6 +1,9 @@
+// Iconos
 import { Moon, Sun } from "lucide-react";
+// Store
 import { useStore } from "@/store/appStore";
 
+// Botón que alterna entre tema claro y oscuro
 const ThemeSelector = () => {
 	const theme = useStore((s) => s.theme);
 	const toggleTheme = useStore((s) => s.toggleTheme);

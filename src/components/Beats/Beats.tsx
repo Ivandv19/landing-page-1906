@@ -1,11 +1,19 @@
-import { type FC, useRef, useEffect, useCallback } from "react";
+// React
+import { type FC, useRef, useCallback } from "react";
+// Iconos
 import { ChevronLeft, ChevronRight } from "lucide-react";
+// Store
 import { useT, useStore } from "@/store/appStore";
+// Hooks
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useKeyboardNav } from "@/hooks/useKeyboardNav";
+// Datos
 import { beats } from "@/data/beats";
+// Componentes
 import { MiniPlayer } from "./MiniPlayer";
 import { BeatCard } from "./BeatCard";
 
+// Sección de beats con desplazamiento horizontal y navegación por teclado
 const BeatsSection: FC = () => {
 	const t = useT();
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
@@ -22,6 +30,7 @@ const BeatsSection: FC = () => {
 	const setVolume = useStore((s) => s.setVolume);
 	const seek = useStore((s) => s.seek);
 
+	// Desplaza el contenedor horizontalmente
 	const scroll = useCallback((direction: "left" | "right") => {
 		const { current } = scrollRef;
 		if (current) {
@@ -30,26 +39,12 @@ const BeatsSection: FC = () => {
 		}
 	}, []);
 
-	useEffect(() => {
-		const handleKeyPress = (e: KeyboardEvent) => {
-			if (
-				e.target instanceof HTMLInputElement ||
-				e.target instanceof HTMLTextAreaElement
-			) {
-				return;
-			}
-
-			if (e.key === "ArrowLeft") scroll("left");
-			if (e.key === "ArrowRight") scroll("right");
-			if (e.key === " " && currentBeat) {
-				e.preventDefault();
-				play(currentBeat);
-			}
-		};
-
-		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
-	}, [currentBeat, play, scroll]);
+	// Navegación por teclado: flechas y espacio
+	useKeyboardNav(
+		() => scroll("left"),
+		() => scroll("right"),
+		currentBeat ? () => play(currentBeat) : undefined,
+	);
 
 	return (
 		<>
@@ -58,6 +53,7 @@ const BeatsSection: FC = () => {
 				className="bg-page-bg py-24 sm:py-32 border-t border-border/50"
 			>
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+					{/* Encabezado de la sección */}
 					<div
 						ref={headerRef as React.RefObject<HTMLDivElement>}
 						className={`flex items-center justify-between mb-12 animate-on-scroll ${headerVisible ? "visible" : ""}`}
@@ -70,6 +66,7 @@ const BeatsSection: FC = () => {
 								{t.beats.subtitle}
 							</p>
 						</div>
+						{/* Botones de navegación */}
 						<div className="flex gap-4">
 							<button
 								type="button"
@@ -90,6 +87,7 @@ const BeatsSection: FC = () => {
 						</div>
 					</div>
 
+					{/* Lista horizontal de beats */}
 					<div
 						ref={scrollRef}
 						className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-2"
@@ -107,6 +105,7 @@ const BeatsSection: FC = () => {
 				</div>
 			</section>
 
+			{/* Reproductor mini inferior */}
 			<MiniPlayer
 				currentBeat={currentBeat}
 				isPlaying={isPlaying}

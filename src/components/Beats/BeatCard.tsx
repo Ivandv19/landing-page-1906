@@ -1,9 +1,15 @@
+// React
 import type { FC } from "react";
+// Iconos
 import { Play, Pause, LoaderCircle } from "lucide-react";
+// Store
 import { useT } from "@/store/appStore";
+// Componentes
 import { ResponsiveImage } from "@/components/common/ResponsiveImage";
+// Tipos
 import type { Beat } from "@/data/beats";
 
+// Props del componente BeatCard
 interface BeatCardProps {
 	beat: Beat;
 	isPlaying: boolean;
@@ -11,6 +17,7 @@ interface BeatCardProps {
 	onPlay: (beat: Beat) => void;
 }
 
+// Tarjeta individual de beat con imagen, info y controles de reproducción
 export const BeatCard: FC<BeatCardProps> = ({
 	beat,
 	isPlaying,
@@ -21,6 +28,7 @@ export const BeatCard: FC<BeatCardProps> = ({
 
 	return (
 		<div className="min-w-[280px] md:min-w-[320px] snap-center group relative flex flex-col overflow-hidden rounded-lg bg-surface-card shadow-md transition-all hover:shadow-xl border border-border">
+			{/* Imagen del beat con overlay de reproducción */}
 			<div className="relative aspect-square overflow-hidden bg-border/50">
 				<ResponsiveImage
 					src={beat.image.split("/").pop() || ""}
@@ -48,6 +56,7 @@ export const BeatCard: FC<BeatCardProps> = ({
 					)}
 				</button>
 			</div>
+			{/* Información del beat */}
 			<div className="flex flex-1 flex-col justify-between p-5">
 				<div>
 					<h3 className="text-lg font-bold text-text-main">
@@ -65,6 +74,7 @@ export const BeatCard: FC<BeatCardProps> = ({
 						<span>{beat.key}</span>
 					</div>
 				</div>
+				{/* Precio y botón de compra */}
 				<div className="mt-6 flex items-center justify-between">
 					<span className="text-lg font-bold text-accent dark:text-accent-hover">
 						${beat.price}

@@ -1,17 +1,16 @@
+// Hono
 import { Hono } from "hono";
+// Cloudflare Pages
 import { handle } from "hono/cloudflare-pages";
+// Validación
 import { zValidator } from "@hono/zod-validator";
-import { Resend } from "resend";
-import { z } from "zod";
-import { buildContactEmail } from "../../src/email/contact-template";
+// Compartidos
+import { checkRateLimit } from "../_shared/rateLimit";
+import { verifyTurnstile } from "../_shared/turnstile";
+import { sendContactEmail } from "../_shared/email";
+import { contactSchema } from "../_shared/contactSchema";
 
-const contactSchema = z.object({
-	name: z.string().min(2, "Nombre muy corto").max(100, "Nombre muy largo"),
-	email: z.string().email("Email inválido"),
-	message: z.string().min(10, "Mensaje muy corto").max(1000, "Mensaje muy largo"),
-	turnstileToken: z.string().min(1, "Verificación de humano requerida"),
-});
-
+// Variables de entorno del worker
 type Env = {
 	RESEND_API_KEY: string;
 	RESEND_FROM_EMAIL: string;
@@ -21,62 +20,51 @@ type Env = {
 
 const app = new Hono<{ Bindings: Env }>();
 
+// POST /api/contact - Envía un mensaje de contacto con verificación Turnstile
 app.post("/api/contact", zValidator("json", contactSchema), async (c) => {
+	// 1. Obtiene la IP del cliente para rate limiting
+	const ip = c.req.header("cf-connecting-ip")
+		|| c.req.header("x-forwarded-for")?.split(",")[0]?.trim()
+		|| "unknown";
+
+	// 2. Verifica que no haya excedido el límite de solicitudes
+	if (!checkRateLimit(ip)) {
+		return c.json(
+			{ success: false, error: "Demasiadas solicitudes. Intenta de nuevo más tarde." },
+			429,
+		);
+	}
+
+	// 3. Extrae y valida los datos del body
 	const { name, email, message, turnstileToken } = c.req.valid("json");
 
-	const secretKey = c.env.TURNSTILE_SECRET_KEY;
-	const verifyUrl = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-
-	const verifyResponse = await fetch(verifyUrl, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/x-www-form-urlencoded",
-		},
-		body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(turnstileToken)}`,
-	});
-
-	const verifyData = await verifyResponse.json() as { success: boolean; [key: string]: unknown };
-
-	if (!verifyData.success) {
+	// 4. Verifica el token de Turnstile con Cloudflare
+	const turnstileOk = await verifyTurnstile(turnstileToken, c.env.TURNSTILE_SECRET_KEY);
+	if (!turnstileOk) {
 		return c.json(
-			{
-				success: false,
-				error: "La verificación de seguridad falló. Por favor, inténtalo de nuevo.",
-			},
-			400
+			{ success: false, error: "La verificación de seguridad falló. Por favor, inténtalo de nuevo." },
+			400,
 		);
 	}
 
-	const resend = new Resend(c.env.RESEND_API_KEY);
-
-	const { data, error } = await resend.emails.send({
-		from: c.env.RESEND_FROM_EMAIL,
-		to: c.env.CONTACT_EMAIL,
-		replyTo: email,
-		subject: `Nuevo mensaje de ${name}`,
-		html: buildContactEmail(name, email, message),
-	});
-
-	if (error) {
+	// 5. Envía el email usando Resend
+	const emailSent = await sendContactEmail({ name, email, message }, c.env);
+	if (!emailSent) {
 		return c.json(
-			{
-				success: false,
-				error: "Error al enviar el mensaje",
-				details: error,
-			},
-			500
+			{ success: false, error: "Error al enviar el mensaje. Intenta de nuevo más tarde." },
+			500,
 		);
 	}
 
+	// 6. Responde con éxito
 	return c.json({
 		success: true,
 		message: "Mensaje enviado correctamente",
-		id: data?.id,
 	});
 });
 
-app.get("/api/health", (c) => {
-	return c.json({ status: "ok", timestamp: new Date().toISOString() });
-});
+// GET /api/health - Health check del worker
+app.get("/api/health", (c) => c.json({ status: "ok" }));
 
+// Exporta el manejador para Cloudflare Pages Functions
 export const onRequest = handle(app);

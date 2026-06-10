@@ -1,14 +1,18 @@
+// React
 import type { FC } from "react";
+// Router
 import { Link } from "react-router-dom";
-
+// Store
 import { useT } from "@/store/appStore";
 
+// Página de política de privacidad
 const Privacy: FC = () => {
 	const t = useT();
 
 	return (
 		<div className="min-h-screen bg-page-bg pt-32 pb-16 transition-colors duration-300">
 			<div className="mx-auto max-w-3xl px-6 lg:px-8">
+				{/* Enlace para volver al inicio */}
 				<Link
 					to="/"
 					className="text-sm font-medium text-accent hover:text-accent-hover mb-8 inline-block"
@@ -18,6 +22,7 @@ const Privacy: FC = () => {
 				<h1 className="text-4xl font-bold tracking-tight text-text-main mb-8">
 					{t.legalPages.privacy.title}
 				</h1>
+				{/* Secciones de política de privacidad */}
 				<div className="prose prose-slate dark:prose-invert max-w-none text-text-muted space-y-6">
 					<section>
 						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s1.title}</h2>

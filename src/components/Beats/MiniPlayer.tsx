@@ -1,8 +1,13 @@
+// React
 import type { FC } from "react";
+// Iconos
 import { Play, Pause, LoaderCircle, X, Volume1, Volume2, VolumeX } from "lucide-react";
+// Tipos
 import type { Beat } from "@/data/beats";
+// Utilidades
 import { formatTime } from "@/utils/time";
 
+// Props del reproductor mini
 interface MiniPlayerProps {
 	currentBeat: Beat | null;
 	isPlaying: boolean;
@@ -17,12 +22,17 @@ interface MiniPlayerProps {
 	onSeek: (progress: number) => void;
 }
 
+// Icono de volumen según el nivel
 const VolumeIcon = ({ volume }: { volume: number }) => {
+	// 1. Sin volumen, muestra mute
 	if (volume === 0) return <VolumeX size={20} />;
+	// 2. Volumen bajo, muestra icono reducido
 	if (volume < 0.5) return <Volume1 size={20} />;
+	// 3. Volumen alto, muestra icono completo
 	return <Volume2 size={20} />;
 };
 
+// Reproductor mini fijo en la parte inferior
 export const MiniPlayer: FC<MiniPlayerProps> = ({
 	currentBeat,
 	isPlaying,
@@ -41,6 +51,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 	return (
 		<div className="fixed bottom-0 left-0 w-full z-[100] bg-surface-card border-t border-border shadow-2xl transition-colors duration-300">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+				{/* Barra de progreso */}
 				<div className="mb-3">
 					<input
 						type="range"
@@ -59,6 +70,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 					</div>
 				</div>
 
+				{/* Controles de reproducción */}
 				<div className="flex items-center justify-between gap-4">
 					<div className="flex items-center gap-4 min-w-0 flex-1">
 						<button
@@ -86,6 +98,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 						</div>
 					</div>
 
+					{/* Volumen y botón cerrar */}
 					<div className="flex items-center gap-4 shrink-0">
 						<div className="hidden md:flex items-center gap-2">
 							<VolumeIcon volume={volume} />

@@ -1,10 +1,14 @@
+// React
 import type { FC } from "react";
 
+// Fondo decorativo con círculos de blur y textura de ruido
 const AuraBackground: FC = () => {
 	return (
 		<div className="absolute inset-0 -z-10 h-full w-full overflow-hidden pointer-events-none select-none">
+			{/* Fondo base */}
 			<div className="absolute inset-0 bg-page-bg transition-colors duration-700" />
 
+			{/* Círculos decorativos con blur */}
 			<div className="absolute inset-0 opacity-20 dark:opacity-30">
 				<div
 					className="absolute top-[5%] -left-[10%] w-[80vw] h-[80vw] rounded-full bg-accent-muted/40 blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse-slow"
@@ -27,6 +31,7 @@ const AuraBackground: FC = () => {
 				/>
 			</div>
 
+			{/* Textura de ruido SVG */}
 			<div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat" />
 		</div>
 	);

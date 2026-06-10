@@ -1,23 +1,32 @@
+// React
 import { useState, useEffect } from "react";
+// Iconos
 import { Menu, X } from "lucide-react";
+// Componentes
 import ThemeSelector from "@/components/common/ThemeSelector";
 import LanguageSelector from "@/components/common/LanguageSelector";
+// Store
 import { useT } from "@/store/appStore";
 
+// Barra de navegación fija con menú responsive
 const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 
 	const t = useT();
 
+	// Detecta el scroll para cambiar el estilo del header
 	useEffect(() => {
+		// 1. Escucha el evento de scroll
 		const handleScroll = () => {
 			setIsScrolled(window.scrollY > 10);
 		};
 		window.addEventListener("scroll", handleScroll);
+		// 2. Limpia el listener al desmontar
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
+	// Elementos de navegación del menú
 	const navItems = [
 		{ label: t.header.home, href: "#inicio" },
 		{ label: t.header.beats, href: "#beats" },
@@ -32,6 +41,7 @@ const Header = () => {
 
 	return (
 		<>
+			{/* Barra de navegación superior */}
 			<header
 				className={`fixed top-0 z-50 w-full transition-all duration-300 bg-page-bg/80 backdrop-blur-md ${isScrolled
 					? "border-b border-border shadow-sm"
@@ -39,6 +49,7 @@ const Header = () => {
 					}`}
 			>
 				<nav className="mx-auto max-w-7xl flex h-16 w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
+					{/* Logo */}
 					<div className="shrink-0 cursor-pointer">
 						<h1 className="text-2xl font-bold tracking-tight text-text-main">
 							<span className="text-accent">Flux</span>
@@ -46,6 +57,7 @@ const Header = () => {
 						</h1>
 					</div>
 
+					{/* Enlaces de escritorio */}
 					<div className="hidden md:flex flex-1 justify-center">
 						<div className="flex items-center gap-8">
 							{navItems.map((item) => (
@@ -62,17 +74,19 @@ const Header = () => {
 
 					<div className="flex-1 md:hidden" />
 
+					{/* Selectores de idioma y tema */}
 					<div className="flex items-center gap-2 shrink-0">
 						<div className="hidden md:flex items-center gap-0">
 							<LanguageSelector />
 							<ThemeSelector />
 						</div>
 
+						{/* Botón menú móvil */}
 						<button
 							type="button"
 							onClick={toggleMenu}
 							className="text-text-muted hover:text-accent md:hidden p-2"
-							aria-label="Abrir men\u00fa"
+							aria-label="Abrir menú"
 							aria-expanded={isMenuOpen}
 						>
 							{isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -81,6 +95,7 @@ const Header = () => {
 				</nav>
 			</header>
 
+			{/* Menú móvil */}
 			<div
 				className={`fixed top-16 left-0 z-40 w-full h-[calc(100vh-4rem)] bg-page-bg transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${isMenuOpen
 					? "translate-y-0 opacity-100"
@@ -111,6 +126,7 @@ const Header = () => {
 				</div>
 			</div>
 
+			{/* Overlay al abrir menú móvil */}
 			{isMenuOpen && (
 				<div
 					onClick={closeMenu}

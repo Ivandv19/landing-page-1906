@@ -1,13 +1,18 @@
-import type { FC, ReactNode } from "react";
+// React
+import { useState, type FC, type FormEvent, type ReactNode } from "react";
+// Router
 import { Link } from "react-router-dom";
+// Store
 import { useT } from "@/store/appStore";
 
+// Props del icono de red social
 interface SocialIconProps {
 	href: string;
 	label: string;
 	children: ReactNode;
 }
 
+// Icono de red social con estilo circular
 const SocialIcon: FC<SocialIconProps> = ({ href, label, children }) => (
 	<a
 		href={href}
@@ -19,14 +24,33 @@ const SocialIcon: FC<SocialIconProps> = ({ href, label, children }) => (
 	</a>
 );
 
+// Pie de página con navegación, redes sociales y newsletter
 const Footer: FC = () => {
 	const t = useT();
 	const currentYear = new Date().getFullYear();
+	const [newsletterEmail, setNewsletterEmail] = useState("");
+	const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "error" | "success">("idle");
+
+	// Maneja el envío del formulario de newsletter
+	const handleNewsletterSubmit = (e: FormEvent<HTMLFormElement>) => {
+		// 1. Evita recargar la página
+		e.preventDefault();
+		// 2. Valida que el email tenga formato básico
+		if (!newsletterEmail.includes("@") || newsletterEmail.length < 5) {
+			setNewsletterStatus("error");
+			return;
+		}
+		// 3. Muestra éxito y resetea
+		setNewsletterStatus("success");
+		setNewsletterEmail("");
+		setTimeout(() => setNewsletterStatus("idle"), 3000);
+	};
 
 	return (
 		<footer className="bg-page-bg border-t border-border pt-16 pb-8 transition-colors duration-300">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+					{/* Marca y descripción */}
 					<div className="space-y-4">
 						<h2 className="text-2xl font-bold tracking-tight text-text-main">
 							<span className="text-accent dark:text-accent-hover">Flux</span>
@@ -36,6 +60,7 @@ const Footer: FC = () => {
 							{t.footer.about}
 						</p>
 
+						{/* Redes sociales */}
 						<div className="flex space-x-4 pt-2">
 							<SocialIcon href="https://github.com/tu-usuario" label="GitHub">
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -59,6 +84,7 @@ const Footer: FC = () => {
 						</div>
 					</div>
 
+					{/* Navegación */}
 					<div>
 						<h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-main">
 							Navegaci&oacute;n
@@ -82,6 +108,7 @@ const Footer: FC = () => {
 						</ul>
 					</div>
 
+					{/* Enlaces legales */}
 					<div>
 						<h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-main">
 							Legal
@@ -103,18 +130,28 @@ const Footer: FC = () => {
 						</ul>
 					</div>
 
+					{/* Newsletter */}
 					<div>
 						<h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-main">
 							{t.footer.newsletter.title}
 						</h3>
-						<form className="flex flex-col gap-2">
+						<form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-2">
 							<input
 								type="email"
+								value={newsletterEmail}
+								onChange={(e) => { setNewsletterEmail(e.target.value); setNewsletterStatus("idle"); }}
 								placeholder={t.footer.newsletter.placeholder}
+								required
 								className="w-full rounded-md border border-border px-3 py-2 text-sm placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent dark:bg-surface-card dark:text-text-main"
 							/>
+							{newsletterStatus === "error" && (
+								<p className="text-xs text-red-500">Email inválido</p>
+							)}
+							{newsletterStatus === "success" && (
+								<p className="text-xs text-green-500">¡Gracias por suscribirte!</p>
+							)}
 							<button
-								type="button"
+								type="submit"
 								className="w-full rounded-md bg-accent px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors"
 							>
 								{t.footer.newsletter.button}
@@ -123,6 +160,7 @@ const Footer: FC = () => {
 					</div>
 				</div>
 
+				{/* Pie inferior */}
 				<div className="mt-12 border-t border-border/50 pt-8 flex flex-col items-center gap-6">
 					<div className="flex flex-col items-center gap-4">
 						<p className="text-sm font-medium text-text-muted">

@@ -1,12 +1,17 @@
+// Iconos
 import { Check } from "lucide-react";
+// Store
 import { useT } from "@/store/appStore";
+// Hooks
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
+// Planes de licencia disponibles
 const Licencias = () => {
 	const t = useT();
 	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 	const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation(0.05);
 
+	// Opciones de licencia con precios y características
 	const licenses = [
 		{
 			name: t.licenses.options.basic.name,
@@ -60,6 +65,7 @@ const Licencias = () => {
 			className="bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
+				{/* Encabezado de la sección */}
 				<div ref={headerRef as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-4xl text-center animate-on-scroll ${headerVisible ? "visible" : ""}`}>
 					<h2 className="text-base font-semibold leading-7 text-accent">
 						{t.licenses.header}
@@ -72,6 +78,7 @@ const Licencias = () => {
 					{t.licenses.subtitle}
 				</p>
 
+				{/* Tarjetas de licencias */}
 				<div ref={gridRef as React.RefObject<HTMLDivElement>} className={`isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 animate-on-scroll ${gridVisible ? "visible" : ""}`}>
 					{licenses.map((tier) => (
 						<div
@@ -81,6 +88,7 @@ const Licencias = () => {
 									: "bg-surface-card ring-border shadow-md hover:ring-accent/50 hover:shadow-lg"
 								}`}
 						>
+							{/* Badge de popular */}
 							{tier.popular && (
 								<div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-sm font-semibold text-white shadow-sm">
 									Mas Vendido
@@ -107,6 +115,7 @@ const Licencias = () => {
 									</span>
 								</p>
 
+								{/* Lista de características */}
 								<ul className="mt-8 space-y-3 text-sm leading-6 text-text-muted">
 									{tier.features.map((feature) => (
 										<li key={feature} className="flex gap-x-3">
@@ -120,6 +129,7 @@ const Licencias = () => {
 								</ul>
 							</div>
 
+							{/* Botón de selección */}
 							<button
 								type="button"
 								className={`mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ${tier.popular

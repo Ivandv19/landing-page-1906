@@ -1,10 +1,19 @@
+// React
 import { useState, type FormEvent } from "react";
+// Iconos
 import { Mail, Clock, Share2, LoaderCircle } from "lucide-react";
+// Turnstile
 import { Turnstile } from "@marsidev/react-turnstile";
+// Store
 import { useT } from "@/store/appStore";
+// Hooks
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import type { ContactFormData, ContactResponse } from "./types";
+// API
+import { sendContact } from "@/lib/api";
+// Tipos
+import type { ContactFormData } from "./types";
 
+// Sección de formulario de contacto con verificación Turnstile
 const Contacto = () => {
 	const t = useT();
 	const { ref, isVisible } = useScrollAnimation();
@@ -17,31 +26,24 @@ const Contacto = () => {
 	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 	const [errorMessage, setErrorMessage] = useState("");
 
+	// Maneja el envío del formulario
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		// 1. Evita la recarga de la página
 		e.preventDefault();
+		// 2. Muestra el estado de carga
 		setStatus("loading");
 		setErrorMessage("");
 
 		try {
-			const response = await fetch("/api/contact", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData),
-			});
-
-			const data: ContactResponse = await response.json();
-
-			if (!response.ok || !data.success) {
-				throw new Error(data.error || "Error al enviar el mensaje");
-			}
-
+			// 3. Envía el mensaje a la API
+			await sendContact(formData);
+			// 4. Muestra éxito y resetea el formulario
 			setStatus("success");
 			setFormData({ name: "", email: "", message: "", turnstileToken: "" });
 
 			setTimeout(() => setStatus("idle"), 5000);
 		} catch (error) {
+			// 5. Captura el error y lo muestra al usuario
 			setStatus("error");
 			setErrorMessage(
 				error instanceof Error ? error.message : "Error al enviar el mensaje"
@@ -49,6 +51,7 @@ const Contacto = () => {
 		}
 	};
 
+	// Actualiza el campo del formulario según el input
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
@@ -65,6 +68,7 @@ const Contacto = () => {
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				<div ref={ref as React.RefObject<HTMLDivElement>} className={`grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2 animate-on-scroll ${isVisible ? "visible" : ""}`}>
+					{/* Información de contacto */}
 					<div className="flex flex-col justify-center">
 						<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
 							{t.contact.title}
@@ -74,6 +78,7 @@ const Contacto = () => {
 						</p>
 
 						<div className="mt-8 space-y-6">
+							{/* Email */}
 							<div className="flex items-center gap-x-4">
 								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-muted text-accent ring-1 ring-accent/30 dark:bg-accent/10 dark:text-accent-hover dark:ring-accent/20">
 									<Mail size={24} />
@@ -86,6 +91,7 @@ const Contacto = () => {
 								</div>
 							</div>
 
+							{/* Tiempo de respuesta */}
 							<div className="flex items-center gap-x-4">
 								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-muted text-accent ring-1 ring-accent/30 dark:bg-accent/10 dark:text-accent-hover dark:ring-accent/20">
 									<Clock size={24} />
@@ -98,6 +104,7 @@ const Contacto = () => {
 								</div>
 							</div>
 
+							{/* Redes sociales */}
 							<div className="flex items-center gap-x-4">
 								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-muted text-accent ring-1 ring-accent/30 dark:bg-accent/10 dark:text-accent-hover dark:ring-accent/20">
 									<Share2 size={24} />
@@ -128,10 +135,12 @@ const Contacto = () => {
 						</div>
 					</div>
 
+					{/* Formulario de contacto */}
 					<form
 						onSubmit={handleSubmit}
 						className="rounded-xl border border-border bg-surface-card p-6 shadow-xl sm:p-8"
 					>
+						{/* Mensaje de éxito */}
 						{status === "success" && (
 							<div className="mb-6 rounded-lg bg-green-50 p-4 border border-green-200 dark:bg-green-900/20 dark:border-green-900/50">
 								<div className="flex">
@@ -145,6 +154,7 @@ const Contacto = () => {
 							</div>
 						)}
 
+						{/* Mensaje de error */}
 						{status === "error" && (
 							<div className="mb-6 rounded-lg bg-red-50 p-4 border border-red-200 dark:bg-red-900/20 dark:border-red-900/50">
 								<div className="flex">
@@ -158,6 +168,7 @@ const Contacto = () => {
 							</div>
 						)}
 
+						{/* Campos del formulario */}
 						<div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
 							<div className="sm:col-span-2">
 								<label htmlFor="name" className="block text-sm font-semibold leading-6 text-text-main">
@@ -220,6 +231,7 @@ const Contacto = () => {
 							</div>
 						</div>
 
+						{/* Turnstile */}
 						<div className="mt-6 flex justify-center sm:justify-start">
 							<Turnstile
 								siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
@@ -232,6 +244,7 @@ const Contacto = () => {
 							/>
 						</div>
 
+						{/* Botón de envío */}
 						<div className="mt-8 flex justify-end">
 							<button
 								type="submit"

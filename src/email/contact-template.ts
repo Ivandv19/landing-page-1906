@@ -1,3 +1,4 @@
+// Escapa caracteres especiales HTML para prevenir inyección XSS en el email
 function escapeHtml(str: string): string {
 	return str
 		.replace(/&/g, "&amp;")
@@ -7,9 +8,12 @@ function escapeHtml(str: string): string {
 		.replace(/'/g, "&#039;");
 }
 
+// Construye la plantilla HTML del email de contacto con datos escapados
 export function buildContactEmail(name: string, email: string, message: string): string {
+	// 1. Escapa cada campo para evitar inyección HTML
 	const safeName = escapeHtml(name);
 	const safeEmail = escapeHtml(email);
+	// 2. Escapa el mensaje y convierte saltos de línea a <br>
 	const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
 
 	return `
@@ -33,18 +37,22 @@ export function buildContactEmail(name: string, email: string, message: string):
 						<h2 style="margin: 0;">Nuevo Mensaje de Contacto</h2>
 					</div>
 					<div class="content">
+						<!-- Nombre del remitente -->
 						<div class="field">
 							<div class="label">Nombre:</div>
 							<div class="value">${safeName}</div>
 						</div>
+						<!-- Email del remitente -->
 						<div class="field">
 							<div class="label">Email:</div>
 							<div class="value"><a href="mailto:${safeEmail}">${safeEmail}</a></div>
 						</div>
+						<!-- Mensaje del contacto -->
 						<div class="field">
 							<div class="label">Mensaje:</div>
 							<div class="value">${safeMessage}</div>
 						</div>
+						<!-- Pie con verificación -->
 						<div class="footer">
 							<p>Enviado desde FluxBeats Landing Page (Verificado por Cloudflare Turnstile)</p>
 						</div>
