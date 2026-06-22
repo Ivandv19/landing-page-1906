@@ -14,7 +14,7 @@ const reviews = [
 		author: "Carlos 'Flow' Ruiz",
 		role: "Artista Urbano",
 		rating: 5,
-		avatar: "https://assets.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/carlos.jpg",
+		avatar: "https://assets.fluxbeats.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/carlos.jpg",
 	},
 	{
 		id: 2,
@@ -23,7 +23,7 @@ const reviews = [
 		author: "Sofía Streamz",
 		role: "Content Creator",
 		rating: 4,
-		avatar: "https://assets.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/sofia.jpg",
+		avatar: "https://assets.fluxbeats.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/sofia.jpg",
 	},
 	{
 		id: 3,
@@ -32,7 +32,7 @@ const reviews = [
 		author: "Prod. Javi",
 		role: "Ingeniero de Mezcla",
 		rating: 4,
-		avatar: "https://assets.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/javi.jpg",
+		avatar: "https://assets.fluxbeats.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/javi.jpg",
 	},
 ];
 
