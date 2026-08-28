@@ -1,9 +1,11 @@
 // Iconos
 import { Star } from "lucide-react";
-// Store
-import { useT } from "@/store/appStore";
+// Config
+import { ASSETS_BASE } from "@/config/assets";
 // Hooks
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+// Store
+import { useT } from "@/store/appStore";
 
 // Reseñas de clientes
 const reviews = [
@@ -14,7 +16,7 @@ const reviews = [
 		author: "Carlos 'Flow' Ruiz",
 		role: "Artista Urbano",
 		rating: 5,
-		avatar: "https://assets.fluxbeats.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/carlos.jpg",
+		avatar: `${ASSETS_BASE}/carlos.jpg`,
 	},
 	{
 		id: 2,
@@ -23,7 +25,7 @@ const reviews = [
 		author: "Sofía Streamz",
 		role: "Content Creator",
 		rating: 4,
-		avatar: "https://assets.fluxbeats.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/sofia.jpg",
+		avatar: `${ASSETS_BASE}/sofia.jpg`,
 	},
 	{
 		id: 3,
@@ -32,7 +34,7 @@ const reviews = [
 		author: "Prod. Javi",
 		role: "Ingeniero de Mezcla",
 		rating: 4,
-		avatar: "https://assets.fluxbeats.mgdc.site/cdn-cgi/image/width=100,height=100,fit=cover,format=auto/javi.jpg",
+		avatar: `${ASSETS_BASE}/javi.jpg`,
 	},
 ];
 
@@ -49,7 +51,10 @@ const Testimonios = () => {
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				{/* Encabezado */}
-				<div ref={headerRef as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-2xl text-center animate-on-scroll ${headerVisible ? "visible" : ""}`}>
+				<div
+					ref={headerRef as React.RefObject<HTMLDivElement>}
+					className={`mx-auto max-w-2xl text-center animate-on-scroll ${headerVisible ? "visible" : ""}`}
+				>
 					<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
 						{t.reviews.header}
 					</h2>
@@ -59,7 +64,10 @@ const Testimonios = () => {
 				</div>
 
 				{/* Grid de tarjetas de reseñas */}
-				<div ref={gridRef as React.RefObject<HTMLDivElement>} className={`mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 animate-on-scroll ${gridVisible ? "visible" : ""}`}>
+				<div
+					ref={gridRef as React.RefObject<HTMLDivElement>}
+					className={`mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 animate-on-scroll ${gridVisible ? "visible" : ""}`}
+				>
 					{reviews.map((review) => (
 						<div
 							key={review.id}

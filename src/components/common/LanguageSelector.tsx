@@ -1,7 +1,8 @@
 // React
-import { useState, useRef, useEffect } from "react";
+
 // Iconos
-import { Globe, ChevronDown } from "lucide-react";
+import { ChevronDown, Globe } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 // Store
 import { useStore } from "@/store/appStore";
 
@@ -23,7 +24,10 @@ const LanguageSelector = ({ align = "right" }: LanguageSelectorProps) => {
 	useEffect(() => {
 		// 1. Escucha clics fuera del menú
 		const handleClickOutside = (event: MouseEvent) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+			if (
+				dropdownRef.current &&
+				!dropdownRef.current.contains(event.target as Node)
+			) {
 				setIsOpen(false);
 			}
 		};
@@ -48,7 +52,10 @@ const LanguageSelector = ({ align = "right" }: LanguageSelectorProps) => {
 				aria-label="Change language"
 				aria-expanded={isOpen}
 			>
-				<Globe size={18} className="group-hover:text-accent transition-colors" />
+				<Globe
+					size={18}
+					className="group-hover:text-accent transition-colors"
+				/>
 				<span className="text-sm font-medium uppercase">{language}</span>
 				<ChevronDown
 					size={12}
@@ -58,38 +65,56 @@ const LanguageSelector = ({ align = "right" }: LanguageSelectorProps) => {
 
 			{/* Menú desplegable */}
 			<div
-				className={`absolute top-full mt-2 w-32 bg-surface-card/95 backdrop-blur-sm border border-border rounded-xl shadow-lg p-1 transition-all duration-200 z-50 transform ${align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left"
-				} ${isOpen
+				className={`absolute top-full mt-2 w-32 bg-surface-card/95 backdrop-blur-sm border border-border rounded-xl shadow-lg p-1 transition-all duration-200 z-50 transform ${
+					align === "right"
+						? "right-0 origin-top-right"
+						: "left-0 origin-top-left"
+				} ${
+					isOpen
 						? "opacity-100 visible translate-y-2"
 						: "opacity-0 invisible translate-y-0"
-					}`}
+				}`}
 			>
 				{/* Opción español */}
 				<button
 					type="button"
-					onClick={() => { setLanguage("es"); setIsOpen(false); }}
+					onClick={() => {
+						setLanguage("es");
+						setIsOpen(false);
+					}}
 					className={`
 						w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all
-						${language === "es"
-							? "bg-accent/10 text-accent"
-							: "text-text-muted hover:bg-surface-card dark:hover:bg-surface-card hover:text-text-main"}
+						${
+							language === "es"
+								? "bg-accent/10 text-accent"
+								: "text-text-muted hover:bg-surface-card dark:hover:bg-surface-card hover:text-text-main"
+						}
 					`}
 				>
-					<span className={`w-1.5 h-1.5 rounded-full bg-accent transition-opacity ${language === "es" ? "opacity-100" : "opacity-0"}`}></span>
+					<span
+						className={`w-1.5 h-1.5 rounded-full bg-accent transition-opacity ${language === "es" ? "opacity-100" : "opacity-0"}`}
+					></span>
 					Espa&#241;ol
 				</button>
 				{/* Opción inglés */}
 				<button
 					type="button"
-					onClick={() => { setLanguage("en"); setIsOpen(false); }}
+					onClick={() => {
+						setLanguage("en");
+						setIsOpen(false);
+					}}
 					className={`
 						w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all
-						${language === "en"
-							? "bg-accent/10 text-accent"
-							: "text-text-muted hover:bg-surface-card dark:hover:bg-surface-card hover:text-text-main"}
+						${
+							language === "en"
+								? "bg-accent/10 text-accent"
+								: "text-text-muted hover:bg-surface-card dark:hover:bg-surface-card hover:text-text-main"
+						}
 					`}
 				>
-					<span className={`w-1.5 h-1.5 rounded-full bg-accent transition-opacity ${language === "en" ? "opacity-100" : "opacity-0"}`}></span>
+					<span
+						className={`w-1.5 h-1.5 rounded-full bg-accent transition-opacity ${language === "en" ? "opacity-100" : "opacity-0"}`}
+					></span>
 					English
 				</button>
 			</div>

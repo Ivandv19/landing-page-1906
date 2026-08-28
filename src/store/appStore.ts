@@ -3,11 +3,11 @@ import { create } from "zustand";
 // Traducciones
 import { en } from "@/i18n/en";
 import { es } from "@/i18n/es";
-// Slices
-import { createUISlice } from "./slices/uiSlice";
+import type { AudioSlice } from "./slices/audioSlice";
 import { createAudioSlice } from "./slices/audioSlice";
 import type { UISlice } from "./slices/uiSlice";
-import type { AudioSlice } from "./slices/audioSlice";
+// Slices
+import { createUISlice } from "./slices/uiSlice";
 
 type AppStore = UISlice & AudioSlice;
 
@@ -20,7 +20,10 @@ export const useStore = create<AppStore>()((set) => ({
 // Inicializa el tema oscuro al cargar si el usuario lo tenía activo
 if (typeof window !== "undefined") {
 	const saved = localStorage.getItem("theme");
-	if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+	if (
+		saved === "dark" ||
+		(!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)
+	) {
 		document.documentElement.classList.add("dark");
 	}
 }

@@ -1,13 +1,13 @@
 // React
 import { useEffect } from "react";
 // Router
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 // Componentes
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import Home from "@/pages/Home/Home";
-import Terms from "@/pages/legal/Terms";
 import Privacy from "@/pages/legal/Privacy";
+import Terms from "@/pages/legal/Terms";
 // Store
 import { useStore } from "@/store/appStore";
 

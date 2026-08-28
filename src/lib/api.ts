@@ -1,8 +1,13 @@
 // Tipos
-import type { ContactFormData, ContactResponse } from "@/components/Contacto/types";
+import type {
+	ContactFormData,
+	ContactResponse,
+} from "@/components/Contacto/types";
 
 // Envía el formulario de contacto a la API y retorna la respuesta
-export async function sendContact(data: ContactFormData): Promise<ContactResponse> {
+export async function sendContact(
+	data: ContactFormData,
+): Promise<ContactResponse> {
 	// 1. Envía los datos del formulario al endpoint
 	const response = await fetch("/api/contact", {
 		method: "POST",

@@ -1,17 +1,18 @@
 // React
-import { type FC, useRef, useCallback } from "react";
+
 // Iconos
 import { ChevronLeft, ChevronRight } from "lucide-react";
-// Store
-import { useT, useStore } from "@/store/appStore";
-// Hooks
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useKeyboardNav } from "@/hooks/useKeyboardNav";
+import { type FC, useCallback, useRef } from "react";
 // Datos
 import { beats } from "@/data/beats";
+import { useKeyboardNav } from "@/hooks/useKeyboardNav";
+// Hooks
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+// Store
+import { useStore, useT } from "@/store/appStore";
+import { BeatCard } from "./BeatCard";
 // Componentes
 import { MiniPlayer } from "./MiniPlayer";
-import { BeatCard } from "./BeatCard";
 
 // Sección de beats con desplazamiento horizontal y navegación por teclado
 const BeatsSection: FC = () => {
@@ -114,7 +115,9 @@ const BeatsSection: FC = () => {
 				progress={progress}
 				currentTime={currentTime}
 				duration={duration}
-				onToggle={() => { if (currentBeat) play(currentBeat); }}
+				onToggle={() => {
+					if (currentBeat) play(currentBeat);
+				}}
 				onClose={stop}
 				onVolumeChange={setVolume}
 				onSeek={seek}

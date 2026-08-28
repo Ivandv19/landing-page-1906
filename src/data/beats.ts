@@ -1,3 +1,5 @@
+import { ASSETS_BASE } from "@/config/assets";
+
 export interface Beat {
 	id: number;
 	title: string;
@@ -16,7 +18,7 @@ export const beats: Beat[] = [
 		key: "E",
 		price: 14.99,
 		image: "winter.png",
-		audioUrl: "https://assets.fluxbeats.mgdc.site/winter.mp3",
+		audioUrl: `${ASSETS_BASE}/winter.mp3`,
 	},
 	{
 		id: 2,
@@ -25,7 +27,7 @@ export const beats: Beat[] = [
 		key: "C#m",
 		price: 14.99,
 		image: "seraph.png",
-		audioUrl: "https://assets.fluxbeats.mgdc.site/lil-seraph.mp3",
+		audioUrl: `${ASSETS_BASE}/lil-seraph.mp3`,
 	},
 	{
 		id: 3,
@@ -34,7 +36,7 @@ export const beats: Beat[] = [
 		key: "G#m",
 		price: 14.99,
 		image: "moon.png",
-		audioUrl: "https://assets.fluxbeats.mgdc.site/moon.mp3",
+		audioUrl: `${ASSETS_BASE}/moon.mp3`,
 	},
 	{
 		id: 4,
@@ -43,7 +45,7 @@ export const beats: Beat[] = [
 		key: "C#m",
 		price: 14.99,
 		image: "7nights.png",
-		audioUrl: "https://assets.fluxbeats.mgdc.site/7nights.mp3",
+		audioUrl: `${ASSETS_BASE}/7nights.mp3`,
 	},
 	{
 		id: 5,
@@ -52,6 +54,6 @@ export const beats: Beat[] = [
 		key: "Bbm",
 		price: 14.99,
 		image: "shibuya.png",
-		audioUrl: "https://assets.fluxbeats.mgdc.site/shibuya-nights.mp3",
+		audioUrl: `${ASSETS_BASE}/shibuya-nights.mp3`,
 	},
 ];

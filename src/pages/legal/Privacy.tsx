@@ -25,19 +25,27 @@ const Privacy: FC = () => {
 				{/* Secciones de política de privacidad */}
 				<div className="prose prose-slate dark:prose-invert max-w-none text-text-muted space-y-6">
 					<section>
-						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s1.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">
+							{t.legalPages.privacy.s1.title}
+						</h2>
 						<p>{t.legalPages.privacy.s1.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s2.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">
+							{t.legalPages.privacy.s2.title}
+						</h2>
 						<p>{t.legalPages.privacy.s2.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s3.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">
+							{t.legalPages.privacy.s3.title}
+						</h2>
 						<p>{t.legalPages.privacy.s3.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.privacy.s4.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">
+							{t.legalPages.privacy.s4.title}
+						</h2>
 						<p>{t.legalPages.privacy.s4.content}</p>
 					</section>
 				</div>

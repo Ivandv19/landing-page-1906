@@ -1,7 +1,8 @@
 // Store
-import { useT } from "@/store/appStore";
+
 // Hooks
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useT } from "@/store/appStore";
 
 // Sección hero principal con animación de entrada
 const Hero = () => {
@@ -9,7 +10,10 @@ const Hero = () => {
 	const { ref, isVisible } = useScrollAnimation();
 
 	return (
-		<div id="inicio" className="relative isolate bg-page-bg px-6 pt-14 lg:px-8 overflow-hidden min-h-screen flex items-center justify-center">
+		<div
+			id="inicio"
+			className="relative isolate bg-page-bg px-6 pt-14 lg:px-8 overflow-hidden min-h-screen flex items-center justify-center"
+		>
 			{/* Fondo decorativo con blur */}
 			<div
 				className="absolute -top-40 left-[calc(50%-10rem)] -z-10 h-160 w-160 transform-gpu blur-3xl sm:left-[calc(50%-20rem)]"
@@ -22,7 +26,10 @@ const Hero = () => {
 			</div>
 
 			{/* Contenido principal */}
-			<div ref={ref as React.RefObject<HTMLDivElement>} className={`mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 animate-on-scroll ${isVisible ? "visible" : ""}`}>
+			<div
+				ref={ref as React.RefObject<HTMLDivElement>}
+				className={`mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 animate-on-scroll ${isVisible ? "visible" : ""}`}
+			>
 				<div className="text-center">
 					<h1 className="text-4xl font-bold tracking-tight text-text-main sm:text-6xl">
 						{t.hero.title}

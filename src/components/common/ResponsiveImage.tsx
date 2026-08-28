@@ -1,6 +1,9 @@
 // React
 import type { FC } from "react";
 
+// Config
+import { ASSETS_BASE } from "@/config/assets";
+
 // Props del componente de imagen responsive
 interface ResponsiveImageProps {
 	src: string;
@@ -15,38 +18,22 @@ interface ResponsiveImageProps {
 	height?: number;
 }
 
-// Tamaños por defecto para cada breakpoint
-const DEFAULT_SIZES = {
-	mobile: 280,
-	tablet: 400,
-	desktop: 600,
-};
-
 /**
- * Componente de imagen optimizado que utiliza Cloudflare Image Resizing.
- * Genera atributos srcSet y sizes automáticamente para responsive loading.
+ * Componente de imagen optimizado que consume assets desde Cloudflare R2
+ * con compresión y entrega automática mediante Cloudflare Edge CDN.
  */
 export const ResponsiveImage: FC<ResponsiveImageProps> = ({
 	src,
 	alt,
 	className = "",
-	sizes = DEFAULT_SIZES,
 	width,
 	height,
 }) => {
-	const baseUrl = "https://assets.fluxbeats.mgdc.site";
-	const { mobile, tablet, desktop } = { ...DEFAULT_SIZES, ...sizes };
-
-	// 1. Genera URLs optimizadas para cada tamaño de pantalla
-	const mobileUrl = `${baseUrl}/cdn-cgi/image/width=${mobile},format=auto,quality=85/${src}`;
-	const tabletUrl = `${baseUrl}/cdn-cgi/image/width=${tablet},format=auto,quality=85/${src}`;
-	const desktopUrl = `${baseUrl}/cdn-cgi/image/width=${desktop},format=auto,quality=85/${src}`;
+	const cleanSrc = src.startsWith("http") ? src : `${ASSETS_BASE}/${src}`;
 
 	return (
 		<img
-			src={desktopUrl}
-			srcSet={`${mobileUrl} ${mobile}w, ${tabletUrl} ${tablet}w, ${desktopUrl} ${desktop}w`}
-			sizes={`(max-width: 640px) ${mobile}px, (max-width: 1024px) ${tablet}px, ${desktop}px`}
+			src={cleanSrc}
 			alt={alt}
 			className={className}
 			width={width}

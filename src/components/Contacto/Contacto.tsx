@@ -1,15 +1,16 @@
 // React
-import { useState, type FormEvent } from "react";
-// Iconos
-import { Mail, Clock, Share2, LoaderCircle } from "lucide-react";
+
 // Turnstile
 import { Turnstile } from "@marsidev/react-turnstile";
-// Store
-import { useT } from "@/store/appStore";
+// Iconos
+import { Clock, LoaderCircle, Mail, Share2 } from "lucide-react";
+import { type FormEvent, useState } from "react";
 // Hooks
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 // API
 import { sendContact } from "@/lib/api";
+// Store
+import { useT } from "@/store/appStore";
 // Tipos
 import type { ContactFormData } from "./types";
 
@@ -23,7 +24,9 @@ const Contacto = () => {
 		message: "",
 		turnstileToken: "",
 	});
-	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+	const [status, setStatus] = useState<
+		"idle" | "loading" | "success" | "error"
+	>("idle");
 	const [errorMessage, setErrorMessage] = useState("");
 
 	// Maneja el envío del formulario
@@ -46,14 +49,14 @@ const Contacto = () => {
 			// 5. Captura el error y lo muestra al usuario
 			setStatus("error");
 			setErrorMessage(
-				error instanceof Error ? error.message : "Error al enviar el mensaje"
+				error instanceof Error ? error.message : "Error al enviar el mensaje",
 			);
 		}
 	};
 
 	// Actualiza el campo del formulario según el input
 	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 	) => {
 		setFormData((prev) => ({
 			...prev,
@@ -67,7 +70,10 @@ const Contacto = () => {
 			className="bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div ref={ref as React.RefObject<HTMLDivElement>} className={`grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2 animate-on-scroll ${isVisible ? "visible" : ""}`}>
+				<div
+					ref={ref as React.RefObject<HTMLDivElement>}
+					className={`grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2 animate-on-scroll ${isVisible ? "visible" : ""}`}
+				>
 					{/* Información de contacto */}
 					<div className="flex flex-col justify-center">
 						<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
@@ -114,19 +120,31 @@ const Contacto = () => {
 										{t.contact.follow}
 									</span>
 									<div className="flex gap-4 mt-1">
-										<button type="button" className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1">
+										<button
+											type="button"
+											className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1"
+										>
 											Instagram
 										</button>
 										<span className="opacity-30">|</span>
-										<button type="button" className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1">
+										<button
+											type="button"
+											className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1"
+										>
 											YouTube
 										</button>
 										<span className="opacity-30">|</span>
-										<button type="button" className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1">
+										<button
+											type="button"
+											className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1"
+										>
 											Airbit
 										</button>
 										<span className="opacity-30">|</span>
-										<button type="button" className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1">
+										<button
+											type="button"
+											className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1"
+										>
 											BeatStars
 										</button>
 									</div>
@@ -144,8 +162,17 @@ const Contacto = () => {
 						{status === "success" && (
 							<div className="mb-6 rounded-lg bg-green-50 p-4 border border-green-200 dark:bg-green-900/20 dark:border-green-900/50">
 								<div className="flex">
-									<svg className="h-5 w-5 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-										<path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+									<svg
+										className="h-5 w-5 text-green-600 dark:text-green-400"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										aria-hidden="true"
+									>
+										<path
+											fillRule="evenodd"
+											d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+											clipRule="evenodd"
+										/>
 									</svg>
 									<p className="ml-3 text-sm font-medium text-green-800 dark:text-green-300">
 										Mensaje enviado correctamente! Te responderemos pronto.
@@ -158,8 +185,17 @@ const Contacto = () => {
 						{status === "error" && (
 							<div className="mb-6 rounded-lg bg-red-50 p-4 border border-red-200 dark:bg-red-900/20 dark:border-red-900/50">
 								<div className="flex">
-									<svg className="h-5 w-5 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-										<path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+									<svg
+										className="h-5 w-5 text-red-600 dark:text-red-400"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										aria-hidden="true"
+									>
+										<path
+											fillRule="evenodd"
+											d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+											clipRule="evenodd"
+										/>
 									</svg>
 									<p className="ml-3 text-sm font-medium text-red-800 dark:text-red-300">
 										{errorMessage}
@@ -171,7 +207,10 @@ const Contacto = () => {
 						{/* Campos del formulario */}
 						<div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
 							<div className="sm:col-span-2">
-								<label htmlFor="name" className="block text-sm font-semibold leading-6 text-text-main">
+								<label
+									htmlFor="name"
+									className="block text-sm font-semibold leading-6 text-text-main"
+								>
 									{t.contact.form.name}
 								</label>
 								<div className="mt-2.5">
@@ -192,7 +231,10 @@ const Contacto = () => {
 							</div>
 
 							<div className="sm:col-span-2">
-								<label htmlFor="email" className="block text-sm font-semibold leading-6 text-text-main">
+								<label
+									htmlFor="email"
+									className="block text-sm font-semibold leading-6 text-text-main"
+								>
 									Email
 								</label>
 								<div className="mt-2.5">
@@ -211,7 +253,10 @@ const Contacto = () => {
 							</div>
 
 							<div className="sm:col-span-2">
-								<label htmlFor="message" className="block text-sm font-semibold leading-6 text-text-main">
+								<label
+									htmlFor="message"
+									className="block text-sm font-semibold leading-6 text-text-main"
+								>
 									Mensaje
 								</label>
 								<div className="mt-2.5">

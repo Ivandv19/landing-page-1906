@@ -20,7 +20,7 @@ export async function verifyTurnstile(
 			body: body.toString(),
 		});
 		// 3. Parsea la respuesta y retorna si el token es válido
-		const data = await res.json() as { success: boolean };
+		const data = (await res.json()) as { success: boolean };
 		return data.success;
 	} catch {
 		// 4. En caso de error de red, retorna false

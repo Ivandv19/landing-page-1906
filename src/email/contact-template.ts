@@ -9,7 +9,11 @@ function escapeHtml(str: string): string {
 }
 
 // Construye la plantilla HTML del email de contacto con datos escapados
-export function buildContactEmail(name: string, email: string, message: string): string {
+export function buildContactEmail(
+	name: string,
+	email: string,
+	message: string,
+): string {
 	// 1. Escapa cada campo para evitar inyección HTML
 	const safeName = escapeHtml(name);
 	const safeEmail = escapeHtml(email);

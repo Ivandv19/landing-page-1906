@@ -1,7 +1,16 @@
 // React
-import type { FC } from "react";
+
 // Iconos
-import { Play, Pause, LoaderCircle, X, Volume1, Volume2, VolumeX } from "lucide-react";
+import {
+	LoaderCircle,
+	Pause,
+	Play,
+	Volume1,
+	Volume2,
+	VolumeX,
+	X,
+} from "lucide-react";
+import type { FC } from "react";
 // Tipos
 import type { Beat } from "@/data/beats";
 // Utilidades

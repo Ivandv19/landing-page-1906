@@ -1,14 +1,15 @@
 // Hono
+
+// Validación
+import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 // Cloudflare Pages
 import { handle } from "hono/cloudflare-pages";
-// Validación
-import { zValidator } from "@hono/zod-validator";
+import { contactSchema } from "../_shared/contactSchema";
+import { sendContactEmail } from "../_shared/email";
 // Compartidos
 import { checkRateLimit } from "../_shared/rateLimit";
 import { verifyTurnstile } from "../_shared/turnstile";
-import { sendContactEmail } from "../_shared/email";
-import { contactSchema } from "../_shared/contactSchema";
 
 // Variables de entorno del worker
 type Env = {
@@ -23,14 +24,18 @@ const app = new Hono<{ Bindings: Env }>();
 // POST /api/contact - Envía un mensaje de contacto con verificación Turnstile
 app.post("/api/contact", zValidator("json", contactSchema), async (c) => {
 	// 1. Obtiene la IP del cliente para rate limiting
-	const ip = c.req.header("cf-connecting-ip")
-		|| c.req.header("x-forwarded-for")?.split(",")[0]?.trim()
-		|| "unknown";
+	const ip =
+		c.req.header("cf-connecting-ip") ||
+		c.req.header("x-forwarded-for")?.split(",")[0]?.trim() ||
+		"unknown";
 
 	// 2. Verifica que no haya excedido el límite de solicitudes
 	if (!checkRateLimit(ip)) {
 		return c.json(
-			{ success: false, error: "Demasiadas solicitudes. Intenta de nuevo más tarde." },
+			{
+				success: false,
+				error: "Demasiadas solicitudes. Intenta de nuevo más tarde.",
+			},
 			429,
 		);
 	}
@@ -39,10 +44,17 @@ app.post("/api/contact", zValidator("json", contactSchema), async (c) => {
 	const { name, email, message, turnstileToken } = c.req.valid("json");
 
 	// 4. Verifica el token de Turnstile con Cloudflare
-	const turnstileOk = await verifyTurnstile(turnstileToken, c.env.TURNSTILE_SECRET_KEY);
+	const turnstileOk = await verifyTurnstile(
+		turnstileToken,
+		c.env.TURNSTILE_SECRET_KEY,
+	);
 	if (!turnstileOk) {
 		return c.json(
-			{ success: false, error: "La verificación de seguridad falló. Por favor, inténtalo de nuevo." },
+			{
+				success: false,
+				error:
+					"La verificación de seguridad falló. Por favor, inténtalo de nuevo.",
+			},
 			400,
 		);
 	}
@@ -51,7 +63,10 @@ app.post("/api/contact", zValidator("json", contactSchema), async (c) => {
 	const emailSent = await sendContactEmail({ name, email, message }, c.env);
 	if (!emailSent) {
 		return c.json(
-			{ success: false, error: "Error al enviar el mensaje. Intenta de nuevo más tarde." },
+			{
+				success: false,
+				error: "Error al enviar el mensaje. Intenta de nuevo más tarde.",
+			},
 			500,
 		);
 	}

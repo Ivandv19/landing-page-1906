@@ -25,19 +25,27 @@ const Terms: FC = () => {
 				{/* Secciones de términos legales */}
 				<div className="prose prose-slate dark:prose-invert max-w-none text-text-muted space-y-6">
 					<section>
-						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.terms.s1.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">
+							{t.legalPages.terms.s1.title}
+						</h2>
 						<p>{t.legalPages.terms.s1.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.terms.s2.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">
+							{t.legalPages.terms.s2.title}
+						</h2>
 						<p>{t.legalPages.terms.s2.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.terms.s3.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">
+							{t.legalPages.terms.s3.title}
+						</h2>
 						<p>{t.legalPages.terms.s3.content}</p>
 					</section>
 					<section>
-						<h2 className="text-2xl font-semibold text-text-main">{t.legalPages.terms.s4.title}</h2>
+						<h2 className="text-2xl font-semibold text-text-main">
+							{t.legalPages.terms.s4.title}
+						</h2>
 						<p>{t.legalPages.terms.s4.content}</p>
 					</section>
 				</div>

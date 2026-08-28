@@ -1,10 +1,11 @@
 // React
-import { useState, useEffect } from "react";
+
 // Iconos
 import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import LanguageSelector from "@/components/common/LanguageSelector";
 // Componentes
 import ThemeSelector from "@/components/common/ThemeSelector";
-import LanguageSelector from "@/components/common/LanguageSelector";
 // Store
 import { useT } from "@/store/appStore";
 
@@ -43,10 +44,11 @@ const Header = () => {
 		<>
 			{/* Barra de navegación superior */}
 			<header
-				className={`fixed top-0 z-50 w-full transition-all duration-300 bg-page-bg/80 backdrop-blur-md ${isScrolled
-					? "border-b border-border shadow-sm"
-					: "border-b border-transparent shadow-none"
-					}`}
+				className={`fixed top-0 z-50 w-full transition-all duration-300 bg-page-bg/80 backdrop-blur-md ${
+					isScrolled
+						? "border-b border-border shadow-sm"
+						: "border-b border-transparent shadow-none"
+				}`}
 			>
 				<nav className="mx-auto max-w-7xl flex h-16 w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
 					{/* Logo */}
@@ -97,10 +99,11 @@ const Header = () => {
 
 			{/* Menú móvil */}
 			<div
-				className={`fixed top-16 left-0 z-40 w-full h-[calc(100vh-4rem)] bg-page-bg transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${isMenuOpen
-					? "translate-y-0 opacity-100"
-					: "-translate-y-full opacity-0 pointer-events-none"
-					}`}
+				className={`fixed top-16 left-0 z-40 w-full h-[calc(100vh-4rem)] bg-page-bg transform transition-all duration-300 ease-in-out md:hidden overflow-y-auto ${
+					isMenuOpen
+						? "translate-y-0 opacity-100"
+						: "-translate-y-full opacity-0 pointer-events-none"
+				}`}
 			>
 				<div className="p-4 border-b border-border">
 					<ul className="flex flex-col space-y-2">
