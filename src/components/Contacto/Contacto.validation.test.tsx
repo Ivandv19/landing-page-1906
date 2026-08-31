@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import Contacto from "./Contacto";
 
-// Override Turnstile mock locally to allow interaction
+// Mock de Cloudflare Turnstile interactivo para pruebas de formulario
 vi.mock("@marsidev/react-turnstile", () => ({
 	Turnstile: ({ onSuccess }: { onSuccess: (token: string) => void }) => (
 		<button
@@ -16,7 +16,7 @@ vi.mock("@marsidev/react-turnstile", () => ({
 	),
 }));
 
-// Mock fetch
+// Mock de la función fetch global
 const fetchMock = vi.fn();
 globalThis.fetch = fetchMock;
 
@@ -24,7 +24,8 @@ const renderComponent = () => {
 	return render(<Contacto />);
 };
 
-describe("Contacto Form Validation", () => {
+// Suite de pruebas para la validación del formulario de contacto y anti-spam
+describe("Contacto Form Validation (Validación del Formulario)", () => {
 	const user = userEvent.setup();
 
 	beforeEach(() => {
@@ -32,58 +33,56 @@ describe("Contacto Form Validation", () => {
 		fetchMock.mockReset();
 	});
 
-	it("renders all form fields correctly", () => {
+	it("renderiza todos los campos del formulario y mantiene el botón de envío deshabilitado inicialmente", () => {
+		// 1. Renderiza el formulario
 		renderComponent();
 
+		// 2. Verifica la presencia de los campos requeridos y el botón deshabilitado
 		expect(screen.getByLabelText(/Nombre/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
 		expect(screen.getByLabelText(/Mensaje/i)).toBeInTheDocument();
 		expect(screen.getByTestId("turnstile-mock")).toBeInTheDocument();
 		expect(
 			screen.getByRole("button", { name: /Enviar Mensaje/i }),
-		).toBeDisabled(); // Disabled initially due to no token
+		).toBeDisabled();
 	});
 
-	it("enables submit button only after Turnstile verification", async () => {
+	it("habilita el botón de envío únicamente después de completar la verificación de Turnstile", async () => {
+		// 1. Renderiza el componente
 		renderComponent();
 
 		const submitBtn = screen.getByRole("button", { name: /Enviar Mensaje/i });
 		expect(submitBtn).toBeDisabled();
 
-		// Verify turnstile
+		// 2. Simula verificación exitosa de Captcha
 		await user.click(screen.getByTestId("turnstile-mock"));
 
+		// 3. Verifica que el botón de envío se active
 		expect(submitBtn).toBeEnabled();
 	});
 
-	it("prevents submission with empty required fields", async () => {
+	it("previene el envío de la petición cuando los campos obligatorios están vacíos", async () => {
+		// 1. Renderiza y activa el botón con el captcha
 		renderComponent();
-
-		// Enable button first
 		await user.click(screen.getByTestId("turnstile-mock"));
 		const submitBtn = screen.getByRole("button", { name: /Enviar Mensaje/i });
 
-		// Try to submit empty form
+		// 2. Intenta enviar el formulario vacío
 		await user.click(submitBtn);
 
-		// Fetch should NOT be called because HTML5 validation stops it
-		// Note: jsdom doesn't fully simulate HTML5 validation blocking submit event,
-		// but userEvent.click on a submit button usually respects 'required' attribute checks if implemented.
-		// However, checking if fetch was called is the safest bet.
+		// 3. Verifica que no se dispare la llamada a la API
 		expect(fetchMock).not.toHaveBeenCalled();
 
-		// Optionally check validity (manual check as UI feedback isn't easy to test in jsdom)
 		const nameInput = screen.getByLabelText(/Nombre/i) as HTMLInputElement;
 		expect(nameInput.checkValidity()).toBe(false);
 	});
 
-	it("prevents submission with invalid email", async () => {
+	it("previene el envío de la petición cuando el formato del email es inválido", async () => {
+		// 1. Renderiza y activa el captcha
 		renderComponent();
-
-		// Enable button
 		await user.click(screen.getByTestId("turnstile-mock"));
 
-		// Fill invalid email
+		// 2. Rellena datos con un email no válido
 		const nameInput = screen.getByLabelText(/Nombre/i);
 		const emailInput = screen.getByLabelText(/Email/i);
 		const messageInput = screen.getByLabelText(/Mensaje/i);
@@ -93,42 +92,39 @@ describe("Contacto Form Validation", () => {
 		await user.type(emailInput, "invalid-email");
 		await user.type(
 			messageInput,
-			"This is a valid message longer than 10 chars",
+			"Este es un mensaje válido de prueba superior a diez caracteres",
 		);
 
-		// Try submit
+		// 3. Intenta enviar
 		await user.click(submitBtn);
 
-		// Fetch should NOT be called
+		// 4. Verifica que no se envíe la solicitud
 		expect(fetchMock).not.toHaveBeenCalled();
 		const emailEl = emailInput as HTMLInputElement;
 		expect(emailEl.checkValidity()).toBe(false);
 	});
 
-	it("submits successfully with valid data", async () => {
+	it("envía exitosamente los datos a la API cuando el formulario es válido", async () => {
+		// 1. Prepara respuesta exitosa de la API
 		renderComponent();
-
-		// Setup mock response
 		fetchMock.mockResolvedValueOnce({
 			ok: true,
 			json: async () => ({ success: true }),
 		});
 
-		// Enable button
+		// 2. Completa verificación y llena campos válidos
 		await user.click(screen.getByTestId("turnstile-mock"));
-
-		// Fill valid data
 		await user.type(screen.getByLabelText(/Nombre/i), "Test User");
 		await user.type(screen.getByLabelText(/Email/i), "test@example.com");
 		await user.type(
 			screen.getByLabelText(/Mensaje/i),
-			"This is a valid message testing the form.",
+			"Este es un mensaje válido de prueba superior a diez caracteres.",
 		);
 
-		// Submit
+		// 3. Envía el formulario
 		await user.click(screen.getByRole("button", { name: /Enviar Mensaje/i }));
 
-		// Check loading state (briefly) or final success
+		// 4. Verifica llamada HTTP y mensaje visual de confirmación
 		expect(fetchMock).toHaveBeenCalledTimes(1);
 		expect(fetchMock).toHaveBeenCalledWith(
 			"/api/contact",
@@ -138,36 +134,32 @@ describe("Contacto Form Validation", () => {
 			}),
 		);
 
-		// Verify success message
 		expect(
 			await screen.findByText(/Mensaje enviado correctamente/i),
 		).toBeInTheDocument();
 	});
 
-	it("handles server API errors gracefully", async () => {
+	it("muestra mensaje de error visual cuando la API del servidor responde con fallo", async () => {
+		// 1. Prepara respuesta de error del backend
 		renderComponent();
-
-		// Setup mock error response
 		fetchMock.mockResolvedValueOnce({
 			ok: false,
 			json: async () => ({ success: false, error: "Server Error" }),
 		});
 
-		// Enable button
+		// 2. Completa campos
 		await user.click(screen.getByTestId("turnstile-mock"));
-
-		// Fill valid data
 		await user.type(screen.getByLabelText(/Nombre/i), "Test User");
 		await user.type(screen.getByLabelText(/Email/i), "test@example.com");
 		await user.type(
 			screen.getByLabelText(/Mensaje/i),
-			"This is a valid message testing the form.",
+			"Este es un mensaje válido de prueba superior a diez caracteres.",
 		);
 
-		// Submit
+		// 3. Envía el formulario
 		await user.click(screen.getByRole("button", { name: /Enviar Mensaje/i }));
 
-		// Verify error message
+		// 4. Verifica que se renderice el mensaje de error del servidor
 		expect(await screen.findByText(/Server Error/i)).toBeInTheDocument();
 	});
 });
