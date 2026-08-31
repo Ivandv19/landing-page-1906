@@ -19,7 +19,7 @@ type Env = {
 	TURNSTILE_SECRET_KEY: string;
 };
 
-const app = new Hono<{ Bindings: Env }>();
+export const app = new Hono<{ Bindings: Env }>();
 
 // POST /api/contact - Envía un mensaje de contacto con verificación Turnstile
 app.post("/api/contact", zValidator("json", contactSchema), async (c) => {

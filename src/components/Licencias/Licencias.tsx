@@ -1,15 +1,11 @@
 // Iconos
 import { Check } from "lucide-react";
-// Hooks
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 // Store
 import { useT } from "@/store/appStore";
 
 // Planes de licencia disponibles
 const Licencias = () => {
 	const t = useT();
-	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
-	const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation(0.05);
 
 	// Opciones de licencia con precios y características
 	const licenses = [
@@ -66,10 +62,7 @@ const Licencias = () => {
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				{/* Encabezado de la sección */}
-				<div
-					ref={headerRef as React.RefObject<HTMLDivElement>}
-					className={`mx-auto max-w-4xl text-center animate-on-scroll ${headerVisible ? "visible" : ""}`}
-				>
+				<div className="mx-auto max-w-4xl text-center scroll-reveal">
 					<h2 className="text-base font-semibold leading-7 text-accent">
 						{t.licenses.header}
 					</h2>
@@ -82,10 +75,7 @@ const Licencias = () => {
 				</p>
 
 				{/* Tarjetas de licencias */}
-				<div
-					ref={gridRef as React.RefObject<HTMLDivElement>}
-					className={`isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 animate-on-scroll ${gridVisible ? "visible" : ""}`}
-				>
+				<div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 scroll-reveal">
 					{licenses.map((tier) => (
 						<div
 							key={tier.name}

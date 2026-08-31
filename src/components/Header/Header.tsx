@@ -3,9 +3,9 @@
 // Iconos
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import LanguageSelector from "@/components/common/LanguageSelector";
+import LanguageSelector from "@/components/ui/LanguageSelector";
 // Componentes
-import ThemeSelector from "@/components/common/ThemeSelector";
+import ThemeSelector from "@/components/ui/ThemeSelector";
 // Store
 import { useT } from "@/store/appStore";
 

@@ -1,15 +1,11 @@
-// Store
-
 // Componentes
-import { ResponsiveImage } from "@/components/common/ResponsiveImage";
-// Hooks
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+// Store
 import { useT } from "@/store/appStore";
 
 // Sección sobre el productor con estadísticas e imagen
 const SobreMi = () => {
 	const t = useT();
-	const { ref, isVisible } = useScrollAnimation();
 
 	// Estadísticas del productor
 	const stats = [
@@ -22,13 +18,10 @@ const SobreMi = () => {
 	return (
 		<section
 			id="sobre-mi"
-			className="overflow-hidden bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
+			className="bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div
-					ref={ref as React.RefObject<HTMLDivElement>}
-					className={`mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center animate-on-scroll ${isVisible ? "visible" : ""}`}
-				>
+				<div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center scroll-reveal">
 					{/* Texto de presentación */}
 					<div className="lg:pr-8">
 						<div className="lg:max-w-lg">
@@ -73,7 +66,6 @@ const SobreMi = () => {
 							src="about-me-studio.jpg"
 							alt="Prod Flux Studio Setup"
 							className="w-full h-auto rounded-xl bg-surface-card shadow-xl ring-1 ring-border/40 object-cover"
-							sizes={{ mobile: 600, tablet: 900, desktop: 1200 }}
 							width={1000}
 							height={1000}
 						/>

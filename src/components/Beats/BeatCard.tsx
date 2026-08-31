@@ -4,7 +4,7 @@
 import { LoaderCircle, Pause, Play } from "lucide-react";
 import type { FC } from "react";
 // Componentes
-import { ResponsiveImage } from "@/components/common/ResponsiveImage";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 // Tipos
 import type { Beat } from "@/data/beats";
 // Store

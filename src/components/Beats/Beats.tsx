@@ -6,8 +6,6 @@ import { type FC, useCallback, useRef } from "react";
 // Datos
 import { beats } from "@/data/beats";
 import { useKeyboardNav } from "@/hooks/useKeyboardNav";
-// Hooks
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 // Store
 import { useStore, useT } from "@/store/appStore";
 import { BeatCard } from "./BeatCard";
@@ -17,7 +15,6 @@ import { MiniPlayer } from "./MiniPlayer";
 // Sección de beats con desplazamiento horizontal y navegación por teclado
 const BeatsSection: FC = () => {
 	const t = useT();
-	const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentBeat = useStore((s) => s.currentBeat);
 	const isPlaying = useStore((s) => s.isPlaying);
@@ -55,10 +52,7 @@ const BeatsSection: FC = () => {
 			>
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					{/* Encabezado de la sección */}
-					<div
-						ref={headerRef as React.RefObject<HTMLDivElement>}
-						className={`flex items-center justify-between mb-12 animate-on-scroll ${headerVisible ? "visible" : ""}`}
-					>
+					<div className="flex items-center justify-between mb-12 scroll-reveal">
 						<div>
 							<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
 								{t.beats.title}

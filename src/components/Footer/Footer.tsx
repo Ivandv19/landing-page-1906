@@ -50,7 +50,7 @@ const Footer: FC = () => {
 
 	return (
 		<footer className="bg-page-bg border-t border-border pt-16 pb-8 transition-colors duration-300">
-			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 scroll-reveal">
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
 					{/* Marca y descripción */}
 					<div className="space-y-4">

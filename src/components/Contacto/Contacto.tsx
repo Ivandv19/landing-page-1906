@@ -5,8 +5,6 @@ import { Turnstile } from "@marsidev/react-turnstile";
 // Iconos
 import { Clock, LoaderCircle, Mail, Share2 } from "lucide-react";
 import { type FormEvent, useState } from "react";
-// Hooks
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 // API
 import { sendContact } from "@/lib/api";
 // Store
@@ -17,7 +15,6 @@ import type { ContactFormData } from "./types";
 // Sección de formulario de contacto con verificación Turnstile
 const Contacto = () => {
 	const t = useT();
-	const { ref, isVisible } = useScrollAnimation();
 	const [formData, setFormData] = useState<ContactFormData>({
 		name: "",
 		email: "",
@@ -70,10 +67,7 @@ const Contacto = () => {
 			className="bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div
-					ref={ref as React.RefObject<HTMLDivElement>}
-					className={`grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2 animate-on-scroll ${isVisible ? "visible" : ""}`}
-				>
+				<div className="grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2 scroll-reveal">
 					{/* Información de contacto */}
 					<div className="flex flex-col justify-center">
 						<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
