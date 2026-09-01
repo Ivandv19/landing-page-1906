@@ -1,0 +1,50 @@
+import { defineConfig, devices } from "@playwright/test";
+
+/**
+ * Configuración de Playwright para pruebas End-to-End (E2E) de Fluxbeats
+ * Simula flujos de usuario reales contra el build de producción levantado en Cloudflare Pages dev.
+ */
+export default defineConfig({
+	// Directorio raíz de las pruebas E2E
+	testDir: "./tests/e2e",
+
+	// Tiempo máximo por prueba
+	timeout: 60_000,
+
+	// Tiempo de espera para aserciones
+	expect: { timeout: 10_000 },
+
+	// Paralelismo y reintentos
+	fullyParallel: true,
+	workers: process.env.CI ? 2 : 1,
+	retries: process.env.CI ? 1 : 0,
+
+	// Reporter
+	reporter: process.env.CI
+		? [["list"], ["html", { open: "never" }]]
+		: [["list"]],
+
+	// Opciones compartidas del navegador
+	use: {
+		baseURL: "http://localhost:4321",
+		trace: "retain-on-failure",
+		screenshot: "only-on-failure",
+		video: "retain-on-failure",
+	},
+
+	// Proyectos de navegadores
+	projects: [
+		{
+			name: "chromium",
+			use: { ...devices["Desktop Chrome"] },
+		},
+	],
+
+	// Servidor web local sobre la carpeta dist/ compilada
+	webServer: {
+		command: "bunx wrangler pages dev dist/ --port 4321 --ip localhost",
+		url: "http://localhost:4321",
+		timeout: 60_000,
+		reuseExistingServer: !process.env.CI,
+	},
+});

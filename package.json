@@ -13,7 +13,9 @@
 		"preview": "vite preview",
 		"test": "vitest",
 		"test:unit": "vitest run",
-		"test:ui": "vitest --ui"
+		"test:ui": "vitest --ui",
+		"test:smoke": "bun run build && playwright test -c playwright.smoke.config.ts",
+		"test:e2e": "playwright test -c playwright.config.ts"
 	},
 	"dependencies": {
 		"@hono/zod-validator": "^0.8.0",
@@ -33,6 +35,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.16",
 		"@cloudflare/workers-types": "^4.20260530.1",
+		"@playwright/test": "^1.62.1",
 		"@testing-library/jest-dom": "^6.9.1",
 		"@testing-library/react": "^16.3.2",
 		"@testing-library/user-event": "^14.6.1",

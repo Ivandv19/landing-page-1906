@@ -35,5 +35,10 @@ dist-ssr
 # CodeGraph
 .codegraph/
 
+# Playwright
+test-results/
+playwright-report/
+
 # Documentation
 docs/
+

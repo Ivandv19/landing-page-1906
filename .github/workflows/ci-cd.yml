@@ -39,9 +39,9 @@ jobs:
       - name: Format check con Biome
         run: bun run check
 
-      # 5. Verifica tipado estricto y compilación TypeScript
-      - name: TypeScript check & Build
-        run: bun run build
+      # 5. Verifica tipado estricto con TypeScript
+      - name: TypeScript type check
+        run: bunx tsc -b
 
   # ----------------------------------------------------------------------------
   # Job 2: Pruebas Unitarias (Vitest)
@@ -78,18 +78,20 @@ jobs:
       - name: Setup E2E
         uses: ./.github/actions/setup-e2e
 
-      # 3. Compila la aplicación para pruebas sobre el build de producción
-      - name: Build de producción
-        run: bun run build
+      # 3. Ejecuta la suite completa de pruebas End-to-End con clave de testing
+      - name: Suite E2E (Playwright)
+        run: bun run test:e2e
+        env:
+          VITE_TURNSTILE_SITE_KEY: "1x00000000000000000000AA"
 
-      # 4. Almacena la carpeta dist compilada para reutilizarla en el deploy
-      - name: Subir dist para deploy
-        if: always()
+      # 4. Sube reportes y trazas si algún test falla
+      - name: Subir reporte de Playwright en caso de fallo
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: dist-e2e
-          path: dist/
-          retention-days: 1
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
 
   # ----------------------------------------------------------------------------
   # Job 4: Despliegue en Cloudflare Pages
@@ -108,24 +110,13 @@ jobs:
       - name: Setup Bun env
         uses: ./.github/actions/setup
 
-      # 3. Descarga el build precompilado generado en el paso previo
-      - name: Bajar dist desde e2e (artifact)
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-e2e
-          path: dist/
-        continue-on-error: true
+      # 3. Compila para producción inyectando la clave real de Cloudflare Turnstile
+      - name: Build de producción con credenciales reales
+        run: bun run build
+        env:
+          VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
 
-      # 4. Compila nuevamente si no existiera el artefacto
-      - name: Build de respaldo (si no hay dist de artifact)
-        run: |
-          if [ -d dist ] && [ -f dist/index.html ]; then
-            echo "dist restaurado desde artifact e2e, omitiendo build"
-          else
-            bun run build
-          fi
-
-      # 5. Publica en Cloudflare Pages usando Wrangler Action
+      # 4. Publica en Cloudflare Pages usando Wrangler Action
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
