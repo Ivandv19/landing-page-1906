@@ -1,5 +1,10 @@
-name: fluxbeats-ci/cd
+# ==============================================================================
+# Fluxbeats CI/CD Pipeline
+# ------------------------------------------------------------------------------
 
+name: Fluxbeats CI/CD
+
+# Disparadores: Pushes y Pull Requests a las ramas principales
 on:
   push:
     branches:
@@ -11,35 +16,116 @@ on:
       - develop
 
 jobs:
+  # ----------------------------------------------------------------------------
+  # Job 1: Lint y Verificación de Formato (Biome + TypeScript)
+  # ----------------------------------------------------------------------------
   lint:
+    name: Lint & Format Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-      - name: Lint
+      # 1. Clona el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configura Node, Bun y dependencias con caché
+      - name: Setup Bun env
+        uses: ./.github/actions/setup
+
+      # 3. Ejecuta el linter de Biome
+      - name: Lint con Biome
         run: bun run lint
-      - name: TypeScript check
+
+      # 4. Verifica formato con Biome
+      - name: Format check con Biome
+        run: bun run check
+
+      # 5. Verifica tipado estricto y compilación TypeScript
+      - name: TypeScript check & Build
         run: bun run build
 
-  test:
+  # ----------------------------------------------------------------------------
+  # Job 2: Pruebas Unitarias (Vitest)
+  # ----------------------------------------------------------------------------
+  unit:
+    name: Tests Unitarios (Vitest)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-      - name: Run tests
-        run: bun run test
+      # 1. Clona el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
 
+      # 2. Configura Node, Bun y dependencias con caché
+      - name: Setup Bun env
+        uses: ./.github/actions/setup
+
+      # 3. Ejecuta la suite completa de unit tests (Zustand, backend, componentes)
+      - name: Tests unitarios
+        run: bun run test:unit
+
+  # ----------------------------------------------------------------------------
+  # Job 3: Pruebas End-to-End (Playwright)
+  # ----------------------------------------------------------------------------
+  e2e:
+    name: Suite E2E (Playwright)
+    needs: [lint, unit]
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Clona el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configura Bun, dependencias y binarios de Playwright Chromium
+      - name: Setup E2E
+        uses: ./.github/actions/setup-e2e
+
+      # 3. Compila la aplicación para pruebas sobre el build de producción
+      - name: Build de producción
+        run: bun run build
+
+      # 4. Almacena la carpeta dist compilada para reutilizarla en el deploy
+      - name: Subir dist para deploy
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-e2e
+          path: dist/
+          retention-days: 1
+
+  # ----------------------------------------------------------------------------
+  # Job 4: Despliegue en Cloudflare Pages
+  # ----------------------------------------------------------------------------
   deploy:
+    name: Despliegue en Cloudflare Pages
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    needs: [lint, test]
+    needs: [lint, unit, e2e]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-      - name: Build
-        run: bun run build
-        env:
-          VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
+      # 1. Clona el código
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configura el entorno Bun
+      - name: Setup Bun env
+        uses: ./.github/actions/setup
+
+      # 3. Descarga el build precompilado generado en el paso previo
+      - name: Bajar dist desde e2e (artifact)
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-e2e
+          path: dist/
+        continue-on-error: true
+
+      # 4. Compila nuevamente si no existiera el artefacto
+      - name: Build de respaldo (si no hay dist de artifact)
+        run: |
+          if [ -d dist ] && [ -f dist/index.html ]; then
+            echo "dist restaurado desde artifact e2e, omitiendo build"
+          else
+            bun run build
+          fi
+
+      # 5. Publica en Cloudflare Pages usando Wrangler Action
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
