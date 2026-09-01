@@ -14,10 +14,10 @@ export default defineConfig({
 	// Tiempo de espera para aserciones
 	expect: { timeout: 10_000 },
 
-	// Paralelismo y reintentos
-	fullyParallel: true,
-	workers: process.env.CI ? 2 : 1,
-	retries: process.env.CI ? 1 : 0,
+	// Ejecución secuencial controlada para evitar condiciones de carrera en wrangler dev
+	fullyParallel: false,
+	workers: 1,
+	retries: 0,
 
 	// Reporter
 	reporter: process.env.CI
