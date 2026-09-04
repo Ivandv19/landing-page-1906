@@ -11,8 +11,14 @@ export default defineConfig({
 	// Tiempo máximo por prueba
 	timeout: 60_000,
 
-	// Tiempo de espera para aserciones
-	expect: { timeout: 10_000 },
+	// Tiempo de espera para aserciones y configuración de regresión visual
+	expect: {
+		timeout: 10_000,
+		toHaveScreenshot: {
+			maxDiffPixelRatio: 0.05,
+			animations: "disabled",
+		},
+	},
 
 	// Ejecución secuencial controlada para evitar condiciones de carrera en wrangler dev
 	fullyParallel: false,

@@ -1,7 +1,7 @@
 // React
 
 // Iconos
-import { ChevronDown, Globe } from "lucide-react";
+import { Globe } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 // Store
 import { useStore } from "@/store/appStore";
@@ -48,19 +48,12 @@ const LanguageSelector = ({ align = "right" }: LanguageSelectorProps) => {
 			<button
 				type="button"
 				onClick={toggleMenu}
-				className="flex items-center gap-1 px-2 py-2 hover:text-accent transition-colors text-text-muted group"
+				className="rounded-full p-2 text-text-muted transition-colors hover:text-accent dark:hover:text-accent"
 				aria-label="Change language"
 				aria-expanded={isOpen}
 			>
-				<Globe
-					size={18}
-					className="group-hover:text-accent transition-colors"
-				/>
-				<span className="text-sm font-medium uppercase">{language}</span>
-				<ChevronDown
-					size={12}
-					className={`opacity-50 group-hover:opacity-100 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-				/>
+				<Globe size={20} />
+				<span className="sr-only">{language}</span>
 			</button>
 
 			{/* Menú desplegable */}

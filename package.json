@@ -16,6 +16,9 @@
 		"test:ui": "vitest --ui",
 		"test:smoke": "bun run build && playwright test -c playwright.smoke.config.ts",
 		"test:e2e": "bun run build && playwright test -c playwright.config.ts",
+		"test:a11y": "bun run build && playwright test tests/e2e/a11y.spec.ts -c playwright.config.ts",
+		"test:visual": "bun run build && playwright test tests/e2e/visual.spec.ts -c playwright.config.ts",
+		"test:visual:update": "bun run build && playwright test tests/e2e/visual.spec.ts -c playwright.config.ts --update-snapshots",
 		"snyk:auth": "snyk auth",
 		"snyk:test": "snyk test",
 		"snyk:monitor": "snyk monitor"
@@ -36,6 +39,7 @@
 		"zustand": "^5.0.15"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.13.0",
 		"@biomejs/biome": "^2.5.12",
 		"@cloudflare/workers-types": "^5.20260903.1",
 		"@playwright/test": "^1.62.1",

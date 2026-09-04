@@ -67,6 +67,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 						min="0"
 						max="100"
 						value={progress}
+						aria-label="Progreso de la pista"
 						onChange={(e) => onSeek(Number(e.target.value))}
 						className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:cursor-pointer hover:[&::-webkit-slider-thumb]:bg-accent-hover"
 						style={{
@@ -117,6 +118,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 								max="1"
 								step="0.01"
 								value={volume}
+								aria-label="Control de volumen"
 								onChange={(e) => onVolumeChange(Number(e.target.value))}
 								className="w-20 h-1 bg-border rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:cursor-pointer hover:[&::-webkit-slider-thumb]:bg-accent-hover"
 							/>
